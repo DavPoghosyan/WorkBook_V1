@@ -42,6 +42,9 @@ class WorkPlaceService {
         if (workPlace.startDate.after(new Date())) {
             return [false, 'startDate']
         }
+        if (workPlace.endDate.before(workPlace.startDate)){
+            return [false, 'endDate']
+        }
         if (workPlace.endDate == null) {
             if(!workPlace.current) {
                 return [false, 'current']
@@ -51,7 +54,7 @@ class WorkPlaceService {
                 return [false, 'current']
         }
         if (!isAvailableDates(workPlace)){
-            return [false, 'endDate']
+            return [false, 'range']
         }
         return [true, '']
     }

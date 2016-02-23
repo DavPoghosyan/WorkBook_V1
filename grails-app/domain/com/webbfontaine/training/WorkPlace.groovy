@@ -13,11 +13,8 @@ class WorkPlace {
 	static belongsTo = [workbook: WorkBook]
 
 	static constraints = {
-		endDate(blank: true, nullable: true, validator: { val, obj ->
-			val?.after(obj.startDate)
-		})
+		endDate (blank: true, nullable: true)
 	}
-
 }
 
 class Company {

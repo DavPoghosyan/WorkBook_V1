@@ -1,18 +1,12 @@
 package com.webbfontaine.training
 
-import org.springframework.validation.FieldError
-
 import static org.springframework.http.HttpStatus.*
-
 
 class WorkBookController {
 
     WorkBookService workBookService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
-    String customErrorField , customErrorCode
-    Boolean isValidAge = true
 
 	//@Secured(['permitAll'])
     def index() {
@@ -21,6 +15,10 @@ class WorkBookController {
 
 	//@Secured(['permitAll'])
     def show(WorkBook workBookInstance) {
+	    if (workBookInstance == null) {
+		    notFound()
+		    return
+	    }
         respond workBookInstance
     }
 
@@ -35,21 +33,15 @@ class WorkBookController {
             notFound()
             return
         }
-        (isValidAge, customErrorField) = workBookService.isValidBirthDateAndAge(workBookInstance)
-        if (!isValidAge) {
-            customErrorCode = customErrorField == "age" ?  'custom.invalid.age' : 'custom.invalid.birth.date'
-            String errorMessage = message(code: customErrorCode, args: customErrorField)
-            workBookInstance.errors.rejectValue(customErrorField,errorMessage)
-        }
+	    additionalValidate(workBookInstance)
         if (workBookInstance.hasErrors()) {
-            println workBookInstance.errors
             respond(workBookInstance.errors, view:'create', status: CONFLICT)
             return
         }
         workBookService.save(workBookInstance)
         flash.message = message(
                 code: 'default.created.message',
-                args:  [WorkBook.class.name, workBookInstance.id])
+                args:  [WorkBook.class.simpleName, workBookInstance.id])
         respond(workBookInstance, view:'show', status: OK)
     }
 
@@ -64,24 +56,18 @@ class WorkBookController {
             notFound()
             return
         }
-        (isValidAge, customErrorField) = workBookService.isValidBirthDateAndAge(workBookInstance)
-        if (!isValidAge) {
-            customErrorCode = customErrorField == "age" ?  'custom.invalid.age' : 'custom.invalid.birth.date'
-            String errorMessage = message(code: customErrorCode, args: customErrorField)
-            workBookInstance.errors.rejectValue(customErrorField,errorMessage)
-        }
+	    additionalValidate(workBookInstance)
         if (workBookInstance.hasErrors()) {
             println workBookInstance.errors
             respond(workBookInstance.errors, view:'edit', Status: CONFLICT)
             workBookInstance.workplaces*.discard()
             workBookInstance.discard()
-            println workBookInstance
             return
         }
         workBookService.save(workBookInstance)
         flash.message = message(
                 code: 'default.updated.message',
-                args:  [WorkBook.class.name, workBookInstance.id])
+                args:  [WorkBook.class.simpleName, workBookInstance.id])
         respond(workBookInstance, view:'show', status: OK)
     }
 
@@ -92,22 +78,28 @@ class WorkBookController {
             return
         }
         workBookService.remove(workBookInstance)
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'WorkBook.label', default: 'WorkBook'), workBookInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+	    flash.message = message(
+			    code: 'default.deleted.message',
+			    args:  [WorkBook.class.simpleName, workBookInstance.id])
+	    redirect action:"index", method:"GET"
     }
 
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'workBook.label', default: 'WorkBook'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
+    void notFound() {
+	    flash.message = message(
+			    code: 'default.not.found.message',
+			    args:  [WorkBook.class.simpleName, params.id])
+	    redirect action:"index", method:"GET", status: NOT_FOUND
     }
+
+	void additionalValidate(WorkBook workBook) {
+		boolean isValidAge
+		def customErrorField
+		(isValidAge, customErrorField) = workBookService.isValidBirthDateAndAge(workBook)
+		if (!isValidAge) {
+			def customErrorCode = customErrorField == "age" ?  'custom.invalid.age' : 'custom.invalid.birthDate'
+			def errorMessage = message(code: customErrorCode, args: customErrorField)
+			workBook.errors.rejectValue(customErrorField, customErrorCode, errorMessage)
+		}
+	}
+
 }

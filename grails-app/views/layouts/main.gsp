@@ -15,6 +15,12 @@
   		<asset:stylesheet src="application.css"/>
 		<asset:javascript src="application.js"/>
 		<g:layoutHead/>
+	    <g:javascript library="jquery" />
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$(".message").fadeOut(5000);
+		});
+		</script>
 	</head>
 	<body>
 		<div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="grails_logo.png" alt="Grails"/></a></div>
