@@ -101,10 +101,6 @@ class WorkPlaceController {
 					errorCode = 'custom.invalid.startDate'
 					errorMessage = message(code: errorCode)
 					break
-				case 'endDate':
-					errorCode = 'custom.invalid.endDate'
-					errorMessage = message(code: errorCode)
-					break
 				case 'range':
 					errorCode = 'custom.invalid.range'
 					errorMessage = message(code: errorCode, args: [workPlace.startDate, workPlace.endDate])
@@ -116,15 +112,13 @@ class WorkPlaceController {
 		}
 	}
 
-    def companyChanged(long id){
-        render Company.get(id)
-    }
 
     def greetName() {
-		def countries =  Country.list()
+	    println params
+		def companies =  Company.findByCode(params.name)
 
 		render g.select(id:'countryCode', name:'countryCode',
-				from:countries, optionKey:'id', noSelection:[null:'\'Select One...\' ']
+				from:companies, optionKey:'id', noSelection:[null:'\'Select One...\' ']
 		)
     }
 }

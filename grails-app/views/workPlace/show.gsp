@@ -51,16 +51,6 @@
                         </span>
                     </li>
                 </g:if>
-                <g:if test="${workPlaceInstance?.countryCode}">
-                    <li class="fieldcontain">
-                        <span id="countryCode-label" class="property-label">
-                            <g:message code="workplace.countryCode.label" default="Country Code"/>
-                        </span>
-                        <span class="property-value" aria-labelledby="countryCode-label">
-                            <g:fieldValue bean="${workPlaceInstance}" field="countryCode"/>
-                        </span>
-                    </li>
-                </g:if>
                 <g:if test="${workPlaceInstance?.companyCode}">
                     <li class="fieldcontain">
                         <span id="companyCode-label" class="property-label">
@@ -68,6 +58,16 @@
                         </span>
                         <span class="property-value" aria-labelledby="lastName-label">
                             <g:fieldValue bean="${workPlaceInstance}" field="companyCode"/>
+                        </span>
+                    </li>
+                </g:if>
+                <g:if test="${workPlaceInstance?.countryCode}">
+                    <li class="fieldcontain">
+                        <span id="countryCode-label" class="property-label">
+                            <g:message code="workplace.countryCode.label" default="Country Code"/>
+                        </span>
+                        <span class="property-value" aria-labelledby="countryCode-label">
+                            <g:fieldValue bean="${workPlaceInstance}" field="countryCode"/>
                         </span>
                     </li>
                 </g:if>

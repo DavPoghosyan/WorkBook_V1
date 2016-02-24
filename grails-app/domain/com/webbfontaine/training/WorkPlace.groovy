@@ -8,29 +8,24 @@ class WorkPlace {
     String companyCode
     String countryCode
 
-
-    static Company retrieveCompany(String code) {
-        Company.findByCode(code)
-    }
-
-    static Country retrieveCountry(String code) {
-        Country.findByCode(code)
-    }
-
 	static belongsTo = [workbook: WorkBook]
 
 	static constraints = {
-		endDate (blank: true, nullable: true)
+		endDate (blank: true, nullable: true,
+				validator: { val, obj ->
+					val?.after(obj.startDate)
+				}
+        )
         companyCode (
                 validator: {
-                    if(!retrieveCompany(it)) {
+                    if (Company.findByCode(it) == null) {
                         return false
                     }
                 }
         )
         countryCode (
                 validator: {
-                    if(retrieveCountry(it) == null) {
+                    if (Country.findByCode(it) == null) {
                         return false
                     }
                 }

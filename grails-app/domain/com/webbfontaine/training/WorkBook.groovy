@@ -17,7 +17,7 @@ class WorkBook {
 	    firstName(size: 3..25)
 	    lastName(size: 3..25)
         email(email: true, unique: true)
-        passportNumber(unique: true, size:9..9, matches: '^[A-Z]{2}[0-9]{7}')
+        passportNumber(unique: true, matches: '^[A-Z]{2}[0-9]{7}')
         age(min: 18, max: 65)
     }
 

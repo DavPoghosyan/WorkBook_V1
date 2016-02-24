@@ -7,17 +7,18 @@
     <g:select id="workbook" name="workbook.id"
               from="${WorkBook.list()}" optionKey="id"
               value="${workPlaceInstance?.workbook?.id}" class="many-to-one"
-              onchange="greetName(this.value)"
     />
 </div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'companyCode', 'error')} required">
     <label for="companyCode">
-        <g:message code="workPlace.companyName.label" default="Company Code" />
+        <g:message code="workPlace.companyCode.label" default="Company Code" />
         <span class="required-indicator">*</span>
     </label>
-    <g:select id="companyCode" name="companyCode" from="${Company.list()}" optionKey="code"
+    <g:select id="companyCode" name="companyCode" from="${Company.list()}"
+              optionKey="code" optionValue="code"
               value="companyCode"
-              onchange= "companyChanged(this.value);"/>
+              onchange="greetName(this.value)"
+    />
 </div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'countryCode', 'error')} required">
     <label for="countryCode">
@@ -25,9 +26,10 @@
         <span class="required-indicator">*</span>
     </label>
     <g:select id="countryCode"  name="countryCode"
-              from="${Country.listOrderByName()}" optionKey="code"
-              value="countryCode"
-              onchange="countryCode(this.value);"/>
+              from="${Country.listOrderByName()}"
+              optionKey="code" optionValue="code"
+              value="countryCode" onchange="countryCode(this.value);"
+    />
 </div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'startDate', 'error')} required">
     <label for="startDate">
@@ -47,7 +49,7 @@
         <g:message code="workPlace.endDate.label" default="End Date" />
     </label>
     <g:datePicker name="endDate" precision="day"  value="${workPlaceInstance?.endDate}"
-                  default="none" noSelection="['': 'choose']"/>
+                  default="none" noSelection="['': '']"/>
 </div>
 
 
