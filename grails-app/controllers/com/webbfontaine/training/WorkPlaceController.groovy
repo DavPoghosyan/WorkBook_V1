@@ -115,4 +115,16 @@ class WorkPlaceController {
 			workPlace.errors.rejectValue(invalidField, errorCode, errorMessage)
 		}
 	}
+
+    def companyChanged(long id){
+        render Company.get(id)
+    }
+
+    def greetName() {
+		def countries =  Country.list()
+
+		render g.select(id:'countryCode', name:'countryCode',
+				from:countries, optionKey:'id', noSelection:[null:'\'Select One...\' ']
+		)
+    }
 }

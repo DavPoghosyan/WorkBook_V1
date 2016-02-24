@@ -1,52 +1,34 @@
-<%@ page import="com.webbfontaine.training.WorkPlace" %>
-
+<%@ page import="com.webbfontaine.training.*" %>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'workbook', 'error')} required">
     <label for="workbook">
         <g:message code="workPlace.workbook.label" default="Workbook" />
         <span class="required-indicator">*</span>
     </label>
     <g:select id="workbook" name="workbook.id"
-              from="${com.webbfontaine.training.WorkBook.list()}" optionKey="id"
-              required="" value="${workPlaceInstance?.workbook?.id}" class="many-to-one"/>
+              from="${WorkBook.list()}" optionKey="id"
+              value="${workPlaceInstance?.workbook?.id}" class="many-to-one"
+              onchange="greetName(this.value)"
+    />
 </div>
-<fieldset class="embedded">
-    <legend>
-        <g:message code="workPlace.company.label" default="Company"/>
-    </legend>
-    <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'company.code', 'error')} required">
-        <label for="company.code">
-            <g:message code="workPlace.company.code.label" default="Code" />
-            <span class="required-indicator">*</span>
-        </label>
-        <g:textField name="company.code" required="" value="${workPlaceInstance.company?.code}"/>
-    </div>
-    <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'company.name', 'error')} required">
-        <label for="company.name">
-            <g:message code="workPlace.company.name.label" default="Name" />
-            <span class="required-indicator">*</span>
-        </label>
-        <g:textField name="company.name" required="" value="${workPlaceInstance.company?.name}"/>
-    </div>
-</fieldset>
-<fieldset class="embedded">
-    <legend>
-        <g:message code="workPlace.country.label" default="Country"/>
-    </legend>
-    <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'country.code', 'error')} required">
-        <label for="country.code">
-            <g:message code="workPlace.country.code.label" default="Code" />
-            <span class="required-indicator">*</span>
-        </label>
-        <g:textField name="country.code" required="" value="${workPlaceInstance.country?.code}"/>
-    </div>
-    <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'country.name', 'error')} required">
-        <label for="country.name">
-            <g:message code="workPlace.country.name.label" default="Name" />
-            <span class="required-indicator">*</span>
-        </label>
-        <g:textField name="country.name" required="" value="${workPlaceInstance.country?.name}"/>
-    </div>
-</fieldset>
+<div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'companyCode', 'error')} required">
+    <label for="companyCode">
+        <g:message code="workPlace.companyName.label" default="Company Code" />
+        <span class="required-indicator">*</span>
+    </label>
+    <g:select id="companyCode" name="companyCode" from="${Company.list()}" optionKey="code"
+              value="companyCode"
+              onchange= "companyChanged(this.value);"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'countryCode', 'error')} required">
+    <label for="countryCode">
+        <g:message code="workPlace.countryCode.label" default="Country Code" />
+        <span class="required-indicator">*</span>
+    </label>
+    <g:select id="countryCode"  name="countryCode"
+              from="${Country.listOrderByName()}" optionKey="code"
+              value="countryCode"
+              onchange="countryCode(this.value);"/>
+</div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'startDate', 'error')} required">
     <label for="startDate">
         <g:message code="workPlace.startDate.label" default="Start Date" />
@@ -64,7 +46,9 @@
     <label for="endDate">
         <g:message code="workPlace.endDate.label" default="End Date" />
     </label>
-    <g:datePicker name="endDate" precision="day"  value="${workPlaceInstance?.endDate}" default="none" noSelection="['': '']" />
+    <g:datePicker name="endDate" precision="day"  value="${workPlaceInstance?.endDate}"
+                  default="none" noSelection="['': 'choose']"/>
 </div>
+
 
 

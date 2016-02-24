@@ -51,52 +51,26 @@
                         </span>
                     </li>
                 </g:if>
-                <fieldset class="embedded">
-                    <legend>
-                        <g:message code="workPlace.company.label" default="Company" />
-                    </legend>
-                    <g:if test="${workPlaceInstance?.company}">
-                        <li class="fieldcontain">
-                            <span id="company-code-label" class="property-label">
-                                <g:message code="workPlace.company.label" default="Code" />
-                            </span>
-                            <span class="property-value" aria-labelledby="company-code-label">
-                                <g:fieldValue bean="${workPlaceInstance}" field="company.code"/>
-                            </span>
-                        </li>
-                        <li class="fieldcontain">
-                            <span id="company-name-label" class="property-label">
-                                <g:message code="workPlace.company.label" default="Name" />
-                            </span>
-                            <span class="property-value" aria-labelledby="company-name-label">
-                                <g:fieldValue bean="${workPlaceInstance}" field="company.name"/>
-                            </span>
-                        </li>
-                    </g:if>
-                </fieldset>
-                <fieldset class="embedded">
-                    <legend>
-                        <g:message code="workPlace.country.label" default="Country" />
-                    </legend>
-                    <g:if test="${workPlaceInstance?.country}">
-                        <li class="fieldcontain">
-                            <span id="country-code-label" class="property-label">
-                                <g:message code="workPlace.country.label" default="Code" />
-                            </span>
-                            <span class="property-value" aria-labelledby="country-code-label">
-                                <g:fieldValue bean="${workPlaceInstance}" field="country.code"/>
-                            </span>
-                        </li>
-                        <li class="fieldcontain">
-                            <span id="country-name-label" class="property-label">
-                                <g:message code="workPlace.country.label" default="Name" />
-                            </span>
-                            <span class="property-value" aria-labelledby="country-name-label">
-                                <g:fieldValue bean="${workPlaceInstance}" field="country.name"/>
-                            </span>
-                        </li>
-                    </g:if>
-                </fieldset>
+                <g:if test="${workPlaceInstance?.countryCode}">
+                    <li class="fieldcontain">
+                        <span id="countryCode-label" class="property-label">
+                            <g:message code="workplace.countryCode.label" default="Country Code"/>
+                        </span>
+                        <span class="property-value" aria-labelledby="countryCode-label">
+                            <g:fieldValue bean="${workPlaceInstance}" field="countryCode"/>
+                        </span>
+                    </li>
+                </g:if>
+                <g:if test="${workPlaceInstance?.companyCode}">
+                    <li class="fieldcontain">
+                        <span id="companyCode-label" class="property-label">
+                            <g:message code="workplace.companyCode.label" default="Company Code"/>
+                        </span>
+                        <span class="property-value" aria-labelledby="lastName-label">
+                            <g:fieldValue bean="${workPlaceInstance}" field="companyCode"/>
+                        </span>
+                    </li>
+                </g:if>
                 <g:if test="${workPlaceInstance?.startDate}">
                     <li class="fieldcontain">
                         <span id="startDate-label" class="property-label">

@@ -5,6 +5,11 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'workPlace.label', default: 'WorkPlace')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+        <script>
+            function greetName(name) {
+                <g:remoteFunction controller="workPlace" action="greetName" update="countryCode" params="'name='+name"/>
+            }
+        </script>
 	</head>
 	<body>
 		<a href="#edit-workPlace" class="skip" tabindex="-1">
@@ -50,6 +55,9 @@
                     </g:eachError>
                 </ul>
 			</g:hasErrors>
+            <div id="greetingBox">
+                DDD
+            </div>
 			<g:form url="[resource:workPlaceInstance, action:'update']" method="PUT" >
 				<g:hiddenField name="version" value="${workPlaceInstance?.version}" />
                 <fieldset class="form">

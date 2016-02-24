@@ -42,10 +42,10 @@
                             <g:message code="workPlace.workbook.label" default="Workbook Owner"/>
                         </th>
                         <th>
-                            <g:message code="workPlace.company.code.label" default="Company Code"/>
+                            <g:message code="workPlace.companyCode.label" default="Company Code"/>
                         </th>
                         <th>
-                            <g:message code="workPlace.country.code.label" default="Country Code"/>
+                            <g:message code="workPlace.countryCode.label" default="Country Code"/>
                         </th>
                         <g:sortableColumn property="startDate"
                                           title="${message(code: 'workPlace.startDate.label', default: 'Start Date')}"/>
@@ -64,10 +64,10 @@
                                 </g:link>
                             </td>
                             <td>
-                                ${fieldValue(bean: workPlaceInstance, field: "company.code")}
+                                ${fieldValue(bean: workPlaceInstance, field: "companyCode")}
                             </td>
                             <td>
-                                ${fieldValue(bean: workPlaceInstance, field: "country.code")}
+                                ${fieldValue(bean: workPlaceInstance, field: "countryCode")}
                             </td>
                             <td>
                                 <g:formatDate format="yyyy-MM-dd" date="${workPlaceInstance.startDate}" />

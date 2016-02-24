@@ -42,14 +42,14 @@ class WorkPlaceService {
         if (workPlace.startDate.after(new Date())) {
             return [false, 'startDate']
         }
-        if (workPlace.endDate.before(workPlace.startDate)){
-            return [false, 'endDate']
-        }
         if (workPlace.endDate == null) {
             if(!workPlace.current) {
                 return [false, 'current']
             }
         } else {
+            if(workPlace.endDate.before(workPlace.startDate)) {
+                return [false, 'endDate']
+            }
             if(workPlace.current)
                 return [false, 'current']
         }

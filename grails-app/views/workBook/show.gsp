@@ -109,7 +109,7 @@
                         <g:each in="${workBookInstance.workplaces}" var="w">
                             <span class="property-value" aria-labelledby="workplaces-label">
                                 <g:link controller="workPlace" action="show" id="${w.id}">
-                                    ${w.company.name + " " + w.country.code}
+                                    ${w.companyCode + " " + w.countryCode}
                                 </g:link>
                             </span>
                         </g:each>

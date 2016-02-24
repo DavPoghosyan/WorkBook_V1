@@ -55,7 +55,7 @@
         <g:each in="${workBookInstance?.workplaces?}" var="w">
              <li>
                  <g:link controller="workPlace" action="show" id="${w.id}">
-                     ${w.company.name + " " + w.country.code}
+                     ${w.companyCode + " " + w.countryCode}
                  </g:link>
              </li>
         </g:each>
