@@ -113,12 +113,14 @@ class WorkPlaceController {
 	}
 
 
-    def greetName() {
-	    println params
-		def companies =  Company.findByCode(params.name)
+    def retrieveCompanyData(String code) {
+		def company =  Company.findByCode(code)
+        render company
+    }
 
-		render g.select(id:'countryCode', name:'countryCode',
-				from:companies, optionKey:'id', noSelection:[null:'\'Select One...\' ']
-		)
+    def retrieveCountryData(String code) {
+
+        def country =  Country.findByCode(code)
+        render country.name
     }
 }

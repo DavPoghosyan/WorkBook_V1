@@ -16,9 +16,7 @@
     </label>
     <g:select id="companyCode" name="companyCode" from="${Company.list()}"
               optionKey="code" optionValue="code"
-              value="companyCode"
-              onchange="greetName(this.value)"
-    />
+              value="${workPlaceInstance?.companyCode}" onchange="retrieveCompanyData(this.value);"/>
 </div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'countryCode', 'error')} required">
     <label for="countryCode">
@@ -28,8 +26,7 @@
     <g:select id="countryCode"  name="countryCode"
               from="${Country.listOrderByName()}"
               optionKey="code" optionValue="code"
-              value="countryCode" onchange="countryCode(this.value);"
-    />
+              value="${workPlaceInstance?.countryCode}" onchange="retrieveCountryData(this.value);"/>
 </div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'startDate', 'error')} required">
     <label for="startDate">
