@@ -17,8 +17,10 @@
   		<asset:stylesheet src="application.css"/>
 		<asset:javascript src="application.js"/>
         <g:javascript library="jquery"/>
+        <g:javascript library="jquery-ui"/>
         <g:javascript src="main.js"/>
 		<g:layoutHead/>
+
 	</head>
 	<body>
 		<div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="grails_logo.png" alt="Grails"/></a></div>

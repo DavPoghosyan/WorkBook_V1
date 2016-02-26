@@ -115,12 +115,15 @@ class WorkPlaceController {
 
     def retrieveCompanyData(String code) {
 		def company =  Company.findByCode(code)
-        render company
+        render(template:"popUpDialog", model:[company:company])
+
     }
 
     def retrieveCountryData(String code) {
 
         def country =  Country.findByCode(code)
-        render country.name
+        render country
+
+
     }
 }

@@ -5,57 +5,22 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'workPlace.label', default: 'WorkPlace')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        %{-- <g:javascript src="retrieveReferenceData.js"/>--}%
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <g:javascript src="retrieveReferenceData.js"/>
         <script>
-        function retrieveCompanyData( code) {
-            <g:remoteFunction controller='workPlace' action='retrieveCompanyData'
-                     update='company' params="'code='+code"/>
-            $( "#company" ).dialog({
-             modal: true,
-             width:400,
-             height:450 ,
-             buttons: [
-             {
-             text: "Ok",
-             click: function() { $(this).dialog("close"); }
-             },
-                 {
-                     text: "Cancel",
-                     click: function() {$(this).dialog("close");}
-                 }
-             ]
-             });
-        }
-        function retrieveCountryData(code) {
+            function retrieveCompanyData(code) {
+                createDialog('company')
+                <g:remoteFunction controller='workPlace' action='retrieveCompanyData'
+                               update='company' params="'code='+code"/>
+            }
+            function retrieveCountryData(code) {
             <g:remoteFunction controller='workPlace' action='retrieveCountryData'
-                     update='country' params="'code='+code"/>
-            $( "#country" ).dialog({
-                modal: true,
-                width:400,
-                height:450 ,
-                buttons: [
-                    {
-                        text: "Ok",
-                        click: function() { $(this).dialog("close"); }
-                    },
-                    {
-                        text: "Cancel",
-                        click: function() {$(this).dialog("close");}
-                    }
-                ]
-            });
-        }
-    </script>
+                              update='country' params="'code='+code"/>
+            createDialog('country')
+            }
+        </script>
 	</head>
 	<body>
-    <div id="company" title="Company Info" style="display: none;">
-        <g:textArea id="company" name="company" rows="1" cols="40" value="" />
-    </div>
-    <div id="country" title="Country Info" type="hidden" style="display: none;">
-        <g:textArea id="country" name="country" rows="1" cols="40" value="" />
-    </div>
 		<a href="#edit-workPlace" class="skip" tabindex="-1">
 			<g:message code="default.link.skip.label" default="Skip to content&hellip;"/>
         </a>
@@ -110,5 +75,8 @@
 				</fieldset>
 			</g:form>
 		</div>
+        <fieldset class="popUpDialog">
+            <g:render template="popUpDialog"/>
+        </fieldset>
 	</body>
 </html>
