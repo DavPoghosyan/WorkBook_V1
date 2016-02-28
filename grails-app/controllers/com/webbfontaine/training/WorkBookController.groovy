@@ -33,7 +33,7 @@ class WorkBookController {
             notFound()
             return
         }
-	    additionalValidate(workBookInstance)
+	    additionalValidation(workBookInstance)
         if (workBookInstance.hasErrors()) {
             respond(workBookInstance.errors, view:'create', status: CONFLICT)
             return
@@ -56,9 +56,8 @@ class WorkBookController {
             notFound()
             return
         }
-	    additionalValidate(workBookInstance)
+	    additionalValidation(workBookInstance)
         if (workBookInstance.hasErrors()) {
-            println workBookInstance.errors
             respond(workBookInstance.errors, view:'edit', Status: CONFLICT)
             workBookInstance.workplaces*.discard()
             workBookInstance.discard()
@@ -91,12 +90,12 @@ class WorkBookController {
 	    redirect action:"index", method:"GET", status: NOT_FOUND
     }
 
-	void additionalValidate(WorkBook workBook) {
+	void additionalValidation(WorkBook workBook) {
 		boolean isValidAge
 		def customErrorField
 		(isValidAge, customErrorField) = workBookService.isValidBirthDateAndAge(workBook)
 		if (!isValidAge) {
-			def customErrorCode = customErrorField == "age" ?  'custom.invalid.age' : 'custom.invalid.birthDate'
+			def customErrorCode = customErrorField == "age" ?  'age.invalid.property' : 'birthDate.invalid.property'
 			def errorMessage = message(code: customErrorCode, args: customErrorField)
 			workBook.errors.rejectValue(customErrorField, customErrorCode, errorMessage)
 		}

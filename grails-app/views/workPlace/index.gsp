@@ -42,15 +42,13 @@
                             <g:message code="workPlace.workbook.label" default="Workbook Owner"/>
                         </th>
                         <th>
-                            <g:message code="workPlace.companyCode.label" default="Company Code"/>
+                            <g:message code="workPlace.company.label" default="Company"/>
                         </th>
                         <th>
-                            <g:message code="workPlace.countryCode.label" default="Country Code"/>
+                            <g:message code="workPlace.country.label" default="Country"/>
                         </th>
                         <g:sortableColumn property="startDate"
                                           title="${message(code: 'workPlace.startDate.label', default: 'Start Date')}"/>
-                        <g:sortableColumn property="current"
-                                          title="${message(code: 'workPlace.current.label', default: 'Current')}"/>
                         <g:sortableColumn property="endDate"
                                           title="${message(code: 'workPlace.endDate.label', default: 'End Date')}"/>
 					</tr>
@@ -64,19 +62,21 @@
                                 </g:link>
                             </td>
                             <td>
-                                ${fieldValue(bean: workPlaceInstance, field: "companyCode")}
+                                ${fieldValue(bean: workPlaceInstance, field: "company")}
                             </td>
                             <td>
-                                ${fieldValue(bean: workPlaceInstance, field: "countryCode")}
+                                ${fieldValue(bean: workPlaceInstance, field: "country")}
                             </td>
                             <td>
                                 <g:formatDate format="yyyy-MM-dd" date="${workPlaceInstance.startDate}" />
                             </td>
                             <td>
-                                <g:formatBoolean boolean="${workPlaceInstance.current}" />
-                            </td>
-                            <td>
-                                <g:formatDate format="yyyy-MM-dd" date="${workPlaceInstance.endDate}" />
+                                <g:if test="${workPlaceInstance?.endDate}">
+	                                <g:formatDate format="yyyy-MM-dd" date="${workPlaceInstance.endDate}" />
+                                </g:if>
+	                            <g:else>
+		                            <i>up to now</i>
+	                            </g:else>
                             </td>
 					    </tr>
 				    </g:each>

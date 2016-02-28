@@ -4,14 +4,14 @@ class Country {
 
     String code
     String name
+    String description
 
-    @Override
-    String toString() {
-        def strCountry = ''
-        this.properties.each {
-            strCountry += "${it.key} ${it.value} \n"
-        }
-        strCountry
+    static constraints = {
+        code(unique: true)
     }
 
+	@Override
+	String toString() {
+		name
+	}
 }

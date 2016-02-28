@@ -29,15 +29,15 @@ class WorkPlaceController {
 			notFound()
 			return
 		}
-		additionalValidate(workPlaceInstance)
+		workPlaceInstance.current = !workPlaceInstance?.endDate
+		additionalValidation(workPlaceInstance)
 		if (workPlaceInstance.hasErrors()) {
-            println workPlaceInstance.errors
 			respond(workPlaceInstance.errors, view: 'create',status: CONFLICT)
 			return
 		}
 		workPlaceService.save(workPlaceInstance)
 		flash.message = message(
-				code: 'default.updated.message',
+				code: 'default.created.message',
 				args:  [WorkPlace.class.simpleName, workPlaceInstance.id])
 		respond(workPlaceInstance, view:'show', status: OK)
 	}
@@ -51,14 +51,19 @@ class WorkPlaceController {
 			notFound()
 			return
 		}
-		additionalValidate(workPlaceInstance)
+		workPlaceInstance.current = !workPlaceInstance?.endDate
+		if (!workPlaceInstance?.workbook){
+			def errorCode = 'domain.not.found'
+			def errorMessage = message(code: errorCode, args: [WorkBook.class.simpleName, params.workBookId])
+			def invalidField = 'workbook'
+			workPlaceInstance.errors.rejectValue(invalidField, errorCode, errorMessage)
+		}
+		additionalValidation(workPlaceInstance)
 		if (workPlaceInstance.hasErrors()) {
-			println workPlaceInstance.errors
             respond(workPlaceInstance.errors, view: 'edit', status: CONFLICT)
             workPlaceInstance.discard()
             return
 		}
-
 		workPlaceService.save(workPlaceInstance)
 		flash.message = message(
 				code: 'default.updated.message',
@@ -85,45 +90,30 @@ class WorkPlaceController {
 		redirect action:'index', method:'GET', status: NOT_FOUND
 	}
 
-	void additionalValidate(WorkPlace workPlace) {
+	void additionalValidation(WorkPlace workPlace) {
 		boolean isValid
-		def  invalidField
-		(isValid, invalidField) = workPlaceService.Validate(workPlace)
+		def  errorCode
+		(isValid, errorCode) = workPlaceService.validate(workPlace)
 		if(!isValid) {
-			def errorCode
-			def errorMessage
-			switch (invalidField) {
-				case 'current':
-					errorCode =  'custom.invalid.current'
-					errorMessage = message(code: errorCode)
-					break
-				case 'startDate':
-					errorCode = 'custom.invalid.startDate'
-					errorMessage = message(code: errorCode)
-					break
-				case 'range':
-					errorCode = 'custom.invalid.range'
-					errorMessage = message(code: errorCode, args: [workPlace.startDate, workPlace.endDate])
-					invalidField = 'endDate'
-					break
-				default: break
+			def invalidField
+			def errorMessage = message(code: errorCode)
+				invalidField = errorCode.tokenize('.').first()
+			if(invalidField == 'range') {
+				invalidField = workPlace?.endDate ? 'endDate' : 'startDate'
+				errorMessage = message(code: errorCode, args: [workPlace.startDate, workPlace.endDate])
 			}
 			workPlace.errors.rejectValue(invalidField, errorCode, errorMessage)
 		}
 	}
 
 
-    def retrieveCompanyData(String code) {
-		def company =  Company.findByCode(code)
-        render(template:"popUpDialog", model:[company:company])
-
+    def retrieveCompanyData(long id) {
+		def company =  Company.get(id)
+        render(template:"companyDialog", model:[company: company])
     }
 
-    def retrieveCountryData(String code) {
-
-        def country =  Country.findByCode(code)
-        render country
-
-
+    def retrieveCountryData(long id) {
+        def country =  Country.get(id)
+	    render(template:"countryDialog", model:[country: country])
     }
 }

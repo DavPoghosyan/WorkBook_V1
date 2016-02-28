@@ -4,21 +4,11 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'workPlace.label', default: 'WorkPlace')}" />
-		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+		<title>
+			<g:message code="default.edit.label" args="[entityName]" />
+		</title>
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <g:javascript src="retrieveReferenceData.js"/>
-        <script>
-            function retrieveCompanyData(code) {
-                createDialog('company')
-                <g:remoteFunction controller='workPlace' action='retrieveCompanyData'
-                               update='company' params="'code='+code"/>
-            }
-            function retrieveCountryData(code) {
-            <g:remoteFunction controller='workPlace' action='retrieveCountryData'
-                              update='country' params="'code='+code"/>
-            createDialog('country')
-            }
-        </script>
+        <g:javascript src="formActions.js"/>
 	</head>
 	<body>
 		<a href="#edit-workPlace" class="skip" tabindex="-1">
@@ -75,8 +65,5 @@
 				</fieldset>
 			</g:form>
 		</div>
-        <fieldset class="popUpDialog">
-            <g:render template="popUpDialog"/>
-        </fieldset>
 	</body>
 </html>

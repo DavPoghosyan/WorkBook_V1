@@ -1,4 +1,20 @@
 <%@ page import="com.webbfontaine.training.*" %>
+<g:javascript>
+	function retrieveCompanyData(id) {
+		if(id){
+			createDialogCompany()
+			<g:remoteFunction controller='workPlace' action='retrieveCompanyData'
+                               update='company-info' params="'id='+id"/>
+		}
+	}
+	function retrieveCountryData(id) {
+		if(id){
+			createDialogCountry()
+			<g:remoteFunction controller='workPlace' action='retrieveCountryData'
+                          update='country-info' params="'id='+id"/>
+		}
+	}
+</g:javascript>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'workbook', 'error')} required">
     <label for="workbook">
         <g:message code="workPlace.workbook.label" default="Workbook" />
@@ -6,31 +22,32 @@
     </label>
     <g:select id="workbook" name="workbook.id"
               from="${WorkBook.list()}" optionKey="id"
+              noSelection="['':'- Choose WorkBook Owner -']"
               value="${workPlaceInstance?.workbook?.id}" class="many-to-one"
     />
 </div>
-<div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'companyCode', 'error')} required">
-    <label for="companyCode">
-        <g:message code="workPlace.companyCode.label" default="Company Code" />
+<div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'company', 'error')} required">
+   <label for="company">
+        <g:message code="workPlace.company.label" default="Company Code" />
         <span class="required-indicator">*</span>
     </label>
-    <g:select id="companyCode" name="companyCode" from="${Company.listOrderByName()}"
-              optionKey="code" optionValue="code"
-              value="${workPlaceInstance?.companyCode}"
-              noSelection="['':'- Set Company Code -']"
+    <g:select id="company" name="company.id" from="${Company.listOrderByCode()}"
+              optionKey="id" optionValue="code"
+              value="${workPlaceInstance?.company?.id}" class="many-to-one"
+              noSelection="['':'- Choose Company Code -']"
               onchange="retrieveCompanyData(this.value);"
     />
 </div>
-<div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'countryCode', 'error')} required">
-    <label for="countryCode">
-        <g:message code="workPlace.countryCode.label" default="Country Code" />
+<div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'country', 'error')} required">
+    <label for="country">
+        <g:message code="workPlace.country.label" default="Country Code" />
         <span class="required-indicator">*</span>
     </label>
-    <g:select id="countryCode"  name="countryCode"
-              from="${Country.listOrderByName()}"
-              optionKey="code" optionValue="code"
-              value="${workPlaceInstance?.countryCode}"
-              noSelection="['':'- Set Country Code -']"
+    <g:select id="country"  name="country.id"
+              from="${Country.listOrderByCode()}"
+              optionKey="id" optionValue="code" class="many-to-one"
+              value="${workPlaceInstance?.country?.id}"
+              noSelection="['':'- Choose Country Code -']"
               onchange="retrieveCountryData(this.value);"
     />
 </div>
@@ -41,19 +58,20 @@
     </label>
     <g:datePicker name="startDate" precision="day"  value="${workPlaceInstance?.startDate}"  />
 </div>
-<div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'current', 'error')} ">
-    <label for="current">
-        <g:message code="workPlace.current.label" default="Current" />
-    </label>
-    <g:checkBox name="current" value="${workPlaceInstance?.current}" />
+<div class="addElement">
+    <a id="current" class="addEndDate" href="#"> + Add End Date</a>
 </div>
-<div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'endDate', 'error')} ">
+<div id="endDate" class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'endDate', 'error')} ">
     <label for="endDate">
         <g:message code="workPlace.endDate.label" default="End Date" />
     </label>
     <g:datePicker name="endDate" precision="day"  value="${workPlaceInstance?.endDate}"
-                  default="none" noSelection="['': '']"/>
+                      default="none" noSelection="['': '']"/>
 </div>
-
-
+<fieldset class="countryDialog">
+	<g:render template="countryDialog"/>
+</fieldset>
+<fieldset class="companyDialog">
+	<g:render template="companyDialog"/>
+</fieldset>
 

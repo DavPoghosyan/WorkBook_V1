@@ -22,10 +22,10 @@ class WorkBook {
     }
 
     String getFullName(){
-        return "$lastName $firstName"
+        "$lastName $firstName"
     }
 
 	String toString() {
-		return "$fullName [$id]"
+		"$fullName"
 	}
 }

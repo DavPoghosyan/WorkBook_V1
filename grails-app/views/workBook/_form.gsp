@@ -52,10 +52,10 @@
 		<g:message code="workBook.workplaces.label" default="Workplaces"/>
 	</label>
     <ul class="one-to-many">
-        <g:each in="${workBookInstance?.workplaces?}" var="w">
+        <g:each in="${workBookInstance?.workplaces?}" var="workplace">
              <li>
-                 <g:link controller="workPlace" action="show" id="${w.id}">
-                     ${w.companyCode + " " + w.countryCode}
+                 <g:link controller="workPlace" action="show" id="${workplace.id}">
+                     ${workplace}
                  </g:link>
              </li>
         </g:each>

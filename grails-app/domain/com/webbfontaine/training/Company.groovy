@@ -6,12 +6,12 @@ class Company {
 	String name
 	String description
 
-    @Override
-    String toString() {
-        def strCompany = ''
-        this.properties.each {
-            strCompany += "${it.key} ${it.value} \n"
-        }
-        return strCompany
-    }
+	static constraints = {
+		code(unique: true)
+	}
+
+	@Override
+	String toString() {
+		name
+	}
 }

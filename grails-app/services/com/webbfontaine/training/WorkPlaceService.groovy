@@ -19,36 +19,66 @@ class WorkPlaceService {
 		workPlace.delete(flush: true)
 	}
 
+	@Transactional(readOnly = true)
+	boolean isCurrentWorkPlaceExists(WorkPlace workPlace) {
+		def workPlaces = WorkPlace.createCriteria().list() {
+			and {
+				eq('workbook.id', workPlace.workbookId)
+				eq('current',true)
+			}
+		}
+		workPlaces.remove(workPlace)
+		if(workPlaces) {
+			return true
+		}
+		return false
+	}
+
     @Transactional(readOnly = true)
-	boolean isAvailableDates(def workPlaceInstance) {
-		Date startDate = workPlaceInstance.startDate
-		Date endDate = workPlaceInstance.endDate ?: startDate.plus(57*365)
-	    def c = WorkPlace.createCriteria()
-	    def workPlaces = c.list {
+	boolean isAvailableDates(WorkPlace workPlace) {
+		Date startDate = workPlace.startDate
+		Date endDate = workPlace.endDate ?: startDate.plus(57*365)
+	    def workPlaces = WorkPlace.createCriteria().list() {
 		    and {
-			    eq('workbook.id', workPlaceInstance.workbookId)
-			    gt('endDate', startDate)
+			    eq('workbook.id', workPlace.workbookId)
 			    lt('startDate', endDate)
+			    or{
+				    gt('endDate', startDate)
+				    isNull('endDate')
+			    }
 		    }
 	    }
-        workPlaces.remove(workPlaceInstance)
-		if(!workPlaces.isEmpty()) {
+	    workPlaces.remove(workPlace)
+		if(workPlaces) {
 			return false
 		}
 		return true
 	}
 
-    def Validate(WorkPlace workPlace) {
-        if (workPlace.startDate.after(new Date())) {
-            return [false, 'startDate']
+	/*def isRelatedDomainsExists(WorkPlace workPlace) {
+		def invalidDomains = []
+		if (!workPlace.workbook?.id){
+			invalidDomains << 'workbook'
+		}
+		if (!workPlace.company?.id){
+			invalidDomains << 'company'
+		}
+		if (!workPlace.country?.id){
+			invalidDomains << 'country'
+		}
+		invalidDomains
+	}*/
+
+    def validate(WorkPlace workPlace) {
+        if(workPlace.startDate.after(new Date())) {
+            return [false, 'startDate.invalid.property']
         }
-        if (workPlace.endDate == null && !workPlace.current) {
-	        return [false, 'current']
-        }
-        if (!isAvailableDates(workPlace)){
-            return [false, 'range']
+	    if(workPlace.current && isCurrentWorkPlaceExists(workPlace)) {
+		    return [false, 'current.workplace.exists']
+	    }
+        if(!isAvailableDates(workPlace)){
+            return [false, 'range.invalid.properties']
         }
         return [true, '']
     }
-
 }

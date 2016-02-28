@@ -51,23 +51,23 @@
                         </span>
                     </li>
                 </g:if>
-                <g:if test="${workPlaceInstance?.companyCode}">
+                <g:if test="${workPlaceInstance?.company}">
                     <li class="fieldcontain">
                         <span id="companyCode-label" class="property-label">
-                            <g:message code="workplace.companyCode.label" default="Company Code"/>
+                            <g:message code="workplace.company.label" default="Company"/>
                         </span>
                         <span class="property-value" aria-labelledby="lastName-label">
-                            <g:fieldValue bean="${workPlaceInstance}" field="companyCode"/>
+                            <g:fieldValue bean="${workPlaceInstance.company}" field="name"/>
                         </span>
                     </li>
                 </g:if>
-                <g:if test="${workPlaceInstance?.countryCode}">
+                <g:if test="${workPlaceInstance?.country}">
                     <li class="fieldcontain">
                         <span id="countryCode-label" class="property-label">
-                            <g:message code="workplace.countryCode.label" default="Country Code"/>
+                            <g:message code="workplace.country.label" default="Country"/>
                         </span>
                         <span class="property-value" aria-labelledby="countryCode-label">
-                            <g:fieldValue bean="${workPlaceInstance}" field="countryCode"/>
+                            <g:fieldValue bean="${workPlaceInstance.country}" field="name"/>
                         </span>
                     </li>
                 </g:if>
@@ -81,26 +81,19 @@
                         </span>
                     </li>
                 </g:if>
-				<g:if test="${workPlaceInstance?.current}">
-				    <li class="fieldcontain">
-                        <span id="current-label" class="property-label">
-                            <g:message code="workPlace.current.label" default="Current" />
-                        </span>
-                        <span class="property-value" aria-labelledby="current-label">
-                            <g:formatBoolean boolean="${workPlaceInstance?.current}" />
-                        </span>
-				    </li>
-				</g:if>
-                <g:if test="${workPlaceInstance?.endDate}">
-                    <li class="fieldcontain">
-                        <span id="endDate-label" class="property-label">
-                            <g:message code="workPlace.endDate.label" default="End Date" />
-                        </span>
-                        <span class="property-value" aria-labelledby="endDate-label">
+                <li class="fieldcontain">
+                    <span id="endDate-label" class="property-label">
+                        <g:message code="workPlace.endDate.label" default="End Date" />
+                    </span>
+                    <span class="property-value" aria-labelledby="endDate-label">
+                         <g:if test="${workPlaceInstance?.endDate}">
                             <g:formatDate format="yyyy-MM-dd" date="${workPlaceInstance?.endDate}" />
-                        </span>
-                    </li>
-                </g:if>
+                         </g:if>
+                        <g:else>
+                            <i>Up to now</i>
+                        </g:else>
+                    </span>
+                </li>
 			</ol>
 			<g:form url="[resource:workPlaceInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

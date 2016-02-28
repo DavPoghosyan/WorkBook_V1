@@ -106,10 +106,10 @@
                         <span id="workplaces-label" class="property-label">
                             <g:message code="workBook.workplaces.label" default="Workplaces"/>
                         </span>
-                        <g:each in="${workBookInstance.workplaces}" var="w">
+                        <g:each in="${workBookInstance.workplaces}" var="workplace">
                             <span class="property-value" aria-labelledby="workplaces-label">
-                                <g:link controller="workPlace" action="show" id="${w.id}">
-                                    ${w.companyCode + " " + w.countryCode}
+                                <g:link controller="workPlace" action="show" id="${workplace.id}">
+                                    ${workplace}
                                 </g:link>
                             </span>
                         </g:each>

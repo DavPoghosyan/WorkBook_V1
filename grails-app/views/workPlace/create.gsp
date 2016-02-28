@@ -6,6 +6,8 @@
 		<title>
 		    <g:message code="default.create.label" args="[entityName]"/>
         </title>
+		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<g:javascript src="formActions.js"/>
 	</head>
 	<body>
 		<a href="#create-workPlace" class="skip" tabindex="-1">
