@@ -1,5 +1,7 @@
 import com.webbfontaine.training.Company
 import com.webbfontaine.training.Country
+import com.webbfontaine.training.WorkPlace
+import groovy.xml.MarkupBuilder
 
 class BootStrap {
 
@@ -17,17 +19,38 @@ class BootStrap {
         SecAppUserSecAppRole.create(admin, adminRole)
 	    SecAppUserSecAppRole.create(user, userRole)*/
 
-        /*Country country = Country.newInstance(name: 'Armenia', code: 'AM/ARM')
+        Country country = Country.newInstance(name: 'Armenia', code: 'AM', description: 'Republic')
         country.save(flush: true)
-	    Country country1 = Country.newInstance(name: 'Poland', code: 'PL/POL')
+	    Country country1 = Country.newInstance(name: 'Poland', code: 'PL', description: 'Republic')
 	    country1.save(flush: true)
+        Country country2 = Country.newInstance(name: 'Denmark', code: 'DK', description: 'Kingdom')
+        country2.save(flush: true)
 
 	    Company company = Company.newInstance(code: 'WBBF', name: 'Webb Fontaine', description: 'e-Government Solutions')
 	    company.save(flush: true)
 	    Company company1 = Company.newInstance(code: 'DC', name: 'Double Coconut', description: 'Game Boutique')
 	    company1.save(flush: true)
 	    Company company2 = Company.newInstance(code: 'JD_IT', name: 'JEDEN IT', description: 'Information systems integration')
-	    company2.save(flush: true)*/
+	    company2.save(flush: true)
+
+       WorkPlace workPlace = WorkPlace.findById(1l)
+        //def converter = workPlace as grails.converters.XML
+
+
+
+        def writer = new FileWriter("testXML.xml")
+
+
+        def converter = new grails.converters.XML(workPlace)
+        converter.registerObjectMarshaller(workPlace) {wp, conv ->
+            conv.build {
+                login(wp.startDate)
+                name(wp.endDate)
+            }
+        }
+        converter.render(writer);
+        writer.close()
+
     }
 
     def destroy = {

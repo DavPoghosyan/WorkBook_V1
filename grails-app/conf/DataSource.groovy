@@ -3,7 +3,7 @@ dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
     username = "root"
-    password = "root"
+    password = "root" //"1234"
     dialect = org.hibernate.dialect.MySQL5InnoDBDialect
     properties {
         maxActive = 50
