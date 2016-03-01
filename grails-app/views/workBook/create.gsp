@@ -51,6 +51,21 @@
                                         value="${message(code: 'default.button.create.label', default: 'Create')}" />
                     </fieldset>
                 </g:form>
+            <g:form name="upload-form" action="importFromXML" method="post"
+                    enctype="multipart/form-data" target="hidden-upload-frame">
+                File: <input type="file" name="myFile" />
+                <button type="submit">Import From XML</button>
+            </g:form>
+            <iframe id="hidden-upload-frame" name="hidden-upload-frame" style="display: none" onload="onUploadComplete">
+            </iframe>
+
+            <script type="text/javascript">
+                function onUploadComplete() {
+                    // Handle upload complete
+                    alert("upload complete");
+                    // Evaluate iframe content or fire another ajax call to get the details for the previously uploaded file
+                }
+            </script>
 		</div>
 	</body>
 </html>

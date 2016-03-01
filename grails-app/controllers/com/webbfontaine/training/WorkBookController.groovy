@@ -5,6 +5,7 @@ import static org.springframework.http.HttpStatus.*
 class WorkBookController {
 
     WorkBookService workBookService
+    XmlProcessingService xmlProcessingService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -100,5 +101,33 @@ class WorkBookController {
 			workBook.errors.rejectValue(customErrorField, customErrorCode, errorMessage)
 		}
 	}
+
+    def exportAsXML(WorkBook workBook){
+        xmlProcessingService.exportToXML(workBook)
+        def xmlFile = new File("a.xml")
+        response.with {
+            setContentType('application/xml')
+            setHeader('Content-Disposition', "Attachment;Filename=\"${xmlFile.name}\"")
+            outputStream << xmlFile.bytes
+        }
+    }
+
+    def importFromXML() {
+        def flyFile = request.getFile('myFile')
+        def xmlObject = xmlProcessingService.importFromXML(flyFile)
+        println xmlObject.age
+        String dateOfBirth =  xmlObject.dateOfBirth.text() - ~/\b\w{3}\b/
+        WorkBook workBookInstance = new WorkBook()
+        workBookInstance.dateOfBirth = Date.parse('yyyy-MM-dd',dateOfBirth.trim())
+        workBookInstance.age = xmlObject.age.toInteger()
+        workBookInstance.firstName = xmlObject.firstName.text()
+        workBookInstance.lastName = xmlObject.lastName.text()
+        workBookInstance.email = xmlObject.email.text()
+        workBookInstance.passportNumber = xmlObject.passportNumber.text()
+        workBookInstance.id = 1l
+        println workBookInstance
+        render(template:"form", model:[workBookInstance: workBookInstance])
+        println workBookInstance
+    }
 
 }

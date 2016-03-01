@@ -22,7 +22,7 @@ class WorkBookService {
 	def isValidBirthDateAndAge(WorkBook workbook) {
         Date now = new Date()
         Date dateOfBirth = workbook.dateOfBirth
-        int expectedAge = now.minus(dateOfBirth)/365
+        int expectedAge = now.minus(dateOfBirth)/365.25
         if (expectedAge < 18) {
             return [false, 'dateOfBirth']
         }

@@ -1,10 +1,18 @@
-### Example user template template
-### Example user template
+*.iws
+*Db.properties
+*Db.script
+.settingsig grails
 
-# IntelliJ project files
-.idea
-*.iml
-*.class
-out
-gen
-# Created by .ignore support plugin (hsz.mobi)
+stacktrace.log
+/*.zip
+/plugin.xml
+/*.log
+/*DB.*
+/cobertura.ser
+.DS_Store
+/target/
+/out/
+/web-app/plugins
+/web-app/WEB-INF/classes
+/.link_to_grails_plugins/
+/target-eclipse/
