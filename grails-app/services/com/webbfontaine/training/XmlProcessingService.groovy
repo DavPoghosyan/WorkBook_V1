@@ -1,7 +1,6 @@
 package com.webbfontaine.training
 
 import grails.converters.XML
-import groovy.xml.MarkupBuilder
 
 class XmlProcessingService {
 
