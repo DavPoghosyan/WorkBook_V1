@@ -45,7 +45,7 @@ class ScaffoldingGrailsPlugin {
 
 	String title = 'Grails Scaffolding Plugin'
 	String author = 'Burt Beckwith'
-	String authorEmail = 'bbeckwith@gopivotal.training'
+	String authorEmail = 'bbeckwith@gopivotal.com'
 	String description = 'Handles the configuration of dynamic scaffolding'
 	String documentation = 'http://grails.org/plugin/scaffolding'
 
@@ -54,8 +54,8 @@ class ScaffoldingGrailsPlugin {
 
 	String license = 'APACHE'
 	def issueManagement = [system: 'JIRA', url: 'http://jira.grails.org/browse/GPSCAFFOLD']
-	def scm = [url: 'https://github.training/grails-plugins/grails-scaffolding']
-	def organization = [name: 'Pivotal', url: 'http://www.gopivotal.training/oss']
+	def scm = [url: 'https://github.com/grails-plugins/grails-scaffolding']
+	def organization = [name: 'Pivotal', url: 'http://www.gopivotal.com/oss']
 
 	def doWithSpring = {
 		ScaffoldingViewResolver.clearViewCache()

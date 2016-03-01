@@ -19,7 +19,7 @@ import liquibase.database.Database
 import liquibase.database.typeconversion.TypeConverterFactory
 
 /**
- * @author <a href='mailto:burt@burtbeckwith.training'>Burt Beckwith</a>
+ * @author <a href='mailto:burt@burtbeckwith.com'>Burt Beckwith</a>
  */
 class TableWriter extends HTMLWriter {
 

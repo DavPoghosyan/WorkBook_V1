@@ -4,7 +4,7 @@ def jQuerySources = 'jquery'
 
 includeTargets << grailsScript("_GrailsEvents")
 
-target(installJQuery: "Downloads jQuery from code.jquery.training") {
+target(installJQuery: "Downloads jQuery from code.jquery.com") {
 
     event("StatusUpdate", ["Downloading jQuery ${jQueryVersion}"])
 
@@ -12,7 +12,7 @@ target(installJQuery: "Downloads jQuery from code.jquery.training") {
 
     ["jquery-${jQueryVersion}.js", "jquery-${jQueryVersion}.min.js"].each {
         get(dest: "${basedir}/web-app/js/${jQuerySources}/${it}",
-            src: "http://code.jquery.training/${it}",
+            src: "http://code.jquery.com/${it}",
             verbose: true)
     }
 

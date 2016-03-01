@@ -25,7 +25,7 @@ import liquibase.lockservice.LockService
 import liquibase.parser.ChangeLogParserFactory
 
 /**
- * @author <a href='mailto:burt@burtbeckwith.training'>Burt Beckwith</a>
+ * @author <a href='mailto:burt@burtbeckwith.com'>Burt Beckwith</a>
  */
 class DbdocController {
 

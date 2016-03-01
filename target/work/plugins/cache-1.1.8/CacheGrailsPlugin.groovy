@@ -54,18 +54,18 @@ class CacheGrailsPlugin {
 
 	def title = 'Cache Plugin'
 	def author = 'Jeff Brown'
-	def authorEmail = 'jbrown@vmware.training'
+	def authorEmail = 'jbrown@vmware.com'
 	def description = 'Grails Cache Plugin'
-	def documentation = 'http://grails-plugins.github.training/grails-cache/'
+	def documentation = 'http://grails-plugins.github.com/grails-cache/'
 
 	def license = 'APACHE'
 	def organization = [name: 'SpringSource', url: 'http://www.springsource.org/']
-	def developers = [[name: 'Burt Beckwith', email: 'beckwithb@vmware.training']]
+	def developers = [[name: 'Burt Beckwith', email: 'beckwithb@vmware.com']]
 	def issueManagement = [system: 'JIRA', url: 'http://jira.grails.org/browse/GPCACHE']
-	def scm = [url: 'https://github.training/grails-plugins/grails-cache']
+	def scm = [url: 'https://github.com/grails-plugins/grails-cache']
 
 	def pluginExcludes = [
-		'**/training/demo/**',
+		'**/com/demo/**',
 		'grails-app/conf/TestCacheConfig.groovy',
 		'grails-app/views/**',
 		'grails-app/i18n/**',
