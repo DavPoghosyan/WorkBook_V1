@@ -34,20 +34,20 @@ class BootStrap {
 	    company2.save(flush: true)
 
        WorkPlace workPlace = WorkPlace.findById(1l)
-        //def converter = workPlace as grails.converters.XML
+        def converter = workPlace as grails.converters.XML
 
 
 
         def writer = new FileWriter("testXML.xml")
 
 
-        def converter = new grails.converters.XML(workPlace)
+        /*def converter = new grails.converters.XML(workPlace)
         converter.registerObjectMarshaller(workPlace) {wp, conv ->
             conv.build {
                 login(wp.startDate)
                 name(wp.endDate)
             }
-        }
+        }*/
         converter.render(writer);
         writer.close()
 
