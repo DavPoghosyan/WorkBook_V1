@@ -5,6 +5,7 @@ import static org.springframework.http.HttpStatus.*
 class WorkPlaceController {
 
 	WorkPlaceService workPlaceService
+	XmlProcessingService xmlProcessingService
 
 	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
@@ -113,7 +114,18 @@ class WorkPlaceController {
     }
 
     def retrieveCountryData(long id) {
-        def country =  Country.get(id)
-	    render(template:"countryDialog", model:[country: country])
+	    xmlProcessingService.importFromXML()
+        /*def country =  Country.get(id)
+	    render(template:"countryDialog", model:[country: country])*/
     }
+
+	def exportAsXML(WorkPlace workPlace){
+		xmlProcessingService.exportToXML(workPlace)
+		def xmlFile = new File("${workPlace.workbook} ${workPlace.id}.xml")
+		response.with {
+			setContentType('application/xml')
+			setHeader('Content-Disposition', "Attachment;Filename=\"${xmlFile.name}\"")
+			outputStream << xmlFile.bytes
+		}
+	}
 }
