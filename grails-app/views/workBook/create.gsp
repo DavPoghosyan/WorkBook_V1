@@ -52,21 +52,33 @@
                                         value="${message(code: 'default.button.create.label', default: 'Create')}" />
                     </fieldset>
                 </g:form>
-            <g:form name="upload-form" action="importFromXML" method="post"
-                    enctype="multipart/form-data" target="hidden-upload-frame">
+            %{--<g:form name="upload-form" action="uploadXmlFile" method="post"
+                    enctype="multipart/form-data" target="_parent">
                 File: <input type="file" name="flyFile" />
                 <g:submitButton name="import" class="import"
                                 value='Import From XML'/>
-            </g:form>
-            <iframe id="upload-frame" name="upload-frame" onload="onUploadComplete">
-            </iframe>
-            <script type="text/javascript">
-                function onUploadComplete() {
-                    // Handle upload complete
-                    alert("upload complete");
-                    // Evaluate iframe content or fire another ajax call to get the details for the previously uploaded file
-                }
-            </script>
+            </g:form>--}%
+			<g:form enctype="multipart/form-data" class="upload" name="fileinfo">
+				<label>File Name </label><input name="name" value="" type="text">
+				<input name="uploadField" type="file">
+				<input class="clickClass" value="submit" type="button">
+			</g:form>
 		</div>
+	<g:javascript>
+	$('.clickClass').click(function(){
+    var oData = new FormData(document.forms.namedItem("flyFile"));
+    var url="${createLink(controller:'workBook',action:'uploadXmlFile')}";
+     $.ajax({
+         url:url,
+         type:'POST',
+         data:oData,
+         processData: false,  // tell jQuery not to process the data
+         contentType: false ,
+         success:function (req) {
+               alert(req);
+            }
+         });
+});
+</g:javascript>
 	</body>
 </html>

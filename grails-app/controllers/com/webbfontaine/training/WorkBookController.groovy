@@ -35,7 +35,6 @@ class WorkBookController {
 
     //@Secured(['ROLE_ADMIN'])
     def edit(WorkBook workBook) {
-        println params
         respond workBook
     }
 
@@ -119,23 +118,59 @@ class WorkBookController {
         }
     }
 
-    def importFromXML() {
+    def uploadXmlFile() {
         def flyFile = request?.getFile('flyFile')
         def xmlObject = xmlProcessingServiceProxy.importFromXML(flyFile)
+	    /*** alternative way using HTTPSession session object ... session['xmlObject'] = xmlObject ***/
         def workPlacesCount = xmlObject?.workplaces.children().size()
-        boolean isWorkBookExists = xmlObject.@id?.text() ? true : false
-        render (template: 'import',
+	    def workBookOwner = "${xmlObject.firstName.text() ?: "Unknown"}" +
+			    "_${xmlObject.lastName.text() ?: "Unknown"}"  //firstName_lastName
+        render (view: 'import_show',
                 model:[
-                        /*workBookOwner: workBook,*/
+                        workBookOwner: workBookOwner,
+		                id: xmlObject.@id?.text(),
                         workPlacesCount: workPlacesCount,
-                        isWorkBookExists: isWorkBookExists
                 ])
     }
 
     def createFromImport(){
         def xmlObject = xmlProcessingServiceProxy.xmlObject
         WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-        respond(workBook, view:'create')
+	    render(template:"form", model:[workBookInstance: workBook])
     }
+
+
+	def uploading={
+		println params
+		fileUploader(params.uploadField)
+		render params.name
+		return
+	}
+
+	def fileUploader(def file){
+		Random randomGenerator = new Random()
+		int randomInt = randomGenerator.nextInt(1000000)
+		def docName = randomInt+file?.getOriginalFilename()
+		log.debug"Random no: "+randomInt
+
+		InputStream is = file?.getInputStream()
+		OutputStream os = new FileOutputStream(docName)   //file path
+		log.debug"Image Size: "+file?.getSize()
+		byte[] buffer = new byte[file?.getSize()]
+		int bytesRead
+		while ((bytesRead = is.read(buffer)) != -1) {
+			os.write(buffer, 0, bytesRead)
+		}
+		is.close()
+		os.close()
+		return docName
+	}
+
+	def updateFromImport(){
+		def xmlObject = xmlProcessingServiceProxy.xmlObject
+		WorkBook workBook = workBookService.xmlToDomain(xmlObject)
+		respond(workBook, view:'edit')
+	}
+
 
 }

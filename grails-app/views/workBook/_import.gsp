@@ -10,15 +10,14 @@
             <g:message code="import.workbook.label" default="Found WorkBook Info For:"/>
         </span>
         <span class="property-value" aria-labelledby="import-workbook-label">
-            <g:if test="${isWorkBookExists}">
-                <g:link action="edit" id="${workBookOwner.id}">
-                    ${workBookOwner}
-                </g:link>
+            <g:if test="${id}">
+                <g:remoteLink action="updateFromImport" update="success"
+                >${workBookOwner}</g:remoteLink>
                 already exists want to update it?
             </g:if>
             <g:else>
                 <g:remoteLink action="createFromImport" update="success"
-                              > AAA</g:remoteLink>
+                              >${workBookOwner}</g:remoteLink>
             </g:else>
         </span>
     </li>

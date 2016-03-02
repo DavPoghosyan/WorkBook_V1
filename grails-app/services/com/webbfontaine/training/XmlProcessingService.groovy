@@ -20,7 +20,7 @@ class XmlProcessingService {
 	}
 
 	def importFromXML(def flyFile){
-        def dirForUploads = new File('uploads') //user home e.g /home/username for unix
+        def dirForUploads = new File('uploads')
         dirForUploads.mkdir()
         File xmlOnServer = new File(dirForUploads,"template_${new Date().timeString}.xml")
         flyFile.transferTo(xmlOnServer)
