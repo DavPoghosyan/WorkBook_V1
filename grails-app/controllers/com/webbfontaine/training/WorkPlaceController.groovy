@@ -5,7 +5,6 @@ import static org.springframework.http.HttpStatus.*
 class WorkPlaceController {
 
 	WorkPlaceService workPlaceService
-	XmlProcessingService xmlProcessingService
 
 	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 

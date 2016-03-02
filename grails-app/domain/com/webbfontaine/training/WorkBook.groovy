@@ -22,7 +22,7 @@ class WorkBook {
     }
 
     String getFullName(){
-        "$lastName $firstName"
+        "${lastName}_$firstName"
     }
 
 	String toString() {

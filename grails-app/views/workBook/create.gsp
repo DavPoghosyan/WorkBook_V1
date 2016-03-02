@@ -1,10 +1,11 @@
+<%@ page import="com.webbfontaine.training.WorkBook" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'workBook.label', default: 'WorkBook')}"/>
 		<title>
-			<g:message code="default.create.label" args="[entityName]" />
+			<g:message code="default.create.label" args="[entityName]"/>
 		</title>
 	</head>
 	<body>
@@ -53,12 +54,12 @@
                 </g:form>
             <g:form name="upload-form" action="importFromXML" method="post"
                     enctype="multipart/form-data" target="hidden-upload-frame">
-                File: <input type="file" name="myFile" />
-                <button type="submit">Import From XML</button>
+                File: <input type="file" name="flyFile" />
+                <g:submitButton name="import" class="import"
+                                value='Import From XML'/>
             </g:form>
-            <iframe id="hidden-upload-frame" name="hidden-upload-frame" style="display: none" onload="onUploadComplete">
+            <iframe id="upload-frame" name="upload-frame" onload="onUploadComplete">
             </iframe>
-
             <script type="text/javascript">
                 function onUploadComplete() {
                     // Handle upload complete
