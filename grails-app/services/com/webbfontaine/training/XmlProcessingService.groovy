@@ -1,28 +1,31 @@
 package com.webbfontaine.training
 
 import grails.converters.XML
-import groovy.xml.MarkupBuilder
 
 class XmlProcessingService {
 
+    static transactional = false
+
+    static  scope = 'session'
+    static proxy = true
+
+    def xmlObject
+
 	void exportToXML(def domainInstance) {
 		XML.use('deep')
-		def fileWriter = new FileWriter("${domainInstance.workbook} ${domainInstance.id}.xml")
+		def fileWriter = new FileWriter("${domainInstance}.xml")
 		def xmlConverter = domainInstance as XML
 		xmlConverter.render(fileWriter)
 		fileWriter.close()
 	}
 
-	void importFromXML(){
-		def xmlFile = new File("testXML.xml")
-		def workplace = new XmlSlurper().parse(xmlFile)
-		WorkPlace wp
-		println workplace.childNodes()*.name()
-		workplace.children().
-		workplace.each() {p ->
-			wp = new WorkPlace(p.attributes())
-		}
-		wp.save()
+	def importFromXML(def flyFile){
+        def dirForUploads = new File('uploads') //user home e.g /home/username for unix
+        dirForUploads.mkdir()
+        File xmlOnServer = new File(dirForUploads,"template_${new Date().timeString}.xml")
+        flyFile.transferTo(xmlOnServer)
+		xmlObject = new XmlSlurper().parse(xmlOnServer)
+        xmlObject
 	}
 
 

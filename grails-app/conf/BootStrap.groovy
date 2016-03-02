@@ -1,6 +1,7 @@
 import com.webbfontaine.training.Company
 import com.webbfontaine.training.Country
 import com.webbfontaine.training.WorkPlace
+import groovy.xml.MarkupBuilder
 
 class BootStrap {
 
@@ -18,10 +19,12 @@ class BootStrap {
         SecAppUserSecAppRole.create(admin, adminRole)
 	    SecAppUserSecAppRole.create(user, userRole)*/
 
-        Country country = Country.newInstance(name: 'Armenia', code: 'AM/ARM', description: 'Republic')
+        Country country = Country.newInstance(name: 'Armenia', code: 'AM', description: 'Republic')
         country.save(flush: true)
-	    Country country1 = Country.newInstance(name: 'Poland', code: 'PL/POL', description: 'Republic')
+	    Country country1 = Country.newInstance(name: 'Poland', code: 'PL', description: 'Republic')
 	    country1.save(flush: true)
+        Country country2 = Country.newInstance(name: 'Denmark', code: 'DK', description: 'Kingdom')
+        country2.save(flush: true)
 
 	    Company company = Company.newInstance(code: 'WBBF', name: 'Webb Fontaine', description: 'e-Government Solutions')
 	    company.save(flush: true)
@@ -29,7 +32,7 @@ class BootStrap {
 	    company1.save(flush: true)
 	    Company company2 = Company.newInstance(code: 'JD_IT', name: 'JEDEN IT', description: 'Information systems integration')
 	    company2.save(flush: true)
-	   // WorkPlace workPlace = WorkPlace.newInstance(workbook: 15)
+
     }
 
     def destroy = {
