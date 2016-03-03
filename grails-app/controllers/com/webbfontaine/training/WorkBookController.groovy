@@ -117,15 +117,22 @@ class WorkBookController {
             outputStream << xmlFile.bytes
         }
     }
-    
+
     def uploadXmlFile() {
         def flyFile = request?.getFile('flyFile')
-        def xmlObject = xmlProcessingServiceProxy.importFromXML(flyFile)
-        //*** alternative way using HTTPSession session object ... session['xmlObject'] = xmlObject ***//
+        if(flyFile.empty){
+	        flash.error = 'file not chosen'
+            respond(flash.error, view:'create', status: CONFLICT)
+            return
+        }
+	    def fileExtension = flyFile.originalFilename.substring(flyFile.originalFilename.lastIndexOf('.')+1)
+	    if(fileExtension != 'xml') {
+		    flash.error = 'fileupload.upload.unauthorizedExtension'
+		    respond(flash.error, view:'create', status: CONFLICT)
+		    return
+	    }
+        def xmlObject = xmlProcessingServiceProxy.importFromXML(flyFile)  //*** alternative way using HTTPSession session object ... session['xmlObject'] = xmlObject ***//
         def workPlacesCount = xmlObject?.workplaces.children().size()
-        def workBookOwner = "${xmlObject.firstName.text() ?: "Unknown"}" +
-                "_${xmlObject.lastName.text() ?: "Unknown"}"  //firstName_lastName
-        "_${xmlObject.lastName.text() ?: "Unknown"}"  //firstName_lastName
         WorkBook workBook = workBookService.xmlToDomain(xmlObject)
         render (view: 'import_show',
                 model:[
@@ -141,7 +148,6 @@ class WorkBookController {
         render(template:'createTemp', model: [workBookInstance:  workBook])
     }
 
-
     def remoteSave(WorkBook workBook) {
         if (workBook == null) {
             notFound()
@@ -156,7 +162,7 @@ class WorkBookController {
         flash.message = message(
                 code: 'default.created.message',
                 args:  [WorkBook.class.simpleName, workBook.id])
-        render(template: 'showTemp', model:[workBookInstance: workBook], status: OK)
+        render(template: 'showTemp', model:[workBookDbInstance: workBook], status: OK)
     }
 
     def remoteUpdate(WorkBook workBook) {
@@ -178,21 +184,10 @@ class WorkBookController {
         render(template: 'showTemp', model:[workBookInstance: workBook])
     }
 
-
 	def updateFromImport(){
 		def xmlObject = xmlProcessingServiceProxy.xmlObject
 		WorkBook workBook = workBookService.xmlToDomain(xmlObject)
         render (template: 'editTemp', model:[workBookInstance: workBook])
 	}
-
-    def showTemp() {
-        def xmlObject = xmlProcessingServiceProxy.xmlObject
-        WorkBook workBook = WorkBook.get(xmlObject.@id.toLong())
-        if (workBook == null) {
-            notFound()
-            return
-        }
-        render(template: 'showTemp', model:[workBookInstance: workBook], status: OK)
-    }
 
 }

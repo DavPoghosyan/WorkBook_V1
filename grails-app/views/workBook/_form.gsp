@@ -46,7 +46,9 @@
     </label>
     <g:select name="age" from="${18..65}" value="${workBookInstance?.age}"/>
 </div>
-
+<g:if test="${workPlacesCount}">
+</g:if>
+<g:else>
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'workplaces', 'error')} ">
 	<label for="workplaces">
 		<g:message code="workBook.workplaces.label" default="Workplaces"/>
@@ -59,11 +61,12 @@
                  </g:link>
              </li>
         </g:each>
-        %{--<li class="add">
-            <g:link controller="workPlace" action="create" params="['workBook.id': workBookInstance?.id]">
-                ${message(code: 'default.add.label', args: [message(code: 'workPlace.label', default: 'WorkPlace')])}
-            </g:link>
-        </li>--}%
+            <li class="add">
+                <g:link controller="workPlace" action="create" params="['workBook.id': workBookInstance?.id]">
+                    ${message(code: 'default.add.label', args: [message(code: 'workPlace.label', default: 'WorkPlace')])}
+                </g:link>
+            </li>
+        </g:else>
     </ul>
 </div>
 
