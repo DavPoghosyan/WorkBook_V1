@@ -32,34 +32,31 @@
                 </li>
 			</ul>
 		</div>
-    <div>
-        <li class="fieldcontain">
-            <span id="import-workbook-label" class="property-label">
-                <g:message code="import.workbook.label" default="Found WorkBook Info For:"/>
-            </span>
-            <span class="property-value" aria-labelledby="import-workbook-label">
-                <g:if test="${id}">
-                    <g:remoteLink action="updateFromImport" update="mainContent"
-                    >${workBookOwner}</g:remoteLink>
-                    already exists want to update it?
-                </g:if>
-                <g:else>
-                    <g:remoteLink action="createFromImport" update="mainContent"
-                    >${workBookOwner}</g:remoteLink>
-                </g:else>
-            </span>
-        </li>
-	    <div id="mainContent" style='float: right; width: 80%; min-height: 500px; background-color: #c0ffc0;'>
-		    <p>This is the main content</p>
-	    </div>
-        <li class="fieldcontain">
-            <span id="import-workplaces-label" class="property-label">
-                <g:message code="import.workplaces.label" default="Found WorkPlaces:"/>
-            </span>
-            <span class="property-value" aria-labelledby="import-workplaces-label">
-                ${workPlacesCount}
-            </span>
-        </li>
-		</div>
+    <g:if test="${workPlacesCount}">
+        <g:message code="import.workplaces.label" default="Found WorkPlaces:"/>${workPlacesCount}
+        <g:each in="${1..workPlacesCount}" var="i" >
+            <g:message code="import.workplaces.label" default="Add WorkPlace:"/>
+            <g:remoteLink controller="workPlace" action="createFromImport" update="main-content"  params="[id:i]">${i}</g:remoteLink>
+        </g:each>
+    </g:if>
+        <div id="main-content">
+            <g:message code="import.workbook.label" default="Found WorkBook Info For:"/>
+            ${workBookInstance}
+            <g:if test="${id}">
+                already exists want to update it?
+                <div id='current-from-store' style='float: left; width: 50%; min-height: 250px; background-color: #ffffff;'>
+                    <g:render template="showTemp"/>
+                </div>
+                <g:remoteLink action="updateFromImport" update="mainContent">Update this one by imported XML</g:remoteLink>
+                <g:remoteLink action="createFromImport" update="main-content">Use As Template</g:remoteLink>
+            </g:if>
+            <g:else>
+                <g:remoteLink action="createFromImport" update="main-content">${workBookInstance}</g:remoteLink>
+                <g:render template="createTemp"/>
+            </g:else>
+            <div id="mainContent">
+                %{--<g:render template="remoteForm"/>--}%
+            </div>
+        </div>
 	</body>
 </html>

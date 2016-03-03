@@ -59,11 +59,11 @@
                  </g:link>
              </li>
         </g:each>
-        <li class="add">
+        %{--<li class="add">
             <g:link controller="workPlace" action="create" params="['workBook.id': workBookInstance?.id]">
                 ${message(code: 'default.add.label', args: [message(code: 'workPlace.label', default: 'WorkPlace')])}
             </g:link>
-        </li>
+        </li>--}%
     </ul>
 </div>
 

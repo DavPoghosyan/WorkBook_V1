@@ -5,6 +5,7 @@ import static org.springframework.http.HttpStatus.*
 class WorkPlaceController {
 
 	WorkPlaceService workPlaceService
+    def xmlProcessingServiceProxy
 
 	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
@@ -115,6 +116,31 @@ class WorkPlaceController {
     def retrieveCountryData(long id) {
         def country =  Country.get(id)
 	    render(template:"countryDialog", model:[country: country])
+    }
+
+    def createFromImport(){
+        def xmlObject = xmlProcessingServiceProxy.xmlObject
+        int i = params.id.toInteger() - 1
+        WorkPlace workPlace = workPlaceService.xmlToDomain(xmlObject, i)
+        render(template:'createTemp', model: [workPlaceInstance:  workPlace])
+    }
+
+
+    def remoteSave(WorkPlace workPlace) {
+        if (workPlace == null) {
+            notFound()
+            return
+        }
+        additionalValidation(workPlace)
+        if (workPlace.hasErrors()) {
+            render (template:'createTemp', model:[workPlaceInstance: workPlace])
+            return
+        }
+        workPlaceService.save(workPlace)
+        flash.message = message(
+                code: 'default.created.message',
+                args:  [WorkPlace.class.simpleName, workPlace.id])
+        render(template: 'showTemp', model:[workPlaceInstance: workPlace], status: OK)
     }
 
 }

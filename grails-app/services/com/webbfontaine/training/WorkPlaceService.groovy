@@ -81,4 +81,26 @@ class WorkPlaceService {
         }
         return [true, '']
     }
+
+	def xmlToDomain(def xmlObject, def i) {
+		WorkPlace workPlace = new WorkPlace()
+        def workPlacesCount = xmlObject?.workplaces.children().size()
+        println xmlObject?.workplaces.workplace[0]
+        println xmlObject?.workplaces.workplace[1]
+		String startDate =  xmlObject?.workplaces.workPlace[i].startDate.text() - ~/\b\w{3}\b/
+		String endDate =  xmlObject?.workplaces.workPlace[i].endDate.text() - ~/\b\w{3}\b/
+		if(startDate){
+            workPlace.startDate = Date.parse('yyyy-MM-dd',startDate.trim())
+		}
+        if(endDate){
+            workPlace.endDate = Date.parse('yyyy-MM-dd',endDate.trim())
+        }
+        workPlace.current = xmlObject.workplaces.workPlace[i].current?.toBoolean()
+        workPlace.company = Company.get(xmlObject.workplaces.workPlace[i].company.@id.toLong())
+        workPlace.country = Country.get(xmlObject.workplaces.workPlace[i].country.@id.toLong())
+        workPlace.workbook = xmlObject.@id?.text() ? WorkBook.get(xmlObject.@id.toLong()) : null
+        workPlace.id =  xmlObject.workplaces.workPlace[i].@id?.text() ? xmlObject.workplaces.workPlace[i].@id.toLong() : 0
+        workPlace
+	}
+
 }

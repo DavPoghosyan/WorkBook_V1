@@ -117,18 +117,20 @@ class WorkBookController {
             outputStream << xmlFile.bytes
         }
     }
-
+    
     def uploadXmlFile() {
         def flyFile = request?.getFile('flyFile')
         def xmlObject = xmlProcessingServiceProxy.importFromXML(flyFile)
-	    /*** alternative way using HTTPSession session object ... session['xmlObject'] = xmlObject ***/
+        //*** alternative way using HTTPSession session object ... session['xmlObject'] = xmlObject ***//
         def workPlacesCount = xmlObject?.workplaces.children().size()
-	    def workBookOwner = "${xmlObject.firstName.text() ?: "Unknown"}" +
-			    "_${xmlObject.lastName.text() ?: "Unknown"}"  //firstName_lastName
+        def workBookOwner = "${xmlObject.firstName.text() ?: "Unknown"}" +
+                "_${xmlObject.lastName.text() ?: "Unknown"}"  //firstName_lastName
+        "_${xmlObject.lastName.text() ?: "Unknown"}"  //firstName_lastName
+        WorkBook workBook = workBookService.xmlToDomain(xmlObject)
         render (view: 'import_show',
                 model:[
-                        workBookOwner: workBookOwner,
-		                id: xmlObject.@id?.text(),
+                        workBookInstance: workBook,
+                        id: xmlObject.@id?.text(),
                         workPlacesCount: workPlacesCount,
                 ])
     }
@@ -136,41 +138,61 @@ class WorkBookController {
     def createFromImport(){
         def xmlObject = xmlProcessingServiceProxy.xmlObject
         WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-	    render(template:"form", model:[workBookInstance: workBook])
+        render(template:'createTemp', model: [workBookInstance:  workBook])
     }
 
 
-	def uploading={
-		println params
-		fileUploader(params.uploadField)
-		render params.name
-		return
-	}
+    def remoteSave(WorkBook workBook) {
+        if (workBook == null) {
+            notFound()
+            return
+        }
+        additionalValidation(workBook)
+        if (workBook.hasErrors()) {
+            render (template:'createTemp', model:[workBookInstance: workBook])
+            return
+        }
+        workBookService.save(workBook)
+        flash.message = message(
+                code: 'default.created.message',
+                args:  [WorkBook.class.simpleName, workBook.id])
+        render(template: 'showTemp', model:[workBookInstance: workBook], status: OK)
+    }
 
-	def fileUploader(def file){
-		Random randomGenerator = new Random()
-		int randomInt = randomGenerator.nextInt(1000000)
-		def docName = randomInt+file?.getOriginalFilename()
-		log.debug"Random no: "+randomInt
+    def remoteUpdate(WorkBook workBook) {
+        if (workBook == null) {
+            notFound()
+            return
+        }
+        additionalValidation(workBook)
+        if (workBook.hasErrors()) {
+            render (template: 'editTemp', model:[workBookInstance: workBook])
+            workBook.workplaces*.discard()
+            workBook.discard()
+            return
+        }
+        workBookService.save(workBook)
+        flash.message = message(
+                code: 'default.updated.message',
+                args:  [WorkBook.class.simpleName, workBook.id])
+        render(template: 'showTemp', model:[workBookInstance: workBook])
+    }
 
-		InputStream is = file?.getInputStream()
-		OutputStream os = new FileOutputStream(docName)   //file path
-		log.debug"Image Size: "+file?.getSize()
-		byte[] buffer = new byte[file?.getSize()]
-		int bytesRead
-		while ((bytesRead = is.read(buffer)) != -1) {
-			os.write(buffer, 0, bytesRead)
-		}
-		is.close()
-		os.close()
-		return docName
-	}
 
 	def updateFromImport(){
 		def xmlObject = xmlProcessingServiceProxy.xmlObject
 		WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-		respond(workBook, view:'edit')
+        render (template: 'editTemp', model:[workBookInstance: workBook])
 	}
 
+    def showTemp() {
+        def xmlObject = xmlProcessingServiceProxy.xmlObject
+        WorkBook workBook = WorkBook.get(xmlObject.@id.toLong())
+        if (workBook == null) {
+            notFound()
+            return
+        }
+        render(template: 'showTemp', model:[workBookInstance: workBook], status: OK)
+    }
 
 }
