@@ -1,5 +1,4 @@
 <%@ page import="com.webbfontaine.training.WorkBook" %>
-<%@ page import="com.webbfontaine.training.XmlProcessingController" %>
 <!DOCTYPE html>
 <html>
 	<head>

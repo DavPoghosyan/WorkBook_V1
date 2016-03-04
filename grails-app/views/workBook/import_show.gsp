@@ -33,14 +33,18 @@
 			</ul>
 		</div>
         <div id="main_content">
-            <g:message code="import.workbook.label" default="In Uploaded XML Found Personal Info For WorkBook Owner: ${workBookInstance}"/>
+			<div class="message" id="perm" role="status">
+            	<g:message code="import.workbook.label" default="In Uploaded XML Found Personal Info For WorkBook Owner: ${workBookInstance} Please check, before creating"/>
+           	</div>
             <g:if test="${id}">
+                <div class="message" id="perm" role="status">
                 <g:message code="import.owner.exists" default="Record about this workbook already exists in store, if want to update it?"/>
+                <g:remoteLink action="createFromImport" update="main_content">Use As Template</g:remoteLink>
+                </div>
                 <div id='current-from-store' style='float: left; width: 50%; min-height: 250px; background-color: #ffffff;'>
                     <g:render template="showTemp"/>
                 </div>
-                <g:remoteLink action="createFromImport" update="main_content">Use As Template</g:remoteLink>
-	            <div id="mainContent">
+	             <div id="mainContent">
 		            <g:render template="editTemp"/>
 	            </div>
             </g:if>
@@ -50,13 +54,7 @@
 	            </div>
             </g:else>
         </div>
-	<g:if test="${workPlacesCount}">
-		<g:message code="import.workplaces.label" default="Found WorkPlaces:"/>${workPlacesCount}
-		<g:each in="${1..workPlacesCount}" var="i" >
-			<g:message code="import.workplaces.label" default="Add WorkPlace:"/>
-			<g:remoteLink controller="workPlace" action="createFromImport" update="sub-content"  params="[id:i]">${i}</g:remoteLink>
-		</g:each>
-	</g:if>
+    </div>
 		<div id="sub-content">
 		</div>
 	</body>

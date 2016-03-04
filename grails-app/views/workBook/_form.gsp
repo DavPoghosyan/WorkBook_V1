@@ -1,5 +1,4 @@
 <%@ page import="com.webbfontaine.training.WorkBook" %>
-
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'firstName', 'error')} required">
 	<label for="firstName">
 		<g:message code="workBook.firstName.label" default="First Name"/>
@@ -25,10 +24,10 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'passportNumber', 'error')} required">
-    <label for="passportNumber">
-        <g:message code="workBook.passportNumber.label" default="Passport Number"/>
-        <span class="required-indicator">*</span>
-    </label>
+        <label for="passportNumber">
+            <g:message code="workBook.passportNumber.label" default="Passport No"/>
+            <span class="required-indicator">*</span>
+        </label>
     <g:textField name="passportNumber" required="" value="${workBookInstance?.passportNumber}"/>
 </div>
 

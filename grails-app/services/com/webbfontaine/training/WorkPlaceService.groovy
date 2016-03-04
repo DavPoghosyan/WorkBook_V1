@@ -57,7 +57,7 @@ class WorkPlaceService {
 
 	/*def isRelatedDomainsExists(WorkPlace workPlace) {
 		def invalidDomains = []
-		if (!workPlace.workbook?.id){
+		if (!workPlace.workbook?.id && WorkBook.get){
 			invalidDomains << 'workbook'
 		}
 		if (!workPlace.company?.id){
@@ -84,9 +84,6 @@ class WorkPlaceService {
 
 	def xmlToDomain(def xmlObject, def i) {
 		WorkPlace workPlace = new WorkPlace()
-        def workPlacesCount = xmlObject?.workplaces.children().size()
-        println xmlObject?.workplaces.workplace[0]
-        println xmlObject?.workplaces.workplace[1]
 		String startDate =  xmlObject?.workplaces.workPlace[i].startDate.text() - ~/\b\w{3}\b/
 		String endDate =  xmlObject?.workplaces.workPlace[i].endDate.text() - ~/\b\w{3}\b/
 		if(startDate){

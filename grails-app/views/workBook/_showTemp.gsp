@@ -1,3 +1,8 @@
+<g:javascript>
+    $(".message").click(function(){
+        $("#show-workBook").hide("fast")
+    })
+</g:javascript>
 <%@ page import="com.webbfontaine.training.WorkBook" %>
 <div id="show-workBook" class="content scaffold-show" role="main">
     <g:if test="${id}">
@@ -88,3 +93,17 @@
         </g:if>
     </ol>
 </div>
+
+
+        <g:if test="${workPlacesCount}">
+            <div class="message"  role="status">
+            <g:message code="import.workplaces.label" default="Found ${workPlacesCount} WorkPlaces info from XML connected this workbook check and add them or use just as templates:"/>
+            <g:each in="${1..workPlacesCount}" var="i" >
+                <g:message code="import.workplaces.label" default="WorkPlace:"/>
+                <g:remoteLink controller="workPlace" action="createFromImport" update="sub-content"  params="[id:i]">${i}</g:remoteLink>
+            </g:each>
+        </g:if>
+        </div>
+
+
+

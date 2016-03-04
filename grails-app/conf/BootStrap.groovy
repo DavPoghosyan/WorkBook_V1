@@ -1,7 +1,6 @@
 import com.webbfontaine.training.Company
 import com.webbfontaine.training.Country
-import com.webbfontaine.training.WorkPlace
-import groovy.xml.MarkupBuilder
+import com.webbfontaine.training.WorkBook
 
 class BootStrap {
 
@@ -33,8 +32,22 @@ class BootStrap {
 	    Company company2 = Company.newInstance(code: 'JD_IT', name: 'JEDEN IT', description: 'Information systems integration')
 	    company2.save(flush: true)
 
+        grails.converters.JSON.registerObjectMarshaller( com.webbfontaine.training.WorkBook ) {
+            return [
+                    id : it.id,
+                    name: it.firstName
+            ]
+        }
+
+       /* grails.converters.XML.registerObjectMarshaller(WorkBook) {workbook, converter ->
+            converter.build {
+                id(workbook.id)
+            }
+        }*/
     }
 
     def destroy = {
     }
+
+
 }

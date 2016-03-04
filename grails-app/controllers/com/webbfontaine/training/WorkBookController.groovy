@@ -111,6 +111,11 @@ class WorkBookController {
     def exportAsXML(WorkBook workBook){
         xmlProcessingServiceProxy.exportToXML(workBook)
         def xmlFile = new File("${workBook}.xml")
+        if(!xmlFile.exists()){
+            flash.message = 'internal server error export unavailble , please try a bit late'
+            respond(workBook, view:'show', status: INTERNAL_SERVER_ERROR)
+            return
+        }
         response.with {
             setContentType('application/xml')
             setHeader('Content-Disposition', "Attachment;Filename=\"${xmlFile.name}\"")
@@ -131,8 +136,13 @@ class WorkBookController {
 		    respond(flash.error, view:'create', status: CONFLICT)
 		    return
 	    }
-        def xmlObject = xmlProcessingServiceProxy.importFromXML(flyFile)  //*** alternative way using HTTPSession session object ... session['xmlObject'] = xmlObject ***//
-        def workPlacesCount = xmlObject?.workplaces.children().size()
+        def xmlObject = xmlProcessingServiceProxy.importFromXML(flyFile)//*** alternative way using HTTPSession session object ... session['xmlObject'] = xmlObject ***//
+        if(String.isCase(xmlObject)){
+            flash.error = xmlObject
+            respond(flash.error, view:'create', status: CONFLICT)
+            return
+        }
+        int workPlacesCount = xmlObject?.workplaces.children().size()
         WorkBook workBook = workBookService.xmlToDomain(xmlObject)
         render (view: 'import_show',
                 model:[
@@ -155,6 +165,7 @@ class WorkBookController {
         }
         additionalValidation(workBook)
         if (workBook.hasErrors()) {
+            println workBook.errors
             render (template:'createTemp', model:[workBookInstance: workBook])
             return
         }
@@ -181,13 +192,13 @@ class WorkBookController {
         flash.message = message(
                 code: 'default.updated.message',
                 args:  [WorkBook.class.simpleName, workBook.id])
-        render(template: 'showTemp', model:[workBookInstance: workBook])
+        render(template: 'showTemp', model:[workBookDbInstance: workBook, flag: false])
     }
 
 	def updateFromImport(){
 		def xmlObject = xmlProcessingServiceProxy.xmlObject
 		WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-        render (template: 'editTemp', model:[workBookInstance: workBook])
+        render (template: 'editTemp', model:[workBookInstance: workBook, flag: true])
 	}
 
 }
