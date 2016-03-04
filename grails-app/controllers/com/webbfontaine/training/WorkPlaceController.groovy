@@ -125,7 +125,6 @@ class WorkPlaceController {
         render(template:'createTemp', model: [workPlaceInstance:  workPlace])
     }
 
-
     def remoteSave(WorkPlace workPlace) {
         if (workPlace == null) {
             notFound()

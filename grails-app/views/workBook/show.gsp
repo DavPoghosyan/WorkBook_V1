@@ -1,4 +1,5 @@
 <%@ page import="com.webbfontaine.training.WorkBook" %>
+<%@ page import="com.webbfontaine.training.XmlProcessingController" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -124,7 +125,7 @@
 					<g:actionSubmit class="delete" action="delete"
                                     value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
-                    <g:link action="exportAsXML" resource="${workBookInstance}">Export As XML</g:link>
+                    <g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">Export As XML</g:link>
                 </fieldset>
 			</g:form>
 		</div>

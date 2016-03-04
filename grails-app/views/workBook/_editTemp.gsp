@@ -19,13 +19,12 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <g:formRemote name="subForm" url="[resource:workBookInstance,controller:'workBook', action:'remoteUpdate']" update="main-content">
+    <g:formRemote name="subForm" url="[resource:workBookInstance,controller:'workBook', action:'remoteUpdate']" update="main_content">
         <fieldset class="form">
             <g:render template="form"/>
         </fieldset>
         <fieldset class="buttons">
             <g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-
         </fieldset>
     </g:formRemote>
 </div>

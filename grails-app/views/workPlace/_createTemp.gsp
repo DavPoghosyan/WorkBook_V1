@@ -20,7 +20,7 @@
         </g:eachError>
     </ul>
 </g:hasErrors>
-<g:formRemote name="subForm" url="[resource:workPlaceInstance, controller:'workPlace', action:'remoteSave']" update="main-content">
+<g:formRemote name="subForm" url="[resource:workPlaceInstance, controller:'workPlace', action:'remoteSave']" update="sub-content">
     <fieldset class="form">
         <g:render template="form"/>
     </fieldset>
