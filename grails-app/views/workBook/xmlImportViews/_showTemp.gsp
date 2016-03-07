@@ -17,7 +17,7 @@
 		${flash.message}
 	</div>
     <div class="cl">
-        - hide
+        -hide
     </div>
 </g:if>
 <div id="show-workBook" class="content scaffold-show" role="main">
