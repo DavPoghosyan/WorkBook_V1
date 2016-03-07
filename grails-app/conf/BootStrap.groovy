@@ -46,6 +46,7 @@ class BootStrap {
 	    Company company2 = Company.newInstance(code: 'JD_IT', name: 'JEDEN IT', description: 'Information systems integration')
 	    company2.save(flush: true)
 */
+
     }
 
     def destroy = {
