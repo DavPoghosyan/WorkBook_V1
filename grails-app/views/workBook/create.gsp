@@ -22,11 +22,11 @@
                     </g:link>
                 </li>
 				<li>
-					<g:form name="upload-form" action="uploadXmlFile" method="post"
-					        enctype="multipart/form-data" target="_parent">
-						<input id="file-upload" class="import" type="file" name="flyFile"/>
-						<g:submitButton name="import" class="import" value='Import From XML'/>
-					</g:form>
+                    <g:form name="upload-form" action="uploadXmlFile" method="post"
+                            enctype="multipart/form-data" target="_parent">
+                        <input id="file-upload" class="import" type="file" name="flyFile"/>
+                        <g:submitButton name="import" class="import" value='Import From XML'/>
+                    </g:form>
 				</li>
 			</ul>
 		</div>

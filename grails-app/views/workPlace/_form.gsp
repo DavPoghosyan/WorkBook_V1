@@ -28,7 +28,7 @@
 </div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'company', 'error')} required">
    <label for="company">
-        <g:message code="workPlace.company.label" default="Company Code" />
+        <g:message code="workPlace.company.code"/>
         <span class="required-indicator">*</span>
     </label>
     <g:select id="company" name="company.id" from="${Company.listOrderByCode()}"
@@ -40,7 +40,7 @@
 </div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'country', 'error')} required">
     <label for="country">
-        <g:message code="workPlace.country.label" default="Country Code" />
+        <g:message code="workPlace.country.code"/>
         <span class="required-indicator">*</span>
     </label>
     <g:select id="country"  name="country.id"
@@ -74,4 +74,3 @@
 <fieldset class="companyDialog">
 	<g:render template="companyDialog"/>
 </fieldset>
-

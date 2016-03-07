@@ -2,7 +2,7 @@
 <g:javascript src="formActions.js"/>
 <div id="create-workPlace" class="content scaffold-edit" role="main">
     <h1>
-        <g:message code="remote.create.label" default="Create From XML Template"/>
+        <g:message code="create.from.xml"/>
     </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">

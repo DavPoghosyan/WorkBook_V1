@@ -32,29 +32,40 @@
                 </li>
 			</ul>
 		</div>
-        <div id="main_content">
-			<div class="message" id="perm" role="status">
-            	<g:message code="import.workbook.label" default="In Uploaded XML Found Personal Info For WorkBook Owner: ${workBookInstance} Please check, before creating"/>
+        <div id="main-content">
+			<div class="message" role="status">
+            	<g:message code="import.workbook.label" args="${workBookInstance}"/>
            	</div>
             <g:if test="${id}">
-                <div class="message" id="perm" role="status">
-                <g:message code="import.owner.exists" default="Record about this workbook already exists in store, if want to update it?"/>
-                <g:remoteLink action="createFromImport" update="main_content">Use As Template</g:remoteLink>
+                <div class="message" role="status">
+	                <g:message code="import.owner.exists"/>
+	                <g:remoteLink action="createFromImport" update="main-content">
+		                <g:message code="import.use.template"/>
+	                </g:remoteLink>
                 </div>
                 <div id='current-from-store' style='float: left; width: 50%; min-height: 250px; background-color: #ffffff;'>
-                    <g:render template="showTemp"/>
+                    <g:render template="xmlImportViews/showTemp"/>
                 </div>
-	             <div id="mainContent">
-		            <g:render template="editTemp"/>
+	             <div>
+		            <g:render template="xmlImportViews/editTemp"/>
 	            </div>
             </g:if>
             <g:else>
-	            <div id="m_c">
-		            <g:render template="createTemp"/>
+	            <div>
+		            <g:render template="xmlImportViews/createTemp"/>
 	            </div>
             </g:else>
         </div>
     </div>
+	<g:if test="${workPlacesCount}">
+		<div class="message"  role="status">
+			<g:message code="import.workplaces.label" args="${workPlacesCount}"/>
+			<g:each in="${1..workPlacesCount}" var="i" >
+				<g:remoteLink controller="workPlace" action="createFromImport" update="sub-content"  params="[id:i]">
+					WorkPlace:${i}</g:remoteLink>
+			</g:each>
+		</div>
+	</g:if>
 		<div id="sub-content">
 		</div>
 	</body>

@@ -1,10 +1,25 @@
-import com.webbfontaine.training.Company
-import com.webbfontaine.training.Country
 import com.webbfontaine.training.WorkBook
+import grails.converters.XML
 
 class BootStrap {
 
     def init = { servletContext ->
+
+
+	    XML.createNamedConfig("shortDeep") {
+		    XML.registerObjectMarshaller(WorkBook,{workBook, converter ->
+			    converter.build {
+				    id(workBook.id)
+				    firstName(workBook.firstName)
+				    lastName(workBook.lastName)
+				    email(workBook.email)
+				    passportNumber(workBook.passportNumber)
+				    age(workBook.age)
+				    dateOfBirth(workBook.dateOfBirth)
+				    workPlaces(workBook.workplaces)
+			    }
+		    })
+	    }
      /*   def adminRole = SecAppRole.newInstance(authority: 'ROLE_ADMIN')
 	    adminRole.save(flush: true)
         def userRole = SecAppRole.newInstance(authority: 'ROLE_USER')
@@ -16,7 +31,7 @@ class BootStrap {
 	    user.save(flush: true)
 
         SecAppUserSecAppRole.create(admin, adminRole)
-	    SecAppUserSecAppRole.create(user, userRole)*/
+	    SecAppUserSecAppRole.create(user, userRole)
 
         Country country = Country.newInstance(name: 'Armenia', code: 'AM', description: 'Republic')
         country.save(flush: true)
@@ -31,19 +46,7 @@ class BootStrap {
 	    company1.save(flush: true)
 	    Company company2 = Company.newInstance(code: 'JD_IT', name: 'JEDEN IT', description: 'Information systems integration')
 	    company2.save(flush: true)
-
-        grails.converters.JSON.registerObjectMarshaller( com.webbfontaine.training.WorkBook ) {
-            return [
-                    id : it.id,
-                    name: it.firstName
-            ]
-        }
-
-       /* grails.converters.XML.registerObjectMarshaller(WorkBook) {workbook, converter ->
-            converter.build {
-                id(workbook.id)
-            }
-        }*/
+*/
     }
 
     def destroy = {

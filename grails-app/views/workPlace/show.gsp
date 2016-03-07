@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'workPlace.label', default: 'WorkPlace')}" />
+		<g:set var="entityName" value="${message(code: 'workPlace.label')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -88,7 +88,7 @@
                             <g:formatDate format="yyyy-MM-dd" date="${workPlaceInstance?.endDate}" />
                          </g:if>
                         <g:else>
-                            <i>Up to now</i>
+                            <g:message code="workPlace.current.true.label"/>
                         </g:else>
                     </span>
                 </li>
@@ -99,8 +99,8 @@
                         <g:message code="default.button.edit.label" default="Edit" />
                     </g:link>
 					<g:actionSubmit class="delete" action="delete"
-                                    value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"
+                                    value="${message(code: 'default.button.delete.label')}"
+                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message')}');"
                     />
 				</fieldset>
 			</g:form>
