@@ -1,6 +1,6 @@
 <div id="edit-workBook" class="content scaffold-edit" role="main">
     <h1>
-        <g:message code="remote.edit.label" default="From XML"/>
+        <g:message code="update.from.xml"/>
     </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">
@@ -19,12 +19,13 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <g:formRemote name="subForm" url="[resource:workBookInstance,controller:'workBook', action:'remoteUpdate']" update="main_content">
+    <g:formRemote name="subForm" url="[resource:workBookInstance,controller:'workBook', action:'remoteUpdate']"
+                  update="main-content">
         <fieldset class="form">
             <g:render template="form"/>
         </fieldset>
         <fieldset class="buttons">
-            <g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+            <g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label')}" />
         </fieldset>
     </g:formRemote>
 </div>

@@ -144,7 +144,7 @@ class WorkBookController {
         }
         int workPlacesCount = xmlObject?.workplaces.children().size()
         WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-        render (view: 'import_show',
+        render (view: 'xmlImportViews/importView',
                 model:[
                         workBookInstance: workBook,
                         id: xmlObject.@id?.text(),
@@ -155,7 +155,7 @@ class WorkBookController {
     def createFromImport(){
         def xmlObject = xmlProcessingServiceProxy.xmlObject
         WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-        render(template:'createTemp', model: [workBookInstance:  workBook])
+        render(template:'xmlImportViews/createTemp', model: [workBookInstance:  workBook])
     }
 
     def remoteSave(WorkBook workBook) {
@@ -166,14 +166,14 @@ class WorkBookController {
         additionalValidation(workBook)
         if (workBook.hasErrors()) {
             println workBook.errors
-            render (template:'createTemp', model:[workBookInstance: workBook])
+            render (template:'xmlImportViews/createTemp', model:[workBookInstance: workBook])
             return
         }
         workBookService.save(workBook)
         flash.message = message(
                 code: 'default.created.message',
                 args:  [WorkBook.class.simpleName, workBook.id])
-        render(template: 'showTemp', model:[workBookDbInstance: workBook], status: OK)
+        render(template: 'xmlImportViews/showTemp', model:[workBookDbInstance: workBook], status: OK)
     }
 
     def remoteUpdate(WorkBook workBook) {
@@ -183,7 +183,7 @@ class WorkBookController {
         }
         additionalValidation(workBook)
         if (workBook.hasErrors()) {
-            render (template: 'editTemp', model:[workBookInstance: workBook])
+            render (template: 'xmlImportViews/editTemp', model:[workBookInstance: workBook])
             workBook.workplaces*.discard()
             workBook.discard()
             return
@@ -192,13 +192,13 @@ class WorkBookController {
         flash.message = message(
                 code: 'default.updated.message',
                 args:  [WorkBook.class.simpleName, workBook.id])
-        render(template: 'showTemp', model:[workBookDbInstance: workBook, flag: false])
+        render(template: 'xmlImportViews/showTemp', model:[workBookDbInstance: workBook, flag: false])
     }
 
 	def updateFromImport(){
 		def xmlObject = xmlProcessingServiceProxy.xmlObject
 		WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-        render (template: 'editTemp', model:[workBookInstance: workBook, flag: true])
+        render (template: 'xmlImportViews/editTemp', model:[workBookInstance: workBook, flag: true])
 	}
 
 }

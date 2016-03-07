@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'workBook.label', default: 'WorkBook')}"/>
+		<g:set var="entityName" value="${message(code: 'workBook.label')}"/>
 		<title>
 			<g:message code="default.create.label" args="[entityName]"/>
 		</title>
@@ -22,11 +22,11 @@
                     </g:link>
                 </li>
 				<li>
-					<g:form name="upload-form" action="uploadXmlFile" method="post"
-					        enctype="multipart/form-data" target="_parent">
-						<input id="file-upload" class="import" type="file" name="flyFile"/>
-						<g:submitButton name="import" class="import" value='Import From XML'/>
-					</g:form>
+                    <g:form name="upload-form" action="uploadXmlFile" method="post"
+                            enctype="multipart/form-data" target="_parent">
+                        <input id="file-upload" class="import" type="file" name="flyFile"/>
+                        <g:submitButton name="import" class="import" value='Import From XML'/>
+                    </g:form>
 				</li>
 			</ul>
 		</div>
@@ -61,7 +61,7 @@
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save"
-                                    value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                                    value="${message(code: 'default.button.create.label')}" />
                 </fieldset>
             </g:form>
 		</div>
