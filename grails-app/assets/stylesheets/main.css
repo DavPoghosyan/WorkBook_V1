@@ -598,3 +598,10 @@ a.skip {
 	position: absolute;
 	left: -9999px;
 }
+
+.current-from-store {
+    float: left;
+    width: 50%;
+    min-height: 250px;
+    background-color: #ffffff;
+}

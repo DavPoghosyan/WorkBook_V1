@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="all_dto" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="89b85722-ba33-45f9-8706-74b3dacad933">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="reportId" class="java.lang.String"/>
+	<parameter name="operationTime" class="java.lang.String"/>
+	<parameter name="race_id" isForPrompting="false" class="java.lang.String">
+
+        <defaultValueExpression><![CDATA["<parameter error>"]]></defaultValueExpression>
+
+        </parameter>
+
+     <queryString><![CDATA[select * from work_book where id = $P{race_id}]]></queryString>
+	<field name="name" class="java.lang.String"/>
+	<field name="age" class="java.lang.String"/>
+	<field name="gender" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<variable name="agencyName" class="java.lang.String"/>
+
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement uuid="85d468b6-12c0-4042-8566-b50602873de0" mode="Opaque" x="0" y="-10" width="555" height="68" backcolor="#006699"/>
+				<textField>
+					<reportElement uuid="5769f1cf-6378-4bb0-b172-4716e2eb79fd" x="18" y="20" width="264" height="43" forecolor="#FFFFFF"/>
+					<textElement markup="none">
+						<font size="20" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{race_id}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="a70ccf14-3aea-462c-ae83-07a0b5371367" x="360" y="43" width="184" height="20" forecolor="#FFFFFF" backcolor="#333333"/>
+					<textElement>
+						<font size="14" isItalic="false" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{race_id}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21">
+			<staticText>
+				<reportElement uuid="6fe065c4-169e-4505-b362-ac4251c8b1f6" mode="Opaque" x="300" y="1" width="255" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fe065c4-169e-4505-b362-ac4251c8b1f6" mode="Opaque" x="183" y="0" width="117" height="21" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gender]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fe065c4-169e-4505-b362-ac4251c8b1f6" mode="Opaque" x="100" y="1" width="83" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Age]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fe065c4-169e-4505-b362-ac4251c8b1f6" mode="Opaque" x="0" y="0" width="100" height="21" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21">
+			<textField>
+				<reportElement uuid="8d449f27-3ff5-4f72-9da6-c0f816e48c9e" x="300" y="2" width="255" height="19" forecolor="#666666"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8d449f27-3ff5-4f72-9da6-c0f816e48c9e" x="183" y="1" width="117" height="20" forecolor="#666666"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gender}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8d449f27-3ff5-4f72-9da6-c0f816e48c9e" x="100" y="1" width="83" height="20" forecolor="#666666"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8d449f27-3ff5-4f72-9da6-c0f816e48c9e" x="0" y="0" width="100" height="21" forecolor="#666666"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30">
+			<textField>
+				<reportElement uuid="df503057-dcfe-47a4-ba3c-240611bdf374" mode="Opaque" x="0" y="17" width="515" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="361f0bb0-014d-402f-80f3-fe748ced00a9" mode="Opaque" x="515" y="17" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="98d5cae2-2532-4834-8de0-73b47852ac1f" x="0" y="17" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{operationTime}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

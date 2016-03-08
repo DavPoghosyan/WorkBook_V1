@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'workBook.label', default: 'WorkBook')}"/>
+		<g:set var="entityName" value="${message(code: 'workBook.label')}"/>
 		<title>
 			<g:message code="default.list.label" args="[entityName]"/>
         </title>
@@ -40,15 +40,15 @@
 			    <thead>
 					<tr>
                         <g:sortableColumn property="fullName"
-                                          title="${message(code: 'workBook.fullName.label', default: 'WorkBook Owner')}"/>
+                                          title="${message(code: 'workBook.fullName.label')}"/>
                         <g:sortableColumn property="pasportNumber"
-                                          title="${message(code: 'workBook.passportNumber.label', default: 'Passport Number')}"/>
+                                          title="${message(code: 'workBook.passportNumber.label')}"/>
                         <g:sortableColumn property="email"
-                                          title="${message(code: 'workBook.email.label', default: 'Email')}"/>
+                                          title="${message(code: 'workBook.email.label')}"/>
 						<g:sortableColumn property="age"
-                                          title="${message(code: 'workBook.age.label', default: 'Age')}"/>
+                                          title="${message(code: 'workBook.age.label')}"/>
 						<g:sortableColumn property="dateOfBirth"
-                                          title="${message(code: 'workBook.dateOfBirth.label', default: 'Date Of Birth')}"/>
+                                          title="${message(code: 'workBook.dateOfBirth.label')}"/>
 					</tr>
                 </thead>
 				<tbody>

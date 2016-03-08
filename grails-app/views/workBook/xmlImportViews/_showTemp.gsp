@@ -4,21 +4,18 @@
     })*/
     var hide = '- hide'
     var show = '+ show'
-    $(".cl").click(function(){
+    $(".message").click(function(){
 	    $("#show-workBook").slideToggle("fast")
-	    $(this).text(function(i, v){
+	    $(this).title(function(i, v){
 		    return v === hide ? show : hide
 	    })
     })
 </g:javascript>
 <%@ page import="com.webbfontaine.training.WorkBook" %>
 <g:if test="${flash.message}">
-	<div class="message" role="status">
+	<div class="message">
 		${flash.message}
 	</div>
-    <div class="cl">
-        - hide
-    </div>
 </g:if>
 <div id="show-workBook" class="content scaffold-show" role="main">
     <g:if test="${id}">

@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'workBook.label', default: 'WorkBook')}"/>
+		<g:set var="entityName" value="${message(code: 'workBook.label')}"/>
 		<title>
 		    <g:message code="default.show.label" args="[entityName]"/>
         </title>
@@ -125,6 +125,9 @@
                                     value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
                     <g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">Export As XML</g:link>
+                    <g:jasperReport jasper="workBook" format="PDF" name="workBook">
+                    <input type="hidden" name="race_id" value="${workBookInstance.id}" />
+                    </g:jasperReport>
                 </fieldset>
 			</g:form>
 		</div>

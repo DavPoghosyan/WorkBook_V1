@@ -5,7 +5,6 @@ class BootStrap {
 
     def init = { servletContext ->
 
-
 	    XML.createNamedConfig("shortDeep") {
 		    XML.registerObjectMarshaller(WorkBook,{workBook, converter ->
 			    converter.build {
@@ -47,6 +46,7 @@ class BootStrap {
 	    Company company2 = Company.newInstance(code: 'JD_IT', name: 'JEDEN IT', description: 'Information systems integration')
 	    company2.save(flush: true)
 */
+
     }
 
     def destroy = {
