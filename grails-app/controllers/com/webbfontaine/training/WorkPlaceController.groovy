@@ -1,5 +1,7 @@
 package com.webbfontaine.training
 
+import org.springframework.security.access.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 
 class WorkPlaceController {
@@ -9,10 +11,12 @@ class WorkPlaceController {
 
 	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
+	@Secured(['permitAll'])
 	def index() {
 		respond workPlaceService.listWorkPlaces()
 	}
 
+	@Secured(['permitAll'])
 	def show(WorkPlace workPlaceInstance) {
 		if (workPlaceInstance == null) {
 			notFound()
@@ -21,10 +25,12 @@ class WorkPlaceController {
 		respond workPlaceInstance
 	}
 
+	@Secured(['ROLE_ADMIN'])
 	def create() {
 		respond new WorkPlace(params)
 	}
 
+	@Secured(['ROLE_ADMIN'])
 	def save(WorkPlace workPlaceInstance) {
 		if (workPlaceInstance == null) {
 			notFound()
@@ -43,10 +49,12 @@ class WorkPlaceController {
 		respond(workPlaceInstance, view:'show', status: OK)
 	}
 
+	@Secured(['ROLE_ADMIN'])
 	def edit(WorkPlace workPlaceInstance) {
 		respond workPlaceInstance
 	}
 
+	@Secured(['ROLE_ADMIN'])
 	def update(WorkPlace workPlaceInstance) {
 		if (workPlaceInstance == null) {
 			notFound()
@@ -72,6 +80,7 @@ class WorkPlaceController {
 		respond(workPlaceInstance, view:'show', status: OK)
 	}
 
+	@Secured(['ROLE_ADMIN'])
 	def delete(WorkPlace workPlaceInstance) {
 		if (workPlaceInstance == null) {
 			notFound()
@@ -107,17 +116,19 @@ class WorkPlaceController {
 		}
 	}
 
-
-    def retrieveCompanyData(long id) {
+	@Secured(['permitAll'])
+	def retrieveCompanyData(long id) {
 		def company =  Company.get(id)
         render(template:"companyDialog", model:[company: company])
     }
 
-    def retrieveCountryData(long id) {
+	@Secured(['permitAll'])
+	def retrieveCountryData(long id) {
         def country =  Country.get(id)
 	    render(template:"countryDialog", model:[country: country])
     }
 
+	@Secured(['ROLE_ADMIN'])
     def createFromImport(){
         def xmlObject = xmlProcessingServiceProxy.xmlObject
         int i = params.id.toInteger() - 1
@@ -125,6 +136,7 @@ class WorkPlaceController {
         render(template:'createTemp', model: [workPlaceInstance:  workPlace])
     }
 
+	@Secured(['ROLE_ADMIN'])
     def remoteSave(WorkPlace workPlace) {
         if (workPlace == null) {
             notFound()
