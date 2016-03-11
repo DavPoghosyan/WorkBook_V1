@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="workBook" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="15449465-aee9-4577-bcce-32dda3569cdd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontSize="12" isBold="true"/>
+	<style name="Detail" fontSize="12"/>
+	<parameter name="id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from work_book where id=$P{id}]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="version" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="age" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_of_birth" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="first_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="last_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="passport_number" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="340" splitType="Stretch">
+			<image>
+				<reportElement x="444" y="0" width="131" height="64" uuid="1d379d89-ca5a-4a5c-88d3-fa0e3c79dc21"/>
+				<imageExpression><![CDATA["leaf_banner_green.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="SubTitle" x="375" y="0" width="178" height="31" uuid="611258ab-bee1-4ea4-9f3c-33486594816b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[WorkBook]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="166" y="222" width="40" height="18" uuid="521ab29a-efec-49ee-b026-57611a87cdb7"/>
+				<textElement>
+					<font size="12" isBold="false" isItalic="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date_of_birth}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" positionType="Float" x="25" y="222" width="132" height="20" forecolor="#000000" uuid="fb9733c3-5f16-4f2e-a6e8-267397c887fa"/>
+				<textElement textAlignment="Right">
+					<font isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[date of birth]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" positionType="Float" x="25" y="197" width="132" height="20" forecolor="#000000" uuid="35e7f7e9-eebb-4b69-80d1-4df20a5fabe5"/>
+				<textElement textAlignment="Right">
+					<font isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[passport number]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="166" y="199" width="338" height="18" uuid="3c89ce79-43f3-4344-a97b-8fd50380e51f"/>
+				<textElement>
+					<font size="12" isBold="false" isItalic="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{passport_number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" positionType="Float" x="25" y="175" width="132" height="20" forecolor="#000000" uuid="ca52df0f-9867-48ce-8915-eaa236c40a1d"/>
+				<textElement textAlignment="Right">
+					<font isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[email]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="166" y="242" width="77" height="18" uuid="a3732a2c-4fae-4997-afda-aad8b2b008eb"/>
+				<textElement>
+					<font size="12" isBold="false" isItalic="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="166" y="175" width="338" height="18" uuid="a1d6696c-f69b-42b4-96e7-e05eefd4bed8"/>
+				<textElement>
+					<font size="12" isBold="false" isItalic="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" positionType="Float" x="123" y="242" width="34" height="18" forecolor="#000000" uuid="c9ce85d6-db59-42eb-b841-db18961fff2e"/>
+				<textElement textAlignment="Right">
+					<font isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[age]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Title" positionType="Float" stretchType="RelativeToBandHeight" x="105" y="79" width="188" height="31" uuid="e2942db0-688f-4310-85a5-cfce08721514"/>
+				<textElement textAlignment="Left">
+					<font size="15" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{last_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Title" positionType="Float" stretchType="RelativeToBandHeight" x="105" y="57" width="163" height="31" isRemoveLineWhenBlank="true" uuid="375304bd-5d97-44d5-91d1-49edde57cd11"/>
+				<textElement>
+					<font size="15" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="57" width="35" height="19" uuid="73d845de-2c34-4a49-9513-08a96d83cd57"/>
+				<textElement>
+					<font isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[owner]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="156" width="79" height="19" uuid="b45a8fd7-376a-4d0a-893a-f8bf718b13da"/>
+				<textElement>
+					<font isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[personal info]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="320" width="103" height="19" uuid="bacd8fe3-d598-4dcd-8857-4550b9d6b06e"/>
+				<textElement>
+					<font isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[workplaces history]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="71">
+			<subreport>
+				<reportElement x="-2" y="0" width="557" height="71" uuid="1198f247-f5f1-4824-a2c8-dfa8d5447bbc"/>
+				<subreportParameter name="id">
+					<subreportParameterExpression><![CDATA[$P{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["workPlaces.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="41" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="13a0187c-42df-4ecd-bde8-7e7ce1e06ea4"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="61cd7103-e6a4-49b2-94c9-a211edaf0688"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="54945962-a78c-4d02-9cea-cf1850bdbb41"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

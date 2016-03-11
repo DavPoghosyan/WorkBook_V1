@@ -605,3 +605,7 @@ a.skip {
     min-height: 250px;
     background-color: #ffffff;
 }
+
+.custom-jasper-form {
+	margin-left: 50%;
+}

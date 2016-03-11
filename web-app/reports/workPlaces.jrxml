@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2_subreport2" language="groovy" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4324e543-4bb9-4670-ba9f-3a085700b8ad">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select start_date, current, end_date, co.code coCode, cm.code cmCode
+from work_place wp
+join country co on wp.country_id=co.id
+join company cm on wp.company_id=cm.id
+where wp.workbook_id=$P{id}
+order by start_date desc]]>
+	</queryString>
+	<field name="start_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="current" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="end_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="coCode" class="java.lang.String"/>
+	<field name="cmCode" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="34">
+			<staticText>
+				<reportElement x="-1" y="7" width="111" height="20" uuid="0da251a2-f706-4533-a121-8f3a39aaf4c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[company code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="7" width="111" height="20" uuid="e686b9ae-db3a-4c6b-bb23-962b2568e1c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[end date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="7" width="111" height="20" uuid="ad943800-c212-4937-a09f-3a73ff726cde"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[country code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="221" y="7" width="111" height="20" uuid="da0e3974-e043-4404-8d8a-77bd2a4a7067"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[start date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="7" width="111" height="20" uuid="82f0633e-1adc-4abd-8f53-95686fb246db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[current]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="29" width="553" height="1" uuid="ce4aa1b6-9178-4224-9e19-98732b0e354e"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="263" y="1" width="40" height="20" uuid="c1628c45-c7e1-4ce7-bab4-fc0053e65657"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{start_date}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="480" y="0" width="40" height="20" uuid="c9b205bb-38cb-41d7-bb23-9bdb8e193705"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{end_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="2" width="111" height="20" uuid="9a448f7d-e112-4d86-9c0f-b4ffcb4570af"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{current}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="111" height="20" uuid="94da917f-9f05-4d15-aad1-9667a527572a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{coCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-1" y="2" width="111" height="20" uuid="04ae474d-a0f6-48c1-804f-f7e7e016c115"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cmCode}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="22" width="553" height="1" uuid="075be902-f4fb-4268-bd5c-f68bd84bcab0"/>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

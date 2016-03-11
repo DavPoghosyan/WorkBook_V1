@@ -117,23 +117,24 @@
                     </li>
                 </g:if>
 			</ol>
-            <g:jasperReport
-                    jasper="workbook"
-                    format="PDF"
-                    name="WorkBook_${id}">
-               <input type="hidden" name="id" value="${id}"/>
-            </g:jasperReport>
-			<g:form url="[resource:workBookInstance, action:'delete']" method="DELETE">
-				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${workBookInstance}">
-                        <g:message code="default.button.edit.label" default="Edit"/>
+            <fieldset class="buttons">
+                <g:message code="show.export.label"/>
+                <g:jasperReport delimiter=" "
+                                jasper="workBook" format="PDF" name="">
+                    <input type="hidden" name="id" value="${id}"/>
+                    <g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">
+                        <img src="${resource(dir:'images/icons', file:'XML.gif')}" title="XML" />
                     </g:link>
-					<g:actionSubmit class="delete" action="delete"
+                </g:jasperReport>
+                <g:form url="[resource:workBookInstance, action:'delete']" method="DELETE">
+                    <g:actionSubmit class="delete" action="delete"
                                     value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
-                    <g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">Export As XML</g:link>
-                </fieldset>
-			</g:form>
+                    <g:link class="edit" action="edit" resource="${workBookInstance}">
+                        <g:message code="default.button.edit.label"/>
+                    </g:link>
+                </g:form>
+            </fieldset>
 		</div>
 	</body>
 </html>
