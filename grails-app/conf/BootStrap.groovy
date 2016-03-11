@@ -1,3 +1,6 @@
+import com.webbfontaine.training.SecRole
+import com.webbfontaine.training.SecUser
+import com.webbfontaine.training.SecUserSecRole
 import com.webbfontaine.training.WorkBook
 import grails.converters.XML
 
@@ -19,19 +22,19 @@ class BootStrap {
 			    }
 		    })
 	    }
-     /*   def adminRole = SecAppRole.newInstance(authority: 'ROLE_ADMIN')
+        /*def adminRole = SecRole.newInstance(authority: 'ROLE_ADMIN')
 	    adminRole.save(flush: true)
-        def userRole = SecAppRole.newInstance(authority: 'ROLE_USER')
+        def userRole = SecRole.newInstance(authority: 'ROLE_USER')
 	    userRole.save(flush: true)
 
-        def admin = SecAppUser.newInstance(username: 'admin', enabled: true, password: 'admin')
+        def admin = SecUser.newInstance(username: 'admin', enabled: true, password: 'admin')
 	    admin.save(flush: true)
-	    def user = SecAppUser.newInstance(username: 'user', enabled: true, password: 'user' )
+	    def user = SecUser.newInstance(username: 'user', enabled: true, password: 'user' )
 	    user.save(flush: true)
 
-        SecAppUserSecAppRole.create(admin, adminRole)
-	    SecAppUserSecAppRole.create(user, userRole)
-
+        SecUserSecRole.create(admin, adminRole)
+	    SecUserSecRole.create(user, userRole)*/
+/*
         Country country = Country.newInstance(name: 'Armenia', code: 'AM', description: 'Republic')
         country.save(flush: true)
 	    Country country1 = Country.newInstance(name: 'Poland', code: 'PL', description: 'Republic')

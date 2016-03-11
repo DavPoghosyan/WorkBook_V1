@@ -1,5 +1,7 @@
 package com.webbfontaine.training
 
+import org.springframework.security.access.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 
 class WorkBookController {
@@ -9,12 +11,12 @@ class WorkBookController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-	//@Secured(['permitAll'])
+	@Secured(['permitAll'])
     def index() {
         respond workBookService.listWorkBooks()
     }
 
-	//@Secured(['permitAll'])
+	@Secured(['permitAll'])
     def show(WorkBook workBook) {
 	    if (workBook == null) {
 		    notFound()
@@ -23,7 +25,7 @@ class WorkBookController {
         respond workBook
     }
 
-	//@Secured(['ROLE_ADMIN'])
+	@Secured(['ROLE_ADMIN'])
     def create(WorkBook workBook) {
         println params.workbook
         if(workBook){
@@ -33,12 +35,12 @@ class WorkBookController {
         respond new WorkBook(params)
     }
 
-    //@Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN'])
     def edit(WorkBook workBook) {
         respond workBook
     }
 
-	//@Secured(['ROLE_ADMIN'])
+	@Secured(['ROLE_ADMIN'])
     def save(WorkBook workBook) {
         if (workBook == null) {
             notFound()
@@ -56,7 +58,7 @@ class WorkBookController {
         respond(workBook, view:'show', status: OK)
     }
 
-	//@Secured(['ROLE_ADMIN'])
+	@Secured(['ROLE_ADMIN'])
     def update(WorkBook workBook) {
         if (workBook == null) {
             notFound()
@@ -76,7 +78,7 @@ class WorkBookController {
         respond(workBook, view:'show', status: OK)
     }
 
-	//@Secured(['ROLE_ADMIN'])
+	@Secured(['ROLE_ADMIN'])
     def delete(WorkBook workBook) {
         if (workBook == null) {
             notFound()
@@ -107,7 +109,7 @@ class WorkBookController {
 			workBook.errors.rejectValue(customErrorField, customErrorCode, errorMessage)
 		}
 	}
-
+    @Secured(['permitAll'])
     def exportAsXML(WorkBook workBook){
         xmlProcessingServiceProxy.exportToXML(workBook)
         def xmlFile = new File("${workBook}.xml")
@@ -123,6 +125,7 @@ class WorkBookController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def uploadXmlFile() {
         def flyFile = request?.getFile('flyFile')
         if(flyFile.empty){
@@ -152,12 +155,14 @@ class WorkBookController {
                 ])
     }
 
+    @Secured(['ROLE_ADMIN'])
     def createFromImport(){
         def xmlObject = xmlProcessingServiceProxy.xmlObject
         WorkBook workBook = workBookService.xmlToDomain(xmlObject)
         render(template:'xmlImportViews/createTemp', model: [workBookInstance:  workBook])
     }
 
+    @Secured(['ROLE_ADMIN'])
     def remoteSave(WorkBook workBook) {
         if (workBook == null) {
             notFound()
@@ -176,6 +181,7 @@ class WorkBookController {
         render(template: 'xmlImportViews/showTemp', model:[workBookDbInstance: workBook], status: OK)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def remoteUpdate(WorkBook workBook) {
         if (workBook == null) {
             notFound()
@@ -195,6 +201,7 @@ class WorkBookController {
         render(template: 'xmlImportViews/showTemp', model:[workBookDbInstance: workBook, flag: false])
     }
 
+    @Secured(['ROLE_ADMIN'])
 	def updateFromImport(){
 		def xmlObject = xmlProcessingServiceProxy.xmlObject
 		WorkBook workBook = workBookService.xmlToDomain(xmlObject)
