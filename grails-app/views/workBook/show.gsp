@@ -116,16 +116,22 @@
                         </g:each>
                     </li>
                 </g:if>
+				<li class="fieldcontain">
+					<span id="exports-label" class="property-label">
+						<g:message code="show.export.label"/>
+					</span>
+					<span class="property-value">
+						<g:jasperReport delimiter=" "
+						                jasper="workBook" format="PDF" name="">
+							<input type="hidden" name="id" value="${id}"/>
+							<g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">
+								<img src="${resource(dir:'images/icons', file:'XML.gif')}" title="XML" />
+							</g:link>
+						</g:jasperReport>
+					</span>
+				</li>
 			</ol>
             <fieldset class="buttons">
-                <g:message code="show.export.label"/>
-                <g:jasperReport delimiter=" "
-                                jasper="workBook" format="PDF" name="">
-                    <input type="hidden" name="id" value="${id}"/>
-                    <g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">
-                        <img src="${resource(dir:'images/icons', file:'XML.gif')}" title="XML" />
-                    </g:link>
-                </g:jasperReport>
                 <g:form url="[resource:workBookInstance, action:'delete']" method="DELETE">
                     <g:actionSubmit class="delete" action="delete"
                                     value="${message(code: 'default.button.delete.label', default: 'Delete')}"

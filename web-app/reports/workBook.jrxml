@@ -44,7 +44,7 @@
 		<band height="340" splitType="Stretch">
 			<image>
 				<reportElement x="444" y="0" width="131" height="64" uuid="1d379d89-ca5a-4a5c-88d3-fa0e3c79dc21"/>
-				<imageExpression><![CDATA["leaf_banner_green.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/davit/WBBF/WorkBook/web-app/reports/leaf_banner_green.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement style="SubTitle" x="375" y="0" width="178" height="31" uuid="611258ab-bee1-4ea4-9f3c-33486594816b"/>
@@ -157,7 +157,7 @@
 					<subreportParameterExpression><![CDATA[$P{id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["workPlaces.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["/home/davit/WBBF/WorkBook/web-app/reports/workPlaces.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
