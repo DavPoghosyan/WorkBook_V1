@@ -23,7 +23,10 @@
 	</head>
 	<body>
 		<div id="grailsLogo" role="banner">
-            <asset:image src="grails_logo.png" alt="Grails"/>
+            <asset:image src="grails_logo.png" alt="WorkBook"/>
+            <g:link class="log-out" controller="logout" action="">
+	            <g:message code="log.out.label"/>
+            </g:link>
         </div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>

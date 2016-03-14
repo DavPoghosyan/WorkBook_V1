@@ -22,11 +22,6 @@
                         </g:link>
                     </li>
                 </sec:ifAllGranted>
-				<li>
-					<g:link class="log-out" controller="logout" action="">
-						<g:message code="log.out.label"/>
-					</g:link>
-				</li>
 			</ul>
 		</div>
 		<div id="list-workBook" class="content scaffold-list" role="main">

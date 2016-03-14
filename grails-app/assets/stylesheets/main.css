@@ -184,10 +184,19 @@ img {
 	text-decoration: underline;
 }
 
-.nav a.home, .nav a.list, .nav a.create, .nav a.log-out {
+.nav a.home, .nav a.list, .nav a.create {
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
+}
+
+.log-out {
+	background-position: 0.7em center;
+	background-repeat: no-repeat;
+	text-indent: 25px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
 }
 
 .nav a.home {
@@ -202,7 +211,7 @@ img {
 	background-image: url(../images/skin/database_add.png);
 }
 
-.nav a.log-out {
+.log-out {
 	background-image: url(../images/skin/log-out-icon.png);
 }
 
