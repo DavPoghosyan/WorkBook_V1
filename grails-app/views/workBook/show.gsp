@@ -16,11 +16,6 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li>
-                    <a class="home" href="${createLink(uri: '/')}">
-                        <g:message code="default.home.label"/>
-                    </a>
-                </li>
-				<li>
                     <g:link class="list" action="index">
                         <g:message code="default.list.label" args="[entityName]"/>
                     </g:link>
@@ -28,6 +23,11 @@
 				<li>
                     <g:link class="create" action="create">
                         <g:message code="default.new.label" args="[entityName]"/>
+                    </g:link>
+                </li>
+                <li>
+                    <g:link class="log-out" controller="logout" action="">
+                        <g:message code="log.out.label"/>
                     </g:link>
                 </li>
 			</ul>
@@ -116,6 +116,13 @@
                         </g:each>
                     </li>
                 </g:if>
+                <li class="fieldcontain">
+                    <span class="property-value">
+                        <g:link controller="workPlace" action="create" params="['workbook.id': workBookInstance?.id]">
+                            ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
+                        </g:link>
+                    </span>
+                </li>
 				<li class="fieldcontain">
 					<span id="exports-label" class="property-label">
 						<g:message code="show.export.label"/>

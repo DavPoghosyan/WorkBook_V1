@@ -99,5 +99,19 @@
                 </g:each>
             </li>
         </g:if>
+        <li class="fieldcontain">
+            <span id="exports-label" class="property-label">
+                <g:message code="show.export.label"/>
+            </span>
+            <span class="property-value">
+                <g:jasperReport delimiter=" "
+                                jasper="workBook" format="PDF" name="">
+                    <input type="hidden" name="id" value="${id}"/>
+                    <g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">
+                        <img src="${resource(dir:'images/icons', file:'XML.gif')}" title="XML" />
+                    </g:link>
+                </g:jasperReport>
+            </span>
+        </li>
     </ol>
 </div>

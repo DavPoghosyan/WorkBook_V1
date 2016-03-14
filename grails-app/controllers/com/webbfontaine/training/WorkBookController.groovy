@@ -27,7 +27,6 @@ class WorkBookController {
 
 	@Secured(['ROLE_ADMIN'])
     def create(WorkBook workBook) {
-        println params.workbook
         if(workBook){
             respond workBook
             return

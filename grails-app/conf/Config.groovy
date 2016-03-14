@@ -117,9 +117,11 @@ log4j.main = {
 }
 
 
-
 // Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.active = false
+grails.plugin.springsecurity.active = true
+grails.plugin.springsecurity.logout.postOnly = false
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/WorkBook/index'
+grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.webbfontaine.training.SecUser'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.webbfontaine.training.SecUserSecRole'
 grails.plugin.springsecurity.authority.className = 'com.webbfontaine.training.SecRole'
@@ -134,7 +136,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':  ['permitAll'],
 	'*/jasper/*':       ['permitAll'],
     '/login/auth':      ['permitAll'],
-    '/logout/**':       ['permitAll']
+    '/logout/**':       ['permitAll'],
+    '/jasper/**':       ['permitAll']
 ]
 
 

@@ -27,6 +27,7 @@ class WorkPlaceController {
 
 	@Secured(['ROLE_ADMIN'])
 	def create() {
+		println params
 		respond new WorkPlace(params)
 	}
 
