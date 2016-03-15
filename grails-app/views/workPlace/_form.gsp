@@ -63,7 +63,7 @@
 </div>
 <div id="endDate" class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'endDate', 'error')} ">
     <label for="endDate">
-        <g:message code="workPlace.endDate.label" default="End Date" />
+        <g:message code="workPlace.endDate.label"/>
     </label>
     <g:datePicker name="endDate" precision="day"  value="${workPlaceInstance?.endDate}"
                       default="none" noSelection="['': '']"/>

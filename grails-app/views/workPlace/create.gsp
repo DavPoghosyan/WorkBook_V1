@@ -20,11 +20,6 @@
                         <g:message code="default.list.label" args="[entityName]"/>
                     </g:link>
                 </li>
-				<li>
-					<g:link class="log-out" controller="logout" action="">
-						<g:message code="log.out.label"/>
-					</g:link>
-				</li>
 			</ul>
 		</div>
 		<div id="create-workPlace" class="content scaffold-create" role="main">

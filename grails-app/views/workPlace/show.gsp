@@ -1,4 +1,3 @@
-
 <%@ page import="com.webbfontaine.training.WorkPlace" %>
 <!DOCTYPE html>
 <html>
@@ -23,10 +22,12 @@
                         <g:message code="default.list.label" args="[entityName]" />
                     </g:link>
                 </li>
-				<li>
-                    <g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" />
-                    </g:link>
-                </li>
+                <sec:ifAllGranted roles="ROLE_ADMIN">
+                    <li>
+                        <g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" />
+                        </g:link>
+                    </li>
+                </sec:ifAllGranted>
 			</ul>
 		</div>
 		<div id="show-workPlace" class="content scaffold-show" role="main">
@@ -93,17 +94,19 @@
                     </span>
                 </li>
 			</ol>
-			<g:form url="[resource:workPlaceInstance, action:'delete']" method="DELETE">
-				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${workPlaceInstance}">
-                        <g:message code="default.button.edit.label" default="Edit" />
-                    </g:link>
-					<g:actionSubmit class="delete" action="delete"
-                                    value="${message(code: 'default.button.delete.label')}"
-                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message')}');"
-                    />
-				</fieldset>
-			</g:form>
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <g:form url="[resource:workPlaceInstance, action:'delete']" method="DELETE">
+                    <fieldset class="buttons">
+                        <g:link class="edit" action="edit" resource="${workPlaceInstance}">
+                            <g:message code="default.button.edit.label" default="Edit" />
+                        </g:link>
+                        <g:actionSubmit class="delete" action="delete"
+                                        value="${message(code: 'default.button.delete.label')}"
+                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message')}');"
+                        />
+                    </fieldset>
+                </g:form>
+            </sec:ifAllGranted>
 		</div>
 	</body>
 </html>

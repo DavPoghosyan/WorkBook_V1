@@ -23,11 +23,6 @@
                         <g:submitButton name="import" class="import" value='Import From XML'/>
                     </g:form>
 				</li>
-                <li>
-                    <g:link class="log-out" controller="logout" action="">
-                        <g:message code="log.out.label"/>
-                    </g:link>
-                </li>
 			</ul>
 		</div>
 		<div id="create-workBook" class="content scaffold-create" role="main">

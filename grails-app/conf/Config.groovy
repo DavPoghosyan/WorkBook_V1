@@ -126,18 +126,18 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.webbfontaine.
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.webbfontaine.training.SecUserSecRole'
 grails.plugin.springsecurity.authority.className = 'com.webbfontaine.training.SecRole'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                ['permitAll'],
-	'/index':           ['permitAll'],
-	'/index.gsp':       ['permitAll'],
-	'/assets/**':       ['permitAll'],
-	'/**/js/**':        ['permitAll'],
-	'/**/css/**':       ['permitAll'],
-	'/**/images/**':    ['permitAll'],
-	'/**/favicon.ico':  ['permitAll'],
-	'*/jasper/*':       ['permitAll'],
+	'/':                ['ROLE_USER','ROLE_ADMIN'],
+	'/index':           ['ROLE_USER','ROLE_ADMIN'],
+	'/index.gsp':       ['ROLE_USER','ROLE_ADMIN'],
+	'/assets/**':       ['ROLE_USER','ROLE_ADMIN'],
+	'/**/js/**':        ['ROLE_USER','ROLE_ADMIN'],
+	'/**/css/**':       ['ROLE_USER','ROLE_ADMIN'],
+	'/**/images/**':    ['ROLE_USER','ROLE_ADMIN'],
+	'/**/favicon.ico':  ['ROLE_USER','ROLE_ADMIN'],
+	'*/jasper/*':       ['ROLE_USER','ROLE_ADMIN'],
     '/login/auth':      ['permitAll'],
-    '/logout/**':       ['permitAll'],
-    '/jasper/**':       ['permitAll']
+    '/logout/**':       ['ROLE_USER','ROLE_ADMIN'],
+    '/jasper/**':       ['ROLE_USER','ROLE_ADMIN']
 ]
 
 

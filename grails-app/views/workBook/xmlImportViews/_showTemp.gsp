@@ -1,29 +1,18 @@
-<g:javascript>
-   /* $(".cl").click(function(){
-        $("#show-workBook").slideToggle("fast")
-    })*/
-    var hide = '- hide'
-    var show = '+ show'
-    $(".message").click(function(){
-	    $("#show-workBook").slideToggle("fast")
-	    $(this).title(function(i, v){
-		    return v === hide ? show : hide
-	    })
-    })
-</g:javascript>
+<g:javascript src="slider.js"/>
 <%@ page import="com.webbfontaine.training.WorkBook" %>
-<g:if test="${flash.message}">
-	<div class="message">
-		${flash.message}
-	</div>
-</g:if>
-<div id="show-workBook" class="content scaffold-show" role="main">
+<a class="slider" href="#">hide</a>
+<div id="show-workBook">
+    <g:if test="${flash.message}">
+        <div class="message">
+            ${flash.message}
+        </div>
+    </g:if>
     <g:if test="${id}">
         <g:set var="workBookDbInstance" value="${WorkBook.get(id)}" />
-        <h1>
-            <g:message code="show.workBook.current"/>
-        </h1>
     </g:if>
+    <h1>
+        <g:message code="show.workBook.current"/>
+    </h1>
     <ol class="property-list workBook">
         <g:if test="${workBookDbInstance?.lastName}">
             <li class="fieldcontain">
@@ -65,16 +54,6 @@
                 </span>
             </li>
         </g:if>
-        <g:if test="${workBookDbInstance?.age}">
-            <li class="fieldcontain">
-                <span id="age-label" class="property-label">
-                    <g:message code="workBook.age.label"/>
-                </span>
-                <span class="property-value" aria-labelledby="age-label">
-                    <g:fieldValue bean="${workBookDbInstance}" field="age"/>
-                </span>
-            </li>
-        </g:if>
         <g:if test="${workBookDbInstance?.dateOfBirth}">
             <li class="fieldcontain">
                 <span id="dateOfBirth-label" class="property-label">
@@ -85,33 +64,45 @@
                 </span>
             </li>
         </g:if>
-        <g:if test="${workBookDbInstance?.workplaces}">
+        <g:if test="${workBookDbInstance?.age}">
             <li class="fieldcontain">
-                <span id="workplaces-label" class="property-label">
-                    <g:message code="workBook.workplaces.label"/>
+                <span id="age-label" class="property-label">
+                    <g:message code="workBook.age.label"/>
                 </span>
-                <g:each in="${workBookDbInstance.workplaces}" var="workplace">
-                    <span class="property-value" aria-labelledby="workplaces-label">
-                        <g:link controller="workPlace" action="show" id="${workplace.id}">
-                            ${workplace}
-                        </g:link>
-                    </span>
-                </g:each>
+                <span class="property-value" aria-labelledby="age-label">
+                    <g:fieldValue bean="${workBookDbInstance}" field="age"/>
+                </span>
             </li>
         </g:if>
-        <li class="fieldcontain">
-            <span id="exports-label" class="property-label">
-                <g:message code="show.export.label"/>
-            </span>
-            <span class="property-value">
-                <g:jasperReport delimiter=" "
-                                jasper="workBook" format="PDF" name="">
-                    <input type="hidden" name="id" value="${id}"/>
-                    <g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">
-                        <img src="${resource(dir:'images/icons', file:'XML.gif')}" title="XML" />
-                    </g:link>
-                </g:jasperReport>
-            </span>
-        </li>
+        <g:if test="${flag}">
+            <g:if test="${workBookDbInstance?.workplaces}">
+                <li class="fieldcontain">
+                    <span id="workplaces-label" class="property-label">
+                        <g:message code="workBook.workplaces.label"/>
+                    </span>
+                    <g:each in="${workBookDbInstance.workplaces}" var="workplace">
+                        <span class="property-value" aria-labelledby="workplaces-label">
+                            <g:link controller="workPlace" action="show" id="${workplace.id}">
+                                ${workplace}
+                            </g:link>
+                        </span>
+                    </g:each>
+                </li>
+            </g:if>
+            <li class="fieldcontain">
+                <span id="exports-label" class="property-label">
+                    <g:message code="show.export.label"/>
+                </span>
+                <span class="property-value">
+                    <g:jasperReport delimiter=" "
+                                    jasper="workBook" format="PDF" name="">
+                        <input type="hidden" name="id" value="${id}"/>
+                        <g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">
+                            <img src="${resource(dir:'images/icons', file:'XML.gif')}" title="XML" />
+                        </g:link>
+                    </g:jasperReport>
+                </span>
+            </li>
+        </g:if>
     </ol>
 </div>

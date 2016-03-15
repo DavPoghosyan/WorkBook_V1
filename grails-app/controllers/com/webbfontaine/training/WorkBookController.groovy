@@ -11,12 +11,12 @@ class WorkBookController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-	@Secured(['permitAll'])
+	@Secured(['ROLE_USER','ROLE_ADMIN'])
     def index() {
         respond workBookService.listWorkBooks()
     }
 
-	@Secured(['permitAll'])
+	@Secured(['ROLE_USER','ROLE_ADMIN'])
     def show(WorkBook workBook) {
 	    if (workBook == null) {
 		    notFound()
@@ -108,7 +108,7 @@ class WorkBookController {
 			workBook.errors.rejectValue(customErrorField, customErrorCode, errorMessage)
 		}
 	}
-    @Secured(['permitAll'])
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def exportAsXML(WorkBook workBook){
         xmlProcessingServiceProxy.exportToXML(workBook)
         def xmlFile = new File("${workBook}.xml")

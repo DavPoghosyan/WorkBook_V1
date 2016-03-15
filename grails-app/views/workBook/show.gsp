@@ -20,16 +20,13 @@
                         <g:message code="default.list.label" args="[entityName]"/>
                     </g:link>
                 </li>
-				<li>
-                    <g:link class="create" action="create">
-                        <g:message code="default.new.label" args="[entityName]"/>
-                    </g:link>
-                </li>
-                <li>
-                    <g:link class="log-out" controller="logout" action="">
-                        <g:message code="log.out.label"/>
-                    </g:link>
-                </li>
+                <sec:ifAllGranted roles="ROLE_ADMIN">
+                    <li>
+                        <g:link class="create" action="create">
+                            <g:message code="default.new.label" args="[entityName]"/>
+                        </g:link>
+                    </li>
+                </sec:ifAllGranted>
 			</ul>
 		</div>
 		<div id="show-workBook" class="content scaffold-show" role="main">
@@ -116,13 +113,15 @@
                         </g:each>
                     </li>
                 </g:if>
-                <li class="fieldcontain">
-                    <span class="property-value">
-                        <g:link controller="workPlace" action="create" params="['workbook.id': workBookInstance?.id]">
-                            ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
-                        </g:link>
-                    </span>
-                </li>
+                <sec:ifAllGranted roles="ROLE_ADMIN">
+                    <li class="fieldcontain">
+                        <span class="property-value">
+                            <g:link controller="workPlace" action="create" params="['workbook.id': workBookInstance?.id]">
+                                ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
+                            </g:link>
+                        </span>
+                    </li>
+                </sec:ifAllGranted>
 				<li class="fieldcontain">
 					<span id="exports-label" class="property-label">
 						<g:message code="show.export.label"/>
@@ -138,16 +137,18 @@
 					</span>
 				</li>
 			</ol>
-            <fieldset class="buttons">
-                <g:form url="[resource:workBookInstance, action:'delete']" method="DELETE">
-                    <g:actionSubmit class="delete" action="delete"
-                                    value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
-                    <g:link class="edit" action="edit" resource="${workBookInstance}">
-                        <g:message code="default.button.edit.label"/>
-                    </g:link>
-                </g:form>
-            </fieldset>
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <fieldset class="buttons">
+                    <g:form url="[resource:workBookInstance, action:'delete']" method="DELETE">
+                        <g:actionSubmit class="delete" action="delete"
+                                        value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
+                        <g:link class="edit" action="edit" resource="${workBookInstance}">
+                            <g:message code="default.button.edit.label"/>
+                        </g:link>
+                    </g:form>
+                </fieldset>
+            </sec:ifAllGranted>
 		</div>
 	</body>
 </html>

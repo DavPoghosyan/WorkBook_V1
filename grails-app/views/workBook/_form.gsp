@@ -15,20 +15,20 @@
 	<g:textField name="lastName" maxlength="25" required="" value="${workBookInstance?.lastName}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'passportNumber', 'error')} required">
+	<label for="passportNumber">
+		<g:message code="workBook.passportNumber.label"/>
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="passportNumber" required="" value="${workBookInstance?.passportNumber}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'email', 'error')} required">
 	<label for="email">
 		<g:message code="workBook.email.label"/>
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field type="email" name="email" required="" value="${workBookInstance?.email}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'passportNumber', 'error')} required">
-        <label for="passportNumber">
-            <g:message code="workBook.passportNumber.label"/>
-            <span class="required-indicator">*</span>
-        </label>
-    <g:textField name="passportNumber" required="" value="${workBookInstance?.passportNumber}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'dateOfBirth', 'error')} required">

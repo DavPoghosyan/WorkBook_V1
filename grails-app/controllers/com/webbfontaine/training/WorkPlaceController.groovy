@@ -11,12 +11,12 @@ class WorkPlaceController {
 
 	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
-	@Secured(['permitAll'])
+	@Secured(['ROLE_USER','ROLE_ADMIN'])
 	def index() {
 		respond workPlaceService.listWorkPlaces()
 	}
 
-	@Secured(['permitAll'])
+	@Secured(['ROLE_USER','ROLE_ADMIN'])
 	def show(WorkPlace workPlaceInstance) {
 		if (workPlaceInstance == null) {
 			notFound()
@@ -117,13 +117,13 @@ class WorkPlaceController {
 		}
 	}
 
-	@Secured(['permitAll'])
+	@Secured(['ROLE_USER','ROLE_ADMIN'])
 	def retrieveCompanyData(long id) {
 		def company =  Company.get(id)
         render(template:"companyDialog", model:[company: company])
     }
 
-	@Secured(['permitAll'])
+	@Secured(['ROLE_USER','ROLE_ADMIN'])
 	def retrieveCountryData(long id) {
         def country =  Country.get(id)
 	    render(template:"countryDialog", model:[country: country])

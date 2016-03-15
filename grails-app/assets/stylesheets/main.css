@@ -614,7 +614,7 @@ a.skip {
 
 .current-from-store {
     float: left;
-    width: 50%;
+    width: 49%;
     min-height: 250px;
     background-color: #ffffff;
 }
