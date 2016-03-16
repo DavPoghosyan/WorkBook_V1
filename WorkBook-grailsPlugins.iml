@@ -58,6 +58,9 @@
     <content url="file://$MODULE_DIR$/target/work/plugins/jquery-ui-1.10.4">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-ui-1.10.4/grails-app/taglib" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/target/work/plugins/rimm-0.1">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/rimm-0.1/grails-app/domain" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/scaffolding-2.1.2">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/scaffolding-2.1.2/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/scaffolding-2.1.2/src/groovy" isTestSource="false" />

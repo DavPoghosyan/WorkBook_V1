@@ -1,4 +1,4 @@
-<%@ page import="com.webbfontaine.training.*" %>
+<%@ page import="am.webbfontaine.training.rimm.Country; am.webbfontaine.training.rimm.Company; com.webbfontaine.training.*" %>
 <g:javascript>
 	function retrieveCompanyData(id) {
 		if(id){

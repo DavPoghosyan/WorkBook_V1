@@ -1,5 +1,8 @@
 package com.webbfontaine.training
 
+import am.webbfontaine.training.rimm.Company
+import am.webbfontaine.training.rimm.Country
+
 class WorkPlace {
 
 	Date startDate
