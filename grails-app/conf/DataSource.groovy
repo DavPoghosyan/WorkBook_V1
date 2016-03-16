@@ -3,7 +3,7 @@ dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
     username = "root"
-    password = "1234" //"root"
+    password = "root" //"1234"
     dialect = org.hibernate.dialect.MySQL5InnoDBDialect
     properties {
         maxActive = 50
@@ -26,7 +26,20 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost/wbbf-training?useOldAliasMetadataBehavior=true"
+            url = "jdbc:mysql://localhost/training?useOldAliasMetadataBehavior=true"
         }
     }
+    test {
+        dataSource {
+            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = "jdbc:mysql://localhost/trainingTest?useOldAliasMetadataBehavior=true"
+        }
+    }
+    production {
+        dataSource {
+            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = "jdbc:mysql://localhost/trainingProd?useOldAliasMetadataBehavior=true"
+        }
+    }
+
 }
