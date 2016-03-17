@@ -50,7 +50,7 @@
                     </g:eachError>
                 </ul>
             </g:hasErrors>
-            <g:form url="[resource:workBookInstance, action:'save']" >
+            <g:form id="wb" url="[resource:workBookInstance, action:'save']" >
                 <fieldset class="form">
                     <g:render template="form"/>
                 </fieldset>

@@ -31,7 +31,8 @@
         <g:message code="workPlace.company.code"/>
         <span class="required-indicator">*</span>
     </label>
-    <g:select id="company" name="company.id" from="${Company.listOrderByCode()}"
+    <g:select id="company" name="company.id"
+              from="${Company.listOrderByCode()}"
               optionKey="id" optionValue="code"
               value="${workPlaceInstance?.company?.id}" class="many-to-one"
               noSelection="['':'- Choose Company Code -']"
@@ -53,7 +54,7 @@
 </div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'startDate', 'error')} required">
     <label for="startDate">
-        <g:message code="workPlace.startDate.label" default="Start Date" />
+        <g:message code="workPlace.startDate.label"/>
         <span class="required-indicator">*</span>
     </label>
     <g:datePicker name="startDate" precision="day"  value="${workPlaceInstance?.startDate}"  />
