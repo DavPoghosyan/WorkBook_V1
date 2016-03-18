@@ -48,34 +48,11 @@ $().ready(function() {
         } else {
             input.removeClass("valid").addClass("invalid");
         }
-        ageCalculation()
     });
 
     <!-- After Form Submitted Validation-->
     submitValidation();
-
-    $('#dateOfBirth_year, #dateOfBirth_month, #dateOfBirth_day').change(function() {
-        ageCalculation();
-    });
-
-
-
 });
-
-function ageCalculation() {
-    var now = new Date();
-    var birthDay = $('#dateOfBirth_day').val();
-    var birthMonth = $('#dateOfBirth_month').val();
-    var birthYear = $('#dateOfBirth_year').val();
-    var dateOfBirth = new Date(birthYear, birthMonth, birthDay)
-    var age = Math.floor((now-dateOfBirth) / (365.25 * 24 * 60 * 60 * 1000));
-    var today = now.getDate()
-    var tm = now.getMonth()+1
-    if(birthMonth == tm &&  birthDay <= today ) {
-       age += 1
-   }
-   $('#age').val(age);
-}
 
 function submitValidation() {
 
@@ -85,7 +62,7 @@ function submitValidation() {
         for (var input in form_data) {
             var element =$("#"+form_data[input]['name']);
             var invalid = element.hasClass("invalid");
-            var error_element = $("span", element.parent());
+            var error_element = $(element.selector+"-vem")
             if (invalid) {
                 error_element.removeClass("jq-error").addClass("error_show");
                 error_free = false;

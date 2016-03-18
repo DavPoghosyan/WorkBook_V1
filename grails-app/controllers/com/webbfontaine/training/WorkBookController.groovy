@@ -1,6 +1,7 @@
 package com.webbfontaine.training
 
 import org.springframework.security.access.annotation.Secured
+import org.springframework.web.servlet.support.RequestContextUtils as RCU
 
 import static org.springframework.http.HttpStatus.*
 
@@ -207,4 +208,13 @@ class WorkBookController {
             workBook.errors.rejectValue(customErrorField, customErrorCode, errorMessage)
         }
     }
+
+    @Secured(['ROLE_ADMIN'])
+    def chLang() {
+        println(params)
+        def newLocale = new Locale(params.id, 'DE')
+        RCU.getLocaleResolver(request).setLocale(request, response, newLocale)
+        return
+    }
+
 }

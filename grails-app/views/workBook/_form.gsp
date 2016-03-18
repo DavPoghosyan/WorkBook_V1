@@ -1,40 +1,9 @@
 <%@ page import="com.webbfontaine.training.WorkBook" %>
-<g:javascript src="JQtest.js"/>
-<style>
-#contact label{
-    display: inline-block;
-    width: 100px;
-    text-align: right;
-}
-#contact_submit{
-    padding-left: 100px;
-}
-#contact div{
-    margin-top: 1em;
-}
-textarea{
-    vertical-align: top;
-    height: 5em;
-}
-
-.jq-error{
-    display: none;
-    margin-left: 10px;
-}
-
-.error_show{
-    color: red;
-    margin-left: 10px;
-}
-
-input.invalid, textarea.invalid{
-    border: 2px solid red;
-}
-
-input.valid, textarea.valid{
-    border: 2px solid green;
-}
-</style>
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
+%{--<g:javascript src="jquery.validate.js"/>
+<g:javascript src="workBookFormValidation.js"/>--}%
+<g:javascript src="workBookValidation.js"/>
+<g:javascript src="ageCalculate.js"/>
 <g:set var="today" value="${new Date()}"/>
 <g:set var="minYear" value="${today[Calendar.YEAR]-65}"/>
 <g:set var="maxYear" value="${today[Calendar.YEAR]-18}"/>
@@ -44,7 +13,7 @@ input.valid, textarea.valid{
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="firstName" maxlength="25" required="" value="${workBookInstance?.firstName}"/>
-    <span class="jq-error">
+    <span id="firstName-vem" class="jq-error">
         <g:message code="workBook.firstName.invalid.size"/>
     </span>
 </div>
@@ -55,9 +24,9 @@ input.valid, textarea.valid{
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="lastName" maxlength="25" required="" value="${workBookInstance?.lastName}"/>
-    <span class="jq-error">
-        <g:message code="workBook.lastName.invalid.size"/>
-    </span>
+	<span id="lastName-vem" class="jq-error">
+		<g:message code="workBook.lastName.invalid.size"/>
+	</span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'passportNumber', 'error')} required">
@@ -66,7 +35,7 @@ input.valid, textarea.valid{
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="passportNumber" maxlength="9" required="" value="${workBookInstance?.passportNumber}"/>
-    <span class="jq-error">
+    <span id="passportNumber-vem" class="jq-error">
         <g:message code="workBook.passportNumber.invalid"/>
     </span>
 </div>
@@ -77,7 +46,9 @@ input.valid, textarea.valid{
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField type="email" name="email" required="" value="${workBookInstance?.email}"/>
-    <span class="jq-error">A valid email address is required</span>
+    <span id="email-vem" class="jq-error">
+        <g:message code="workBook.email.invalid"/>
+    </span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'dateOfBirth', 'error')} required">
