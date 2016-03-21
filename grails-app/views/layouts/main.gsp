@@ -19,6 +19,7 @@
 	    <g:javascript src="main.js"/>
         <g:javascript library="jquery"/>
         <g:javascript library="jquery-ui"/>
+        <g:javascript library="jquery-ui"/>
 		<g:layoutHead/>
 	</head>
 	<body>
@@ -29,6 +30,8 @@
             </g:link>
         </div>
         <locale:selector/>
+		<langs:selector langs="es, en, en_US, pt_BR, pt, pt_pt"
+						url="${createLink(action:actionName, controller:controllerName, params:[paramun:123]) }"/>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

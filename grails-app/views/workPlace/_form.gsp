@@ -16,7 +16,9 @@
 		}
 	}
 </g:javascript>
-<g:javascript src="workPlaceValidation.js"/>
+<g:javascript src="jquery.validate.js"/>
+<g:javascript src="workPlaceFormValidation.js"/>
+%{--<g:javascript src="workPlaceValidation.js"/>--}%
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
 <g:set var="today" value="${new Date()}"/>
 <g:set var="minYear" value="${today[Calendar.YEAR]-100}"/>

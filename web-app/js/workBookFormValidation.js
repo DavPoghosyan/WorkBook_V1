@@ -3,6 +3,7 @@
  */
 $().ready(function () {
     $('#wb').validate({
+        lang: 'fi',
         rules: {
             firstName:{
                 minlength: 3
@@ -16,10 +17,15 @@ $().ready(function () {
             passportNumber: {
                 passportNumberRegExp: true
             },
-        }
+        },
+      /*  messages: {
+            firstName: {
+                minlength: hello
+            },
+        }*/
     });
 
     $.validator.addMethod("passportNumberRegExp", function (value, element) {
-        return this.optional(element) || /^[A-Z]{2}[0-9]{7}/.test(value);
-    }, 'Please enter a valid passport number');
+        return  /^[A-Z]{2}[0-9]{7}/.test(value);
+    },passportNumberInvalidMessage);
 });

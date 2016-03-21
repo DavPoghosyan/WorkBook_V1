@@ -635,3 +635,15 @@ a.skip {
 	display: inline-block;
 	margin-left: 80%;
 }
+
+label.error {
+	color: red;
+	margin-left: 8px;
+	font-size: small;
+	text-align: left;
+	width: auto;
+}
+
+select.error, input.error{
+    border: 2px solid red;
+}

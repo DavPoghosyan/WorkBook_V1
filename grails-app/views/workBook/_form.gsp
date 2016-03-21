@@ -1,8 +1,10 @@
-<%@ page import="com.webbfontaine.training.WorkBook" %>
+<%@ page import="org.springframework.web.servlet.support.RequestContextUtils; com.webbfontaine.training.WorkBook" %>
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
-%{--<g:javascript src="jquery.validate.js"/>
-<g:javascript src="workBookFormValidation.js"/>--}%
-<g:javascript src="workBookValidation.js"/>
+<g:javascript src="jquery.validate.js"/>
+<g:javascript src="jquery.localisation.js"/>
+<g:javascript src="messages-${org.springframework.web.servlet.support.RequestContextUtils.getLocale(request).getLanguage()}.js"/>
+<g:javascript src="workBookFormValidation.js"/>
+%{--<g:javascript src="workBookValidation.js"/>--}%
 <g:javascript src="ageCalculate.js"/>
 <g:set var="today" value="${new Date()}"/>
 <g:set var="minYear" value="${today[Calendar.YEAR]-65}"/>

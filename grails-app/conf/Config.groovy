@@ -141,5 +141,3 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 
 
-
-
