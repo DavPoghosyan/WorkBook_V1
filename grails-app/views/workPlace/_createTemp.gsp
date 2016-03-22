@@ -1,5 +1,5 @@
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<g:javascript src="formActions.js"/>
+<g:javascript src="workPlaceFormActions.js"/>
 <div id="create-workPlace" class="content scaffold-edit" role="main">
     <h1>
         <g:message code="create.from.xml"/>
@@ -20,7 +20,7 @@
         </g:eachError>
     </ul>
 </g:hasErrors>
-<g:formRemote name="subForm" url="[resource:workPlaceInstance, controller:'workPlace', action:'remoteSave']" update="sub-content">
+<g:formRemote id="workPlace" name="subForm" url="[resource:workPlaceInstance, controller:'workPlace', action:'remoteSave']" update="sub-content">
     <fieldset class="form">
         <g:render template="form"/>
     </fieldset>

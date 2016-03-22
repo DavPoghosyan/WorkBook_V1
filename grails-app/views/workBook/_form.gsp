@@ -1,10 +1,9 @@
 <%@ page import="org.springframework.web.servlet.support.RequestContextUtils; com.webbfontaine.training.WorkBook" %>
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
-<g:javascript src="jquery.validate.js"/>
-<g:javascript src="jquery.localisation.js"/>
-<g:javascript src="messages-${org.springframework.web.servlet.support.RequestContextUtils.getLocale(request).getLanguage()}.js"/>
+<g:javascript src="libs/jquery.validate.js"/>
+<g:javascript src="libs/jquery.localisation.js"/>
+<g:javascript src="localisation/messages-${RequestContextUtils.getLocale(request).getLanguage()}.js"/>
 <g:javascript src="workBookFormValidation.js"/>
-%{--<g:javascript src="workBookValidation.js"/>--}%
 <g:javascript src="ageCalculate.js"/>
 <g:set var="today" value="${new Date()}"/>
 <g:set var="minYear" value="${today[Calendar.YEAR]-65}"/>
@@ -15,9 +14,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="firstName" maxlength="25" required="" value="${workBookInstance?.firstName}"/>
-    <span id="firstName-vem" class="jq-error">
-        <g:message code="workBook.firstName.invalid.size"/>
-    </span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'lastName', 'error')} required">
@@ -26,9 +22,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="lastName" maxlength="25" required="" value="${workBookInstance?.lastName}"/>
-	<span id="lastName-vem" class="jq-error">
-		<g:message code="workBook.lastName.invalid.size"/>
-	</span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'passportNumber', 'error')} required">
@@ -37,9 +30,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="passportNumber" maxlength="9" required="" value="${workBookInstance?.passportNumber}"/>
-    <span id="passportNumber-vem" class="jq-error">
-        <g:message code="workBook.passportNumber.invalid"/>
-    </span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'email', 'error')} required">
@@ -48,9 +38,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField type="email" name="email" required="" value="${workBookInstance?.email}"/>
-    <span id="email-vem" class="jq-error">
-        <g:message code="workBook.email.invalid"/>
-    </span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'dateOfBirth', 'error')} required">
@@ -69,6 +56,6 @@
         <span class="common-indicator">:</span>
     </label>
     <g:field name="age" type="number" value="${workBookInstance?.age}"
-             min="18" max="65" />
+             min="18" max="65" readonly="true"/>
 </div>
 

@@ -18,7 +18,7 @@
         </g:eachError>
     </ul>
 </g:hasErrors>
-<g:formRemote id="wb" name="subForm" url="[controller:'workBook', action:'remoteSave']"
+<g:formRemote id="workBook" name="subForm" url="[controller:'workBook', action:'remoteSave']"
               update="main-content">
     <fieldset class="form">
         <g:render template="form"/>

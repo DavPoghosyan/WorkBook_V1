@@ -93,17 +93,11 @@ class WorkBookController {
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def exportAsXML(WorkBook workBook){
-        xmlProcessingServiceProxy.exportToXML(workBook)
-        def xmlFile = new File("${workBook}.xml")
-        if(!xmlFile.exists()){
-            flash.message = 'internal server error export unavailble , please try a bit late'
-            respond(workBook, view:'show', status: INTERNAL_SERVER_ERROR)
-            return
-        }
+        def xmlString = xmlProcessingServiceProxy.exportToXML(workBook)
         response.with {
             setContentType('application/xml')
-            setHeader('Content-Disposition', "Attachment;Filename=\"${xmlFile.name}\"")
-            outputStream << xmlFile.bytes
+            setHeader('Content-Disposition', "Attachment;Filename=\"${workBook}\"")
+            outputStream << xmlString
         }
     }
 
@@ -200,21 +194,11 @@ class WorkBookController {
     void additionalValidation(WorkBook workBook) {
         boolean isValidAge
         def customErrorField
-        (isValidAge, customErrorField) = workBookService.isValidBirthDateAndAge(workBook)
-        if (!isValidAge) {
-            def customErrorCode = customErrorField ==
-                    "age" ?  'age.invalid.property' : 'birthDate.invalid.property'
+        if (!workBookService.isValidBirthDate(workBook)) {
+            def customErrorCode =  'birthDate.invalid.property'
             def errorMessage = message(code: customErrorCode, args: customErrorField)
             workBook.errors.rejectValue(customErrorField, customErrorCode, errorMessage)
         }
-    }
-
-    @Secured(['ROLE_ADMIN'])
-    def chLang() {
-        println(params)
-        def newLocale = new Locale(params.id, 'DE')
-        RCU.getLocaleResolver(request).setLocale(request, response, newLocale)
-        return
     }
 
 }

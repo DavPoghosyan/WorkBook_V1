@@ -2,12 +2,10 @@
 ** Created by davit on 2/25/16.
 */
 $().ready(function(){
-	$(".countryDialog").hide("fast")
-	$(".companyDialog").hide("fast")
 	var removeEndDateTxt = ' - Remove End Date'
 	var addEndDateTxt = ' + Add End Date'
 	if($("#endDate_day").val() == ''){
-		$("#endDate").fadeOut("fast")
+		$("#endDate").hide()
 	} else {
 		$(".addEndDate").text(removeEndDateTxt)
 	}

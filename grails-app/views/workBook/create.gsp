@@ -7,9 +7,9 @@
 		<title>
 			<g:message code="default.create.label" args="[entityName]"/>
 		</title>
+        <g:javascript src="uploadFormSubmit.js"/>
 	</head>
 	<body>
-		<a href="#create-workBook" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li>
@@ -17,11 +17,7 @@
                     </g:link>
                 </li>
 				<li>
-                    <g:form name="upload-form" action="uploadXmlFile" method="post"
-                            enctype="multipart/form-data" target="_parent">
-                        <input id="file-upload" class="import" type="file" name="flyFile"/>
-                        <g:submitButton name="import" class="import" value='Import From XML'/>
-                    </g:form>
+                    <g:render template="uploadForm"/>
 				</li>
 			</ul>
 		</div>
@@ -50,7 +46,7 @@
                     </g:eachError>
                 </ul>
             </g:hasErrors>
-            <g:form id="wb" url="[resource:workBookInstance, action:'save']" >
+            <g:form id="workBook" url="[resource:workBookInstance, action:'save']" >
                 <fieldset class="form">
                     <g:render template="form"/>
                 </fieldset>

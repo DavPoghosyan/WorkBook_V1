@@ -7,12 +7,9 @@
 		    <g:message code="default.create.label" args="[entityName]"/>
         </title>
 		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-		<g:javascript src="formActions.js"/>
+		<g:javascript src="workPlaceFormActions.js"/>
 	</head>
 	<body>
-		<a href="#create-workPlace" class="skip" tabindex="-1">
-            <g:message code="default.link.skip.label" default="Skip to content&hellip;"/>
-        </a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li>
@@ -42,7 +39,7 @@
                     </g:eachError>
                 </ul>
 			</g:hasErrors>
-			<g:form id="wp" url="[resource:workPlaceInstance, action:'save']">
+			<g:form id="workPlace" url="[resource:workPlaceInstance, action:'save']">
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>

@@ -9,9 +9,6 @@
         </title>
 	</head>
 	<body>
-		<a href="#edit-workBook" class="skip" tabindex="-1">
-            <g:message code="default.link.skip.label" default="Skip to content&hellip;"/>
-        </a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li>
@@ -52,7 +49,7 @@
 					</g:eachError>
 				</ul>
 			</g:hasErrors>
-			    <g:form id="wb" url="[resource:workBookInstance, action:'update']" method="PUT" >
+			    <g:form id="workBook" url="[resource:workBookInstance, action:'update']" method="PUT" >
 				    <g:hiddenField name="version" value="${workBookInstance?.version}" />
 				    <fieldset class="form">
 					    <g:render template="form"/>

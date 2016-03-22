@@ -16,7 +16,7 @@
 		}
 	}
 </g:javascript>
-<g:javascript src="jquery.validate.js"/>
+<g:javascript src="libs/jquery.validate.js"/>
 <g:javascript src="workPlaceFormValidation.js"/>
 %{--<g:javascript src="workPlaceValidation.js"/>--}%
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
@@ -25,7 +25,7 @@
 <g:set var="maxYear" value="${today[Calendar.YEAR]}"/>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'workbook', 'error')} required">
     <label for="workbook">
-        <g:message code="workPlace.workbook.label" default="Workbook" />
+        <g:message code="workBook.fullName.label"/>
         <span class="required-indicator">*</span>
     </label>
     <g:select id="workbook" name="workbook.id"
@@ -33,9 +33,6 @@
               noSelection="['':'- Choose WorkBook Owner -']"
               value="${workPlaceInstance?.workbook?.id}" class="many-to-one required"
     />
-    <span id="workbook-vem" class="jq-error">
-        <g:message code="workPlace.workBook.invalid"/>
-    </span>
 </div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'company', 'error')} required">
    <label for="company">
@@ -49,9 +46,6 @@
               noSelection="['':'- Choose Company Code -']"
               onchange="retrieveCompanyData(this.value);"
     />
-    <span id="company-vem" class="jq-error">
-        <g:message code="workPlace.company.invalid"/>
-    </span>
 </div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'country', 'error')} required">
     <label for="country">
@@ -65,9 +59,6 @@
               noSelection="['':'- Choose Country Code -']"
               onchange="retrieveCountryData(this.value);"
     />
-    <span id="country-vem" class="jq-error">
-        <g:message code="workPlace.country.invalid"/>
-    </span>
 </div>
 <div class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'startDate', 'error')} required">
     <label for="startDate">
@@ -76,26 +67,20 @@
     </label>
     <g:datePicker name="startDate" precision="day" class="startDate"
                   value="${workPlaceInstance?.startDate}" years="${maxYear..minYear}"/>
-    <span id="startDate_day-vem" class="jq-error">
-        <g:message code="workPlace.startDate.invalid"/>
-    </span>
 </div>
 <div class="addElement">
     <a id="current" class="addEndDate" href="#"> + Add End Date</a>
 </div>
-<div id="endDate" class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'endDate', 'error')} ">
+<div id="endDate" class="fieldcontain ${hasErrors(bean: workPlaceInstance, field: 'endDate', 'error')}">
     <label for="endDate">
         <g:message code="workPlace.endDate.label"/>
     </label>
     <g:datePicker name="endDate" precision="day"  value="${workPlaceInstance?.endDate}"
                       default="none" noSelection="['': '']" years="${maxYear..minYear}"/>
-    <span id="endDate_day-vem" class="jq-error">
-        <g:message code="workPlace.endDate.invalid"/>
-    </span>
 </div>
-<fieldset class="countryDialog">
+<fieldset class="countryDialog" hidden>
 	<g:render template="countryDialog"/>
 </fieldset>
-<fieldset class="companyDialog">
+<fieldset class="companyDialog" hidden>
 	<g:render template="companyDialog"/>
 </fieldset>

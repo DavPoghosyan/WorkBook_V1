@@ -15,5 +15,6 @@ $.extend($.validator.messages, {
     equalTo: "Bitte denselben Wert wiederholen.",
     range: $.validator.format("Geben Sie bitte einen Wert zwischen {0} und {1} ein."),
     max: $.validator.format("Geben Sie bitte einen Wert kleiner oder gleich {0} ein."),
+    minlength: $.validator.format("Bitte geben Sie mindestens {0} Zeichen.")
 });
 passportNumberInvalidMessage="Bitte geben Sie eine gültige Passnummer"

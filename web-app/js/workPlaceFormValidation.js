@@ -4,7 +4,7 @@
 $().ready(function () {
     
     var now = new Date()
-    $('#wp').validate({
+    $('#workPlace').validate({
         rules: {
             workbook:{
                 required: true,

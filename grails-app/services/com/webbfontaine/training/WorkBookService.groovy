@@ -19,17 +19,14 @@ class WorkBookService {
 		workBook.delete(flush: true)
 	}
 
-	def isValidBirthDateAndAge(WorkBook workbook) {
+	def isValidBirthDate(WorkBook workbook) {
         Date now = new Date()
         Date dateOfBirth = workbook.dateOfBirth
         int expectedAge = now.minus(dateOfBirth)/365.25
         if (expectedAge < 18) {
-            return [false, 'dateOfBirth']
+            return false
         }
-        if(expectedAge != workbook.age) {
-            return  [false, 'age']
-        }
-        return [true,'']
+        return true
     }
 
     def xmlToDomain(def xmlObject) {

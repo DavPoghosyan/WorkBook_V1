@@ -9,9 +9,6 @@
 	</head>
 
 	<body>
-		<a href="#list-workPlace" class="skip" tabindex="-1">
-            <g:message code="default.link.skip.label" default="Skip to content&hellip;"/>
-        </a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li>
@@ -39,7 +36,7 @@
 			    <thead>
 					<tr>
                         <th>
-                            <g:message code="workPlace.workbook.label" default="Workbook Owner"/>
+                            <g:message code="workBook.fullName.label"/>
                         </th>
                         <th>
                             <g:message code="workPlace.company.label" default="Company"/>
@@ -75,7 +72,7 @@
 	                                <g:formatDate format="yyyy-MM-dd" date="${workPlaceInstance.endDate}" />
                                 </g:if>
 	                            <g:else>
-		                            <i>up to now</i>
+		                            <g:message code="workPlace.current.true.label"/>
 	                            </g:else>
                             </td>
 					    </tr>

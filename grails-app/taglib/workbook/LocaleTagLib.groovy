@@ -16,11 +16,9 @@ class LocaleTagLib {
         def requestLocale = RequestContextUtils.getLocale(request)
 
         MarkupBuilder mb = new MarkupBuilder(out)
-        mb.ol('id': 'locale-selector') {
+        mb.ul('id': 'locale-selector') {
             locales.each { Locale locale ->
-                def attrs = ['type': 'radio','name': 'lang', 'checked': true,'disabled':true]
-                if(requestLocale.language != locale.language) attrs.remove('checked')
-                li(attrs) {
+                li(requestLocale.language == locale.language ? ['class': 'active'] : [:]) {
                     mb.yield(
                             link(controller: controllerName, action: actionName, params: params + [lang: locale.language],
                                     {locale.getLanguage() }).toString(),

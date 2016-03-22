@@ -11,12 +11,12 @@ class XmlProcessingService {
 
     def xmlObject
 
-	void exportToXML(domainInstance) {
-		def fileWriter = new FileWriter("${domainInstance}.xml")
+	def exportToXML(domainInstance) {
+		def stringWriter = new StringWriter()
 		XML.use("shortDeep")
         def xmlConverter = domainInstance as XML
-		xmlConverter.render(fileWriter)
-		fileWriter.close()
+		xmlConverter.render(stringWriter)
+        return stringWriter
 	}
 
 	def importFromXML(flyFile){

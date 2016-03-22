@@ -14,7 +14,7 @@
         <g:if test="${workPlaceInstance?.workbook}">
             <li class="fieldcontain">
                 <span id="workbook-label" class="property-label">
-                    <g:message code="workPlace.workbook.label"/>
+                    <g:message code="workBook.fullName.label"/>
                 </span>
                 <span class="property-value" aria-labelledby="workbook-label">
                     <g:link

@@ -1,7 +1,7 @@
 /**
  * Created by davit on 3/15/16.
  */
-$(document).ready(function(){
+$().ready(function(){
     var hide = 'hide'
     var show = 'show'
     $(".slider").click(function(){

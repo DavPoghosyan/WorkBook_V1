@@ -2,8 +2,7 @@
  * Created by davit on 3/18/16.
  */
 $().ready(function () {
-    $('#wb').validate({
-        lang: 'fi',
+    $('#workBook').validate({
         rules: {
             firstName:{
                 minlength: 3
@@ -18,11 +17,6 @@ $().ready(function () {
                 passportNumberRegExp: true
             },
         },
-      /*  messages: {
-            firstName: {
-                minlength: hello
-            },
-        }*/
     });
 
     $.validator.addMethod("passportNumberRegExp", function (value, element) {

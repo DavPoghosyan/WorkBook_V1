@@ -7,12 +7,9 @@
 		<title>
 		    <g:message code="default.show.label" args="[entityName]"/>
         </title>
-		<g:javascript library="jquery" />
+        <g:javascript src="uploadFormSubmit.js"/>
 	</head>
 	<body>
-		<a href="#show-workBook" class="skip" tabindex="-1">
-			<g:message code="default.link.skip.label" default="Skip to content&hellip;"/>
-		</a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li>
@@ -30,6 +27,9 @@
                         <g:message code="default.new.label" args="[entityName]"/>
                     </g:link>
                 </li>
+				<li>
+					<g:render template="uploadForm"/>
+				</li>
 			</ul>
 		</div>
         <div id="main-content">
