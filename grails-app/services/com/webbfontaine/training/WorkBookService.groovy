@@ -4,14 +4,14 @@ import org.springframework.transaction.annotation.Transactional
 
 class WorkBookService {
 
-    @Transactional(readOnly = true)
-	def listWorkBooks(){
-        WorkBook.list()
-	}
+//    @Transactional(readOnly = true)
+//	def listWorkBooks(def params){
+//        WorkBook.list(params)
+//	}
 
 	@Transactional
     void save(WorkBook workBook) {
-        workBook.save(flush: true)
+        workBook.save(flush: false)
     }
 
 	@Transactional
@@ -22,11 +22,18 @@ class WorkBookService {
 	def isValidBirthDate(WorkBook workbook) {
         Date now = new Date()
         Date dateOfBirth = workbook.dateOfBirth
-        int expectedAge = now.minus(dateOfBirth)/365.25
-        if (expectedAge < 18) {
-            return false
+        int age = now.minus(dateOfBirth)/365.25
+        return age > 18
+    }
+
+    def isInValidModifications(WorkBook workBook) {
+        Date dateOfBirth = workBook.dateOfBirth
+        boolean flag
+        workBook.workplaces.any {
+            flag = it.startDate.minus(dateOfBirth)/365.25 < 18
         }
-        return true
+        return flag
+
     }
 
     def xmlToDomain(def xmlObject) {
@@ -35,7 +42,6 @@ class WorkBookService {
         if(dateOfBirth){
             workBook.dateOfBirth = Date.parse('yyyy-MM-dd',dateOfBirth.trim())
         }
-        workBook.age = xmlObject.age?.text() ? xmlObject.age.toInteger() : 18
         workBook.firstName = xmlObject.firstName.text() ?: "Unknown"
         workBook.lastName = xmlObject.lastName.text() ?: "Unknown"
         workBook.email = xmlObject.email.text()

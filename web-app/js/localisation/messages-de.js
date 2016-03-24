@@ -18,3 +18,4 @@ $.extend($.validator.messages, {
     minlength: $.validator.format("Bitte geben Sie mindestens {0} Zeichen.")
 });
 passportNumberInvalidMessage="Bitte geben Sie eine gültige Passnummer"
+invalidAge="Workbook Besitzer sollte älter als 18 Jahre sein"

@@ -7,7 +7,6 @@
 		<g:set var="entityName" value="${message(code: 'workPlace.label', default: 'WorkPlace')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
-
 	<body>
 		<div class="nav" role="navigation">
 			<ul>

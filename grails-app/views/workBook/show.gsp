@@ -10,29 +10,29 @@
         </title>
 	</head>
 	<body>
-		<a href="#show-workBook" class="skip" tabindex="-1">
-			<g:message code="default.link.skip.label" default="Skip to content&hellip;"/>
-		</a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li>
-                    <g:link class="list" action="index">
-                        <g:message code="default.list.label" args="[entityName]"/>
-                    </g:link>
+                <li>
+                    <a class="home" href="${createLink(uri: '/')}">
+                        <g:img dir="images/icons" file="home-icon.png"/>
+                        <p class="homeTip">
+                            <g:message code="default.home.label"/>
+                        </p>
+                    </a>
                 </li>
                 <sec:ifAllGranted roles="ROLE_ADMIN">
                     <li>
                         <g:link class="create" action="create">
-                            <g:message code="default.new.label" args="[entityName]"/>
+                            <g:img dir="images/icons" file="add-icon.png"/>
+                            <p class="createTip">
+                                <g:message code="add.new.label"/>
+                            </p>
                         </g:link>
                     </li>
                 </sec:ifAllGranted>
 			</ul>
 		</div>
 		<div id="show-workBook" class="content scaffold-show" role="main">
-			<h1>
-				<g:message code="default.show.label" args="[entityName]"/>
-			</h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">
                     ${flash.message}
@@ -131,7 +131,7 @@
 						                jasper="workBook" format="PDF" name="">
 							<input type="hidden" name="id" value="${id}"/>
 							<g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">
-								<img src="${resource(dir:'images/icons', file:'XML.gif')}" title="XML" />
+								<img src="${resource(dir:'images/icons', file:'xml-icon.gif')}" title="XML" />
 							</g:link>
 						</g:jasperReport>
 					</span>
@@ -139,14 +139,20 @@
 			</ol>
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <fieldset class="buttons">
-                    <g:form url="[resource:workBookInstance, action:'delete']" method="DELETE">
-                        <g:actionSubmit class="delete" action="delete"
+                    <g:form url="[resource:workBookInstance, action:'delete']" method="DELETE" class="delete">
+                        <g:actionSubmitImage src="${resource(dir: 'images/icons', file: 'delete-icon.png')}" action="delete"
                                         value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
-                        <g:link class="edit" action="edit" resource="${workBookInstance}">
-                            <g:message code="default.button.edit.label"/>
-                        </g:link>
+                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message')}');"/>
+                        <p class="deleteTip">
+                            <g:message code="default.button.delete.label"/>
+                        </p>
                     </g:form>
+                    <g:link class="edit" action="edit" resource="${workBookInstance}">
+                        <g:img dir="images/icons" file="edit-icon.png"/>
+                        <p class="editTip">
+                            <g:message code="default.button.edit.label"/>
+                        </p>
+                    </g:link>
                 </fieldset>
             </sec:ifAllGranted>
 		</div>

@@ -13,7 +13,7 @@ class WorkPlaceService {
 
 	@Transactional
 	def save(WorkPlace workPlace) {
-		workPlace.save(flush: true)
+		workPlace.save()
 	}
 
 	@Transactional
@@ -39,14 +39,14 @@ class WorkPlaceService {
     @Transactional(readOnly = true)
 	boolean isAvailableDates(WorkPlace workPlace) {
 		Date startDate = workPlace.startDate
-		Date endDate = workPlace.endDate ?: startDate.plus(57*365)
+		Date endDate = workPlace.endDate ?: new Date()
 	    def workPlaces = WorkPlace.createCriteria().list() {
 		    and {
 			    eq('workbook.id', workPlace.workbookId)
 			    lt('startDate', endDate)
 			    or{
-				    gt('endDate', startDate)
 				    isNull('endDate')
+					gt('endDate', startDate)
 			    }
 		    }
 	    }
@@ -73,13 +73,13 @@ class WorkPlaceService {
 
     def validate(WorkPlace workPlace) {
         if(workPlace.startDate.after(new Date())) {
-            return [false, 'startDate.invalid.property']
+            return [false, 'workPlace.startDate.invalid']
         }
 	    if(workPlace.current && isCurrentWorkPlaceExists(workPlace)) {
-		    return [false, 'current.workplace.exists']
+		    return [false, 'workplace.current.exists']
 	    }
         if(!isAvailableDates(workPlace)){
-            return [false, 'range.invalid.properties']
+            return [false, 'workPlace.range.invalid']
         }
         return [true, '']
     }

@@ -14,8 +14,9 @@ class WorkPlaceController {
 	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
 	@Secured(['ROLE_USER','ROLE_ADMIN'])
-	def index() {
-		respond workPlaceService.listWorkPlaces()
+	def index(Integer max) {
+		params.max = max ?: 10
+		respond WorkPlace.list(params), model: [workPlaceInstanceCount: WorkPlace.count()]
 	}
 
 	@Secured(['ROLE_USER','ROLE_ADMIN'])
@@ -39,7 +40,6 @@ class WorkPlaceController {
 			notFound()
 			return
 		}
-		workPlaceInstance.current = !workPlaceInstance?.endDate
 		additionalValidation(workPlaceInstance)
 		if (workPlaceInstance.hasErrors()) {
 			respond(workPlaceInstance.errors, view: 'create',status: CONFLICT)

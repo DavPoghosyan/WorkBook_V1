@@ -50,6 +50,7 @@
     />
 </div>
 
+%{--
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'age', 'error')}">
     <label for="age">
         <g:message code="workBook.age.label"/>
@@ -58,4 +59,5 @@
     <g:field name="age" type="number" value="${workBookInstance?.age}"
              min="18" max="65" readonly="true"/>
 </div>
+--}%
 

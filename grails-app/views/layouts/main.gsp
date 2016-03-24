@@ -26,10 +26,20 @@
         <asset:image src="grails_logo.png" alt="WorkBook"/>
         <locale:selector/>
         <g:link class="log-out" controller="logout" action="">
-            <g:message code="log.out.label"/>
+			<asset:image src="skin/log-out-icon.png" alt="WorkBook"/>
+            <p class="text">
+                <g:message code="log.out.label" class="text"/>
+            </p>
         </g:link>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo">
+            <g:link uri="http://www.webbfontaine.com/" target="_blank">
+                <g:message code="footer.copyright.company"/>
+                </g:link>
+            <g:message code="footer.training.label"/>
+            <g:link uri="https://www.linkedin.com/in/davit-poghosyan-37556ab4" target="_blank">
+                <g:message code="footer.copyright.developer"/>
+            </g:link>
         </div>
 	</body>
 </html>

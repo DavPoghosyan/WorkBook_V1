@@ -4,7 +4,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'workPlace.label')}" />
 		<title>
-		    <g:message code="default.create.label" args="[entityName]"/>
+		    <g:message code="registration.form.label" args="[entityName]"/>
         </title>
 		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<g:javascript src="workPlaceFormActions.js"/>
@@ -21,7 +21,7 @@
 		</div>
 		<div id="create-workPlace" class="content scaffold-create" role="main">
 			<h1>
-                <g:message code="default.create.label" args="[entityName]"/>
+                <g:message code="registration.form.label" args="[entityName]"/>
             </h1>
 			<g:if test="${flash.message}">
 			    <div class="message" role="status">

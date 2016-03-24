@@ -98,7 +98,7 @@
                                     jasper="workBook" format="PDF" name="">
                         <input type="hidden" name="id" value="${id}"/>
                         <g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">
-                            <img src="${resource(dir:'images/icons', file:'XML.gif')}" title="XML" />
+                            <img src="${resource(dir:'images/icons', file:'xml-icon.gif')}" title="XML" />
                         </g:link>
                     </g:jasperReport>
                 </span>

@@ -1,7 +1,6 @@
 package com.webbfontaine.training
 
 import org.springframework.security.access.annotation.Secured
-import org.springframework.web.servlet.support.RequestContextUtils as RCU
 
 import static org.springframework.http.HttpStatus.*
 
@@ -12,9 +11,14 @@ class WorkBookController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-	@Secured(['ROLE_USER','ROLE_ADMIN'])
+	/*@Secured(['ROLE_USER','ROLE_ADMIN'])
     def index() {
         respond workBookService.listWorkBooks()
+    }*/
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
+    def index(Integer max) {
+        params.max = max ?: 10
+        respond WorkBook.list(params), model: [workBookInstanceCount: WorkBook.count()]
     }
 
 	@Secured(['ROLE_USER','ROLE_ADMIN'])
@@ -46,7 +50,7 @@ class WorkBookController {
             notFound()
             return
         }
-	    additionalValidation(workBook)
+	   // additionalValidation(workBook)
         if (workBook.hasErrors()) {
             respond(workBook.errors, view:'create', status: CONFLICT)
             return
@@ -60,11 +64,17 @@ class WorkBookController {
 
 	@Secured(['ROLE_ADMIN'])
     def update(WorkBook workBook) {
+        workBook.lock()
         if (workBook == null) {
             notFound()
             return
         }
-	    additionalValidation(workBook)
+	   // additionalValidation(workBook)
+        if(workBookService.isInValidModifications(workBook)) {
+            def customErrorCode =  'workBook.age.conflict.workplaces'
+            def errorMessage = message(code: customErrorCode)
+            workBook.errors.rejectValue('dateOfBirth', customErrorCode, errorMessage)
+        }
         if (workBook.hasErrors()) {
             respond(workBook.errors, view:'edit', Status: CONFLICT)
             workBook.workplaces*.discard()
@@ -192,10 +202,9 @@ class WorkBookController {
     }
 
     void additionalValidation(WorkBook workBook) {
-        boolean isValidAge
         def customErrorField
         if (!workBookService.isValidBirthDate(workBook)) {
-            def customErrorCode =  'birthDate.invalid.property'
+            def customErrorCode =  'workBook.age.min.invalid'
             def errorMessage = message(code: customErrorCode, args: customErrorField)
             workBook.errors.rejectValue(customErrorField, customErrorCode, errorMessage)
         }

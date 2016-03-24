@@ -91,12 +91,9 @@ img {
 	margin: 1em;
 }
 
-.content {
-}
 
 .content h1 {
-	border-bottom: 1px solid #CCCCCC;
-	margin: 0.8em 1em 0.3em;
+    margin: 1% 25% 1% 20%;
 	padding: 0 0.25em;
 }
 
@@ -105,13 +102,14 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: whitesmoke;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
 	margin-top: 1.5em;
 	padding: 1em;
 	min-height: 1em;
+	text-align: center;
 }
 
 .footer a {
@@ -132,17 +130,13 @@ img {
 /* NAVIGATION MENU */
 
 .nav {
-	background-color: #efefef;
-	padding: 0.5em 0.75em;
-	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
-	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-	        box-shadow: 0 0 3px 1px #aaaaaa;
-	zoom: 1;
+    border: none;
+    margin-left: 15%;
+    background: white no-repeat center;
 }
 
 .nav ul {
 	overflow: hidden;
-	padding-left: 0;
 	zoom: 1;
 }
 
@@ -155,15 +149,31 @@ img {
 }
 
 .nav a {
-	color: #666666;
-	display: block;
-	padding: 0.25em 0.7em;
-	text-decoration: none;
-	   -moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-	        border-radius: 0.3em;
+    text-decoration: none;
 }
 
+.nav p {
+    position: relative;
+    margin-left: 10px;
+    visibility: hidden;
+    color: #48802c;
+}
+
+.create:hover .createTip  {
+    visibility: visible;
+}
+
+.home:hover .homeTip  {
+    visibility: visible;
+}
+
+.import:hover .importTip {
+    visibility: visible;
+    position: relative;
+    top: -2px;
+    left: -15px;
+}
+/*
 .nav a:active, .nav a:visited {
 	color: #666666;
 }
@@ -185,31 +195,19 @@ img {
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
-}
+}*/
 
 
-
-.nav a.home {
-	background-image: url(../images/skin/house.png);
-}
-
-.nav a.list {
-	background-image: url(../images/skin/database_table.png);
-}
-
-.nav a.create {
-	background-image: url(../images/skin/database_add.png);
-}
 
 /* CREATE/EDIT FORMS AND SHOW PAGES */
 
 fieldset,
 .property-list {
-	margin: 0.6em 1.25em 0 1.25em;
-	padding: 0.3em 1.8em 1.25em;
+	margin: 0% 35% 0% 25%;
 	position: relative;
 	zoom: 1;
-	border: none;
+	border: ridge;
+    border-color: green;
 }
 
 .property-list .fieldcontain {
@@ -219,7 +217,9 @@ fieldset,
 }
 
 .fieldcontain {
-	margin-top: 1em;
+	margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 10%;
 }
 
 .fieldcontain label,
@@ -522,12 +522,12 @@ th:hover, tr:hover {
 	text-decoration: underline;
 }
 
-/* ACTION BUTTONS */
+/*/!* ACTION BUTTONS *!/
 
 .buttons {
 	background-color: #efefef;
 	overflow: hidden;
-	padding: 0.3em;
+	padding: 1em;
 	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
 	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
 	        box-shadow: 0 0 3px 1px #aaaaaa;
@@ -544,7 +544,7 @@ th:hover, tr:hover {
 	display: inline-block;
 	margin: 0 0.25em 0;
 	overflow: visible;
-	padding: 0.25em 0.7em;
+	padding: 1em;
 	text-decoration: none;
 
 	   -moz-border-radius: 0.3em;
@@ -571,7 +571,7 @@ th:hover, tr:hover {
 }
 
 .buttons .delete, .buttons .edit, .buttons .save {
-	background-position: 0.7em center;
+	background-position: center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
 }
@@ -582,7 +582,7 @@ th:hover, tr:hover {
 }
 
 .buttons .delete {
-	background-image: url(../images/skin/database_delete.png);
+	background-image: url(../images/skin/delete-icon.png);
 }
 
 .buttons .edit {
@@ -591,6 +591,51 @@ th:hover, tr:hover {
 
 .buttons .save {
 	background-image: url(../images/skin/database_save.png);
+}*/
+
+.buttons {
+    padding: 0.7em;
+    left: 35%;
+    border: none;
+    background: white no-repeat center;
+}
+
+.buttons input {
+    border: none;
+}
+
+.buttons .edit {
+    position: absolute;
+    top: 15px;
+    left: -50px;
+}
+
+.deleteTip, .registerTip {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    visibility: hidden;
+    color: #48802c;
+}
+
+.editTip {
+    position: absolute;
+    top: 45px;
+    left: 5px;
+    visibility: hidden;
+    color: #48802c;
+}
+
+.delete:hover .deleteTip  {
+    visibility: visible;
+}
+
+.edit:hover .editTip  {
+    visibility: visible;
+}
+
+.register:hover .registerTip  {
+    visibility: visible;
 }
 
 a.skip {
@@ -620,7 +665,7 @@ a.skip {
 
 #locale-selector {
 	display: inline-block;
-	margin-left: 80%;
+	margin-left: 75%;
 }
 
 ul#locale-selector {
@@ -649,17 +694,25 @@ ul#locale-selector li.active a{
 
 
 .log-out {
-    background-image: url(../images/skin/log-out-icon.png);
-    background-position: 0.7em center;
-    background-repeat: no-repeat;
-    background-color: honeydew;
-    text-indent: 25px;
     position: absolute;
-    top: 0px;
+    top: 5px;
     right: 15px;
     text-decoration: none;
     border-radius: 15px;
 }
+
+.log-out .text {
+	position:absolute;
+	top:2px;
+    right:25px;
+	visibility:hidden;
+}
+
+.log-out:hover .text {
+    visibility:visible;
+}
+
+
 label.error {
 	color: red;
 	margin-left: 8px;
@@ -676,6 +729,8 @@ select.error, input.error{
 .upload_btn{
     position:absolute;
     opacity:0;
+    width: 45px;
+    height: 45px;
 }
 .import {
     margin-left: 25px;

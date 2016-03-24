@@ -7,9 +7,8 @@ class WorkBook {
     String email
     String passportNumber
     Date dateOfBirth
-    int age
 
-    static transients = ['fullName']
+    static transients = ['fullName','age']
 
     static hasMany = [workplaces: WorkPlace]
 
@@ -25,8 +24,12 @@ class WorkBook {
         "${lastName}_$firstName"
     }
 
+    int getAge(){
+        new Date().minus(dateOfBirth)/365.25
+    }
+
 	String toString() {
-		"$fullName"
+        fullName
 	}
 
 

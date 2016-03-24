@@ -136,6 +136,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':  ['ROLE_USER','ROLE_ADMIN'],
 	'*/jasper/*':       ['ROLE_USER','ROLE_ADMIN'],
     '/login/auth':      ['permitAll'],
+    '/auth':            ['permitAll'],
     '/logout/**':       ['ROLE_USER','ROLE_ADMIN'],
     '/jasper/**':       ['ROLE_USER','ROLE_ADMIN']
 ]
