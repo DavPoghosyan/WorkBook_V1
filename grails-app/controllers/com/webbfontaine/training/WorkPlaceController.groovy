@@ -20,12 +20,12 @@ class WorkPlaceController {
 	}
 
 	@Secured(['ROLE_USER','ROLE_ADMIN'])
-	def show(WorkPlace workPlaceInstance) {
-		if (workPlaceInstance == null) {
+	def show(WorkPlace workPlace) {
+		if (workPlace == null) {
 			notFound()
 			return
 		}
-		respond workPlaceInstance
+		render(template: 'showTemp', model:[workPlace: workPlace], status: OK)
 	}
 
 	@Secured(['ROLE_ADMIN'])

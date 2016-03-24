@@ -21,7 +21,7 @@ class WorkBook {
     }
 
     String getFullName(){
-        "${lastName}_$firstName"
+        "$firstName ${lastName}"
     }
 
     int getAge(){

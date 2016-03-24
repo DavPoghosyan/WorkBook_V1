@@ -93,7 +93,7 @@ img {
 
 
 .content h1 {
-    margin: 1% 25% 1% 20%;
+    margin-left: 10px;
 	padding: 0 0.25em;
 }
 
@@ -203,7 +203,8 @@ img {
 
 fieldset,
 .property-list {
-	margin: 0% 35% 0% 25%;
+	margin-left: 5px;
+	width: 45%;
 	position: relative;
 	zoom: 1;
 	border: ridge;
@@ -219,23 +220,32 @@ fieldset,
 .fieldcontain {
 	margin-top: 2%;
     margin-bottom: 2%;
-    margin-left: 10%;
+    /*margin-left: 10%;*/
 }
+
+#sub {
+	position: absolute;
+	width: 75%;
+	margin-top: -350px;
+	margin-left: 55%;
+}
+
 
 .fieldcontain label,
 .fieldcontain .property-label {
 	color: #666666;
-	text-align: right;
+	/*text-align: right;*/
 	width: 25%;
 }
 
 .fieldcontain .property-label {
+	margin-left: 5%;
 	float: left;
 }
 
 .fieldcontain .property-value {
 	display: block;
-	margin-left: 27%;
+	margin-left: 35%;
 }
 
 label {
@@ -595,13 +605,15 @@ th:hover, tr:hover {
 
 .buttons {
     padding: 0.7em;
-    left: 35%;
+    left: 50%;
     border: none;
     background: white no-repeat center;
 }
 
+
 .buttons input {
     border: none;
+	background-color: inherit;
 }
 
 .buttons .edit {
@@ -624,6 +636,9 @@ th:hover, tr:hover {
     left: 5px;
     visibility: hidden;
     color: #48802c;
+}
+.delete {
+	width: 5px;
 }
 
 .delete:hover .deleteTip  {
@@ -654,6 +669,8 @@ a.skip {
 	width: 35px;
     border: none;
 }
+
+
 
 .activeLang {
 	color: #196532;

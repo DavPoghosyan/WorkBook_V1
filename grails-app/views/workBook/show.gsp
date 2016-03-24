@@ -4,7 +4,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'workBook.label')}"/>
-		<g:set var="id" value="${workBookInstance.id}"/>
+		<g:set var="id" value="${workBookInstance?.id}"/>
 		<title>
 		    <g:message code="default.show.label" args="[entityName]"/>
         </title>
@@ -32,33 +32,26 @@
                 </sec:ifAllGranted>
 			</ul>
 		</div>
-		<div id="show-workBook" class="content scaffold-show" role="main">
+		<div id="show-workBook" class="content" role="main">
+            <h1>
+                <g:message code="default.show.label" args="[entityName]" />
+            </h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">
                     ${flash.message}
                 </div>
 			</g:if>
 			<ol class="property-list workBook">
-                <g:if test="${workBookInstance?.firstName}">
-                    <li class="fieldcontain">
-                        <span id="firstName-label" class="property-label">
-                            <g:message code="workBook.firstName.label"/>
-                        </span>
-                        <span class="property-value" aria-labelledby="firstName-label">
-                            <g:fieldValue bean="${workBookInstance}" field="firstName"/>
-                        </span>
-                    </li>
-                </g:if>
-				<g:if test="${workBookInstance?.lastName}">
-                    <li class="fieldcontain">
-                        <span id="lastName-label" class="property-label">
-                            <g:message code="workBook.lastName.label"/>
-                        </span>
-                        <span class="property-value" aria-labelledby="lastName-label">
-                            <g:fieldValue bean="${workBookInstance}" field="lastName"/>
-                        </span>
-                    </li>
-                </g:if>
+                <li class="fieldcontain">
+                    <g:if test="${workBookInstance?.fullName}">
+                            <span id="fullName-label" class="property-label">
+                                <g:message code="workBook.fullName.label"/>
+                            </span>
+                            <span class="property-value" aria-labelledby="firstName-label">
+                                <g:fieldValue bean="${workBookInstance}" field="fullName"/>
+                            </span>
+                    </g:if>
+                </li>
                 <g:if test="${workBookInstance?.passportNumber}">
                     <li class="fieldcontain">
                         <span id="passportNumber-label" class="property-label">
@@ -79,16 +72,6 @@
                         </span>
                     </li>
                 </g:if>
-				<g:if test="${workBookInstance?.age}">
-				    <li class="fieldcontain">
-					    <span id="age-label" class="property-label">
-                            <g:message code="workBook.age.label"/>
-                        </span>
-						<span class="property-value" aria-labelledby="age-label">
-                            <g:fieldValue bean="${workBookInstance}" field="age"/>
-                        </span>
-				    </li>
-				</g:if>
 				<g:if test="${workBookInstance?.dateOfBirth}">
                     <li class="fieldcontain">
                         <span id="dateOfBirth-label" class="property-label">
@@ -99,6 +82,16 @@
                         </span>
                     </li>
 				</g:if>
+                <g:if test="${workBookInstance?.age}">
+                    <li class="fieldcontain">
+                        <span id="age-label" class="property-label">
+                            <g:message code="workBook.age.label"/>
+                        </span>
+                        <span class="property-value" aria-labelledby="age-label">
+                            <g:fieldValue bean="${workBookInstance}" field="age"/>
+                        </span>
+                    </li>
+                </g:if>
 				<g:if test="${workBookInstance?.workplaces}">
                     <li class="fieldcontain">
                         <span id="workplaces-label" class="property-label">
@@ -106,9 +99,12 @@
                         </span>
                         <g:each in="${workBookInstance.workplaces}" var="workplace">
                             <span class="property-value" aria-labelledby="workplaces-label">
-                                <g:link controller="workPlace" action="show" id="${workplace.id}">
+                                %{--<g:link controller="workPlace" action="show" id="${workplace.id}">
                                     ${workplace}
-                                </g:link>
+                                </g:link>--}%
+                                <g:remoteLink controller="workPlace" action="show" update="sub" id="${workplace.id}">
+                                    ${workplace}
+                                </g:remoteLink>
                             </span>
                         </g:each>
                     </li>
@@ -136,25 +132,28 @@
 						</g:jasperReport>
 					</span>
 				</li>
-			</ol>
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <fieldset class="buttons">
-                    <g:form url="[resource:workBookInstance, action:'delete']" method="DELETE" class="delete">
-                        <g:actionSubmitImage src="${resource(dir: 'images/icons', file: 'delete-icon.png')}" action="delete"
-                                        value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message')}');"/>
-                        <p class="deleteTip">
-                            <g:message code="default.button.delete.label"/>
-                        </p>
-                    </g:form>
-                    <g:link class="edit" action="edit" resource="${workBookInstance}">
-                        <g:img dir="images/icons" file="edit-icon.png"/>
-                        <p class="editTip">
-                            <g:message code="default.button.edit.label"/>
-                        </p>
-                    </g:link>
-                </fieldset>
-            </sec:ifAllGranted>
-		</div>
+            </ol>
+                <sec:ifAllGranted roles="ROLE_ADMIN">
+                    <fieldset class="buttons">
+                        <g:form url="[resource:workBookInstance, action:'delete']" method="DELETE" class="delete">
+                            <g:actionSubmitImage src="${resource(dir: 'images/icons', file: 'delete-icon.png')}" action="delete"
+                                                 value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message')}');"/>
+                            <p class="deleteTip">
+                                <g:message code="default.button.delete.label"/>
+                            </p>
+                        </g:form>
+                        <g:link class="edit" action="edit" resource="${workBookInstance}">
+                            <g:img dir="images/icons" file="edit-icon.png"/>
+                            <p class="editTip">
+                                <g:message code="default.button.edit.label"/>
+                            </p>
+                        </g:link>
+                    </fieldset>
+                </sec:ifAllGranted>
+        </div>
+            <div id="sub" class="content" role="sub">
+            </div>
+
 	</body>
 </html>

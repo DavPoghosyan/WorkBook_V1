@@ -28,7 +28,9 @@
 			</ul>
 		</div>
 		<div id="show-workPlace" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<h1>
+				<g:message code="default.show.label" args="[entityName]" />
+			</h1>
 			<g:if test="${flash.message}">
 			    <div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -92,17 +94,22 @@
                 </li>
 			</ol>
             <sec:ifAllGranted roles="ROLE_ADMIN">
-                <g:form url="[resource:workPlaceInstance, action:'delete']" method="DELETE">
-                    <fieldset class="buttons">
-                        <g:link class="edit" action="edit" resource="${workPlaceInstance}">
-                            <g:message code="default.button.edit.label" default="Edit" />
-                        </g:link>
-                        <g:actionSubmit class="delete" action="delete"
-                                        value="${message(code: 'default.button.delete.label')}"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message')}');"
-                        />
-                    </fieldset>
-                </g:form>
+                <fieldset class="buttons">
+                    <g:form url="[resource:workPlaceInstance, action:'delete']" method="DELETE" class="delete">
+                        <g:actionSubmitImage src="${resource(dir: 'images/icons', file: 'delete-icon.png')}" action="delete"
+                                             value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                             onclick="return confirm('${message(code: 'default.button.delete.confirm.message')}');"/>
+                        <p class="deleteTip">
+                            <g:message code="default.button.delete.label"/>
+                        </p>
+                    </g:form>
+                    <g:link class="edit" action="edit" resource="${workPlaceInstance}">
+                        <g:img dir="images/icons" file="edit-icon.png"/>
+                        <p class="editTip">
+                            <g:message code="default.button.edit.label"/>
+                        </p>
+                    </g:link>
+                </fieldset>
             </sec:ifAllGranted>
 		</div>
 	</body>
