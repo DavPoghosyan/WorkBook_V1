@@ -50,8 +50,12 @@
 				    <g:each in="${workBookInstanceList}" status="i" var="workBookInstance">
 					    <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						    <td>
-                                <g:link action="show" id="${workBookInstance.id}">
+                                <g:link action="show" id="${workBookInstance.id}" class="refToDetails">
                                     ${fieldValue(bean: workBookInstance, field: "fullName")}
+									<p class="title">
+                                        <g:img dir="images/icons" file="details-icon.png"/>
+										<g:message code="show.details.label"/>
+									</p>
                                 </g:link>
                             </td>
                             <td>${fieldValue(bean: workBookInstance, field: "passportNumber")}</td>

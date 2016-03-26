@@ -31,56 +31,63 @@ class WorkPlaceController {
 	@Secured(['ROLE_ADMIN'])
 	def create() {
 		println params
-		respond new WorkPlace(params)
+        WorkPlace workPlace = new WorkPlace(params)
+        render(template:'create', model:[workPlace: workPlace], status: OK)
 	}
 
 	@Secured(['ROLE_ADMIN'])
-	def save(WorkPlace workPlaceInstance) {
-		if (workPlaceInstance == null) {
+	def save(WorkPlace workPlace) {
+        if (workPlace == null) {
+            notFound()
+            return
+        }
+        workPlace.current = !workPlace?.endDate
+        workPlace.registeredAt = new Date()
+        workPlace.lastUpdatedAt = new Date()
+        workPlace.workbook.lastUpdatedAt = new Date()
+        additionalValidation(workPlace)
+        if (workPlace.hasErrors()) {
+            render (template:'create', model:[workPlace: workPlace])
+            return
+        }
+        workPlaceService.save(workPlace)
+        flash.message = message(
+                code: 'default.created.message',
+                args:  [WorkPlace.class.simpleName, workPlace.id])
+        render(template: 'showTemp', model:[workPlace: workPlace], status: OK)
+	}
+
+	@Secured(['ROLE_ADMIN'])
+	def edit(WorkPlace workPlace) {
+		render(template:'create', model:[workPlace: workPlace], status: OK)
+	}
+
+	@Secured(['ROLE_ADMIN'])
+	def update(WorkPlace workPlace) {
+		if (workPlace == null) {
 			notFound()
 			return
 		}
-		additionalValidation(workPlaceInstance)
-		if (workPlaceInstance.hasErrors()) {
-			respond(workPlaceInstance.errors, view: 'create',status: CONFLICT)
-			return
-		}
-		workPlaceService.save(workPlaceInstance)
-		flash.message = message(
-				code: 'default.created.message',
-				args:  [WorkPlace.class.simpleName, workPlaceInstance.id])
-		respond(workPlaceInstance, view:'show', status: OK)
-	}
-
-	@Secured(['ROLE_ADMIN'])
-	def edit(WorkPlace workPlaceInstance) {
-		respond workPlaceInstance
-	}
-
-	@Secured(['ROLE_ADMIN'])
-	def update(WorkPlace workPlaceInstance) {
-		if (workPlaceInstance == null) {
-			notFound()
-			return
-		}
-		workPlaceInstance.current = !workPlaceInstance?.endDate
-		if (!workPlaceInstance?.workbook){
+        workPlace.lastUpdatedAt = new Date()
+        workPlace.workbook.lastUpdatedAt = new Date()
+		workPlace.current = !workPlace?.endDate
+		if (!workPlace?.workbook){
 			def errorCode = 'domain.not.found'
 			def errorMessage = message(code: errorCode, args: [WorkBook.class.simpleName, params.workBookId])
 			def invalidField = 'workbook'
-			workPlaceInstance.errors.rejectValue(invalidField, errorCode, errorMessage)
+			workPlace.errors.rejectValue(invalidField, errorCode, errorMessage)
 		}
-		additionalValidation(workPlaceInstance)
-		if (workPlaceInstance.hasErrors()) {
-            respond(workPlaceInstance.errors, view: 'edit', status: CONFLICT)
-            workPlaceInstance.discard()
+		//additionalValidation(workPlace)
+		if (workPlace.hasErrors()) {
+            respond(workPlace.errors, view: 'edit', status: CONFLICT)
+            workPlace.discard()
             return
 		}
-		workPlaceService.save(workPlaceInstance)
+		workPlaceService.save(workPlace)
 		flash.message = message(
 				code: 'default.updated.message',
-				args:  [WorkPlace.class.simpleName, workPlaceInstance.id])
-		respond(workPlaceInstance, view:'show', status: OK)
+				args:  [WorkPlace.class.simpleName, workPlace.id])
+		respond(workPlace, view:'show', status: OK)
 	}
 
 	@Secured(['ROLE_ADMIN'])
@@ -93,7 +100,7 @@ class WorkPlaceController {
 		flash.message = message(
 				code: 'default.deleted.message',
 				args:  [WorkBook.class.simpleName, workPlaceInstance.id])
-		redirect action:'index', method:'GET'
+		render flash.message
 	}
 
 	@Secured(['ROLE_ADMIN'])
@@ -110,9 +117,9 @@ class WorkPlaceController {
             notFound()
             return
         }
-        additionalValidation(workPlace)
+       // additionalValidation(workPlace)
         if (workPlace.hasErrors()) {
-            render (template:'createTemp', model:[workPlaceInstance: workPlace])
+            render (template:'create', model:[workPlace: workPlace])
             return
         }
         workPlaceService.save(workPlace)
@@ -137,7 +144,7 @@ class WorkPlaceController {
 	void notFound() {
 		flash.message = message(
 				code: 'default.not.found.message',
-				args:  [WorkBook.class.simpleName, params.id])
+				args:  [WorkPlace.class.simpleName, params.id])
 		redirect action:'index', method:'GET', status: NOT_FOUND
 	}
 
@@ -145,10 +152,10 @@ class WorkPlaceController {
 		boolean isValid
 		def  errorCode
 		(isValid, errorCode) = workPlaceService.validate(workPlace)
-		if(!isValid) {
+    		if(!isValid) {
 			def invalidField
 			def errorMessage = message(code: errorCode)
-			invalidField = errorCode.tokenize('.').first()
+			invalidField = errorCode.tokenize('.')[1]
 			if(invalidField == 'range') {
 				invalidField = workPlace?.endDate ? 'endDate' : 'startDate'
 				errorMessage = message(code: errorCode, args: [workPlace.startDate, workPlace.endDate])

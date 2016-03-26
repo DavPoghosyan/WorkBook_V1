@@ -6,9 +6,9 @@ $().ready(function () {
     var now = new Date()
     $('#workPlace').validate({
         rules: {
-            workbook:{
+/*            workbook:{
                 required: true,
-            },
+            },*/
             company:{
                 required: true
             },
@@ -50,3 +50,31 @@ $().ready(function () {
 
 
 });
+
+function validateSearchForm() {
+    $('#workPlace').validate({
+        rules: {
+            /*            workbook:{
+             required: true,
+             },*/
+            company:{
+                required: true
+            },
+            country: {
+                required: true
+            },
+            startDate_month: {
+                max : now.getMonth()+1
+            },
+            startDate_day: {
+                max : now.getDate()
+            },
+            endDate_month: {
+                max : now.getMonth()+1
+            },
+            endDate_day: {
+                max : now.getDate()
+            }
+        }
+    });
+}

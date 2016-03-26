@@ -116,7 +116,7 @@ img {
 	color: #255b17;
 }
 
-.spinner {
+#spinner {
 	background: url(../images/spinner.gif) 50% 50% no-repeat transparent;
 	height: 16px;
 	width: 16px;
@@ -225,9 +225,9 @@ fieldset,
 
 #sub {
 	position: absolute;
-	width: 75%;
-	margin-top: -350px;
-	margin-left: 55%;
+	width: 95%;
+	top: 22%;
+	left: 52%;
 }
 
 
@@ -235,7 +235,7 @@ fieldset,
 .fieldcontain .property-label {
 	color: #666666;
 	/*text-align: right;*/
-	width: 25%;
+	width: 28%;
 }
 
 .fieldcontain .property-label {
@@ -605,7 +605,7 @@ th:hover, tr:hover {
 
 .buttons {
     padding: 0.7em;
-    left: 50%;
+    left: 40%;
     border: none;
     background: white no-repeat center;
 }
@@ -751,4 +751,21 @@ select.error, input.error{
 }
 .import {
     margin-left: 25px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.refToDetails .title {
+    position:relative;
+    height: 2px;
+    width: 20px;
+    margin-left: 40%;
+    border: groove;
+    visibility:hidden;
+}
+
+.refToDetails:hover .title {
+    visibility:visible;
 }

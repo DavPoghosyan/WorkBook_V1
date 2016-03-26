@@ -10,6 +10,8 @@ class WorkPlace {
 	boolean current
     Company company
     Country country
+	Date registeredAt
+	Date lastUpdatedAt
 
 	static belongsTo = [workbook: WorkBook]
 	
@@ -20,13 +22,15 @@ class WorkPlace {
 					val.minus(obj.workbook.dateOfBirth)/365.25 > 18
                 }
         )
-		endDate (blank: true, nullable: true/*,
+		endDate (blank: true, nullable: true,
 				validator: { val, obj ->
 					if(val){
 						(val.after(obj.startDate)) && val.before(obj.workbook.dateOfBirth.plus(65*365))
 					}
-				}*/
+				}
         )
+		registeredAt(nullable: true)
+		lastUpdatedAt(nullable: true)
 	}
 
 	def dateMessage = { Date date ->

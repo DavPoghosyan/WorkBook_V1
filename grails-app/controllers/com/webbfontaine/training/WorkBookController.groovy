@@ -23,11 +23,22 @@ class WorkBookController {
 
 	@Secured(['ROLE_USER','ROLE_ADMIN'])
     def show(WorkBook workBook) {
+        println params
 	    if (workBook == null) {
 		    notFound()
 		    return
 	    }
         respond workBook
+    }
+
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
+    def showTemp(WorkBook workBook) {
+        println params
+        if (workBook == null) {
+            notFound()
+            return
+        }
+        render(template: 'showWorkBook', model:[workBookInstance: workBook], status: OK)
     }
 
 	@Secured(['ROLE_ADMIN'])
@@ -51,6 +62,8 @@ class WorkBookController {
             return
         }
 	   // additionalValidation(workBook)
+        workBook.registeredAt = new Date()
+        workBook.lastUpdatedAt = new Date()
         if (workBook.hasErrors()) {
             respond(workBook.errors, view:'create', status: CONFLICT)
             return
@@ -81,6 +94,7 @@ class WorkBookController {
             workBook.discard()
             return
         }
+        workBook.lastUpdatedAt(new Date())
         workBookService.save(workBook)
         flash.message = message(
                 code: 'default.updated.message',
@@ -133,12 +147,13 @@ class WorkBookController {
         }
         int workPlacesCount = xmlObject?.workplaces.children().size()
         WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-        render (view: 'xmlImportViews/importView',
+        /*render (view: 'show',
                 model:[
                         workBookInstance: workBook,
                         id: xmlObject.@id?.text(),
                         workPlacesCount: workPlacesCount,
-                ])
+                ])*/
+        respond(workBook, view:'create', status: OK)
     }
 
     @Secured(['ROLE_ADMIN'])

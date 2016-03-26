@@ -92,6 +92,26 @@
                         </g:else>
                     </span>
                 </li>
+                <g:if test="${workPlaceInstance?.registeredAt}">
+                    <li class="fieldcontain">
+                        <span id="registeredAt-label" class="property-label">
+                            <g:message code="instance.registered.label"/>
+                        </span>
+                        <span class="property-value" aria-labelledby="registeredAt-label">
+                            <g:formatDate format="yyyy-MM-dd hh:mm:ss" date="${workBookInstance?.registeredAt}"/>
+                        </span>
+                    </li>
+                </g:if>
+                <g:if test="${workPlaceInstance?.lastUpdatedAt}">
+                    <li class="fieldcontain">
+                        <span id="lastUpdatedAt-label" class="property-label">
+                            <g:message code="instance.lastUpdatedAt.label"/>
+                        </span>
+                        <span class="property-value" aria-labelledby="lastUpdatedAt-label">
+                            <g:formatDate format="yyyy-MM-dd hh:mm:ss" date="${workBookInstance?.lastUpdatedAt}"/>
+                        </span>
+                    </li>
+                </g:if>
 			</ol>
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <fieldset class="buttons">

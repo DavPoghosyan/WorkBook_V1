@@ -1,12 +1,12 @@
 <%@ page import="com.webbfontaine.training.WorkPlace" %>
 <g:set var="entityName" value="${message(code: 'workPlace.label')}" />
-%{--<div id="show-workPlace" class="content scaffold-show" role="main">
-    <g:if test="${id}">
-        <g:set var="workPlace" value="${WorkPlace.get(id)}" />
-        <h1>
-            <g:message code="show.workPlace.label" default="Current"/>
-        </h1>
-    </g:if>--}%
+<g:javascript>
+    if($('.message').is(':visible')) {
+       alert("aa")
+        <g:remoteFunction controller='workBook' action='showTemp'
+                          update='show-workBook' params="['id': workPlace?.workbook?.id]"/>
+    }
+</g:javascript>
 <div id="show-workPlace" class="content" role="main">
     <h1>
         <g:message code="default.show.label" args="[entityName]" />
@@ -14,7 +14,7 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <ol class="property-list workPlace">
+    <ol class="property-list workPlace" >
         <g:if test="${workPlace?.company}">
             <li class="fieldcontain">
                 <span id="companyCode-label" class="property-label">
@@ -58,23 +58,48 @@
                 </g:else>
             </span>
         </li>
+        <g:if test="${workPlace?.registeredAt}">
+            <li class="fieldcontain">
+                <span id="registeredAt-label" class="property-label">
+                    <g:message code="instance.registered.label"/>
+                </span>
+                <span class="property-value" aria-labelledby="registeredAt-label">
+                    <g:formatDate format="yyyy-MM-dd hh:mm:ss" date="${workPlace?.registeredAt}"/>
+                </span>
+            </li>
+        </g:if>
+        <g:if test="${workPlace?.lastUpdatedAt}">
+            <li class="fieldcontain">
+                <span id="lastUpdatedAt-label" class="property-label">
+                    <g:message code="instance.lastUpdatedAt.label"/>
+                </span>
+                <span class="property-value" aria-labelledby="lastUpdatedAt-label">
+                    <g:formatDate format="yyyy-MM-dd hh:mm:ss" date="${workPlace?.lastUpdatedAt}"/>
+                </span>
+            </li>
+        </g:if>
     </ol>
 	    <sec:ifAllGranted roles="ROLE_ADMIN">
 		    <fieldset class="buttons">
-			    <g:form url="[resource:workPlaceInstance, action:'delete']" method="DELETE" class="delete">
+			    <g:formRemote  name="delete" update="sub"
+                               url="[resource:workPlace, action:'delete']" controller="workPlace" method="DELETE" class="delete">
 				    <g:actionSubmitImage src="${resource(dir: 'images/icons', file: 'delete-icon.png')}" action="delete"
 				                         value="${message(code: 'default.button.delete.label', default: 'Delete')}"
 				                         onclick="return confirm('${message(code: 'default.button.delete.confirm.message')}');"/>
 				    <p class="deleteTip">
 					    <g:message code="default.button.delete.label"/>
 				    </p>
-			    </g:form>
-			    <g:link class="edit" action="edit" resource="${workPlaceInstance}">
+			    </g:formRemote>
+			    <g:remoteLink class="edit" controller="workPlace" action="edit" update="sub" resource="${workPlace}">
 				    <g:img dir="images/icons" file="edit-icon.png"/>
 				    <p class="editTip">
 					    <g:message code="default.button.edit.label"/>
 				    </p>
-			    </g:link>
+			    </g:remoteLink>
+                %{--<g:remoteLink id="c" controller="workBook" action="showTemp" update="show-workBook" params="['id': workPlace?.workbook?.id]">
+                    ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
+                </g:remoteLink>--}%
 		    </fieldset>
 	    </sec:ifAllGranted>
+    </div>
 </div>

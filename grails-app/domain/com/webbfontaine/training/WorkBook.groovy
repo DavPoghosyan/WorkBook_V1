@@ -7,6 +7,8 @@ class WorkBook {
     String email
     String passportNumber
     Date dateOfBirth
+    Date registeredAt
+    Date lastUpdatedAt
 
     static transients = ['fullName','age']
 
@@ -18,6 +20,8 @@ class WorkBook {
         email(email: true, unique: true)
         passportNumber(unique: true, matches: '^[A-Z]{2}[0-9]{7}')
         age(min: 18, max: 65)
+        registeredAt(nullable: true)
+        lastUpdatedAt(nullable: true)
     }
 
     String getFullName(){

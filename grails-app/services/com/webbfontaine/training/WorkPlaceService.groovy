@@ -76,7 +76,7 @@ class WorkPlaceService {
             return [false, 'workPlace.startDate.invalid']
         }
 	    if(workPlace.current && isCurrentWorkPlaceExists(workPlace)) {
-		    return [false, 'workplace.current.exists']
+		    return [false, 'workPlace.current.exists']
 	    }
         if(!isAvailableDates(workPlace)){
             return [false, 'workPlace.range.invalid']

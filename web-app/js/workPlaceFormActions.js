@@ -21,6 +21,27 @@ $().ready(function(){
 	$("#endDate_day").change(function() {
 		$("checkBox").prop('checked', true)
 	})
+
+	$("body").mouseout(function(){
+       // alert($('.error').is(':visible'))
+		if($('.error').is(':visible')) {
+			$("#formSubmit").hide()
+		} else {
+			$("#formSubmit").show()
+		}
+
+	});
+
+   /* $('#formSubmit').on('show', function() {
+        alert('#foo is now visible');
+        $("#formSubmit").hide()
+    });
+
+    $('.error').on('hide', function() {
+        alert('#foo is hidden');
+        $("#formSubmit").show()
+    });*/
+
 })
 function createDialogCompany() {
 	$( "#company-info").dialog({
@@ -62,3 +83,15 @@ function createDialogCountry() {
         ]
     })
 }
+
+(function ($) {
+    $.each(['show', 'hide'], function (i, ev) {
+        var el = $.fn[ev];
+        $.fn[ev] = function () {
+            this.trigger(ev);
+            return el.apply(this, arguments);
+        };
+    });
+})(jQuery);
+
+

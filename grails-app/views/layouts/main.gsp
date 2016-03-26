@@ -41,5 +41,6 @@
                 <g:message code="footer.copyright.developer"/>
             </g:link>
         </div>
+		%{--<div id="spinner" class="spinner"><g:message code="log.out.label" default="Loading&hellip;"/></div>--}%
 	</body>
 </html>

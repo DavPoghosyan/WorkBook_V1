@@ -15,7 +15,6 @@
 	</label>
 	<g:textField name="firstName" maxlength="25" required="" value="${workBookInstance?.firstName}"/>
 </div>
-
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'lastName', 'error')} required">
 	<label for="lastName">
 		<g:message code="workBook.lastName.label"/>
@@ -23,15 +22,6 @@
 	</label>
 	<g:textField name="lastName" maxlength="25" required="" value="${workBookInstance?.lastName}"/>
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'passportNumber', 'error')} required">
-	<label for="passportNumber">
-		<g:message code="workBook.passportNumber.label"/>
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="passportNumber" maxlength="9" required="" value="${workBookInstance?.passportNumber}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'email', 'error')} required">
 	<label for="email">
 		<g:message code="workBook.email.label"/>
@@ -39,7 +29,13 @@
 	</label>
 	<g:textField type="email" name="email" required="" value="${workBookInstance?.email}"/>
 </div>
-
+<div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'passportNumber', 'error')} required">
+	<label for="passportNumber">
+		<g:message code="workBook.passportNumber.label"/>
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="passportNumber" maxlength="9" required="" value="${workBookInstance?.passportNumber}"/>
+</div>
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'dateOfBirth', 'error')} required">
 	<label for="dateOfBirth">
 		<g:message code="workBook.dateOfBirth.label"/>
