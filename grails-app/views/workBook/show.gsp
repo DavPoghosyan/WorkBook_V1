@@ -8,13 +8,6 @@
 		<title>
 		    <g:message code="default.show.label" args="[entityName]"/>
         </title>
-        <g:javascript>
-    if($('.message').is(':visible')) {
-       alert("aa")
-        <g:remoteFunction controller='workBook' action='showTemp'
-                          update='show-workBook' params="['id': workPlace?.workbook?.id]"/>
-            }
-        </g:javascript>
 	</head>
 	<body>
 		<div class="nav" role="navigation">
@@ -39,11 +32,11 @@
                 </sec:ifAllGranted>
 			</ul>
 		</div>
-		<div id="show-workBook" class="content" role="main">
+
+        <div id="show-workBook" class="content" role="main">
             <g:render template="showWorkBook"/>
         </div>
-
-            <div id="sub" class="content" role="sub">
-            </div>
+		<div id="sub" class="content sub" role="sub">
+		</div>
 	</body>
 </html>

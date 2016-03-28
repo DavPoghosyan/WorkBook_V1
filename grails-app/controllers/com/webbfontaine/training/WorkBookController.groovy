@@ -9,7 +9,7 @@ class WorkBookController {
     WorkBookService workBookService
     def xmlProcessingServiceProxy
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+  //  static allowedMethods = [remoteSave: "POST", update: "PUT", delete: "DELETE"]
 
 	/*@Secured(['ROLE_USER','ROLE_ADMIN'])
     def index() {
@@ -33,7 +33,6 @@ class WorkBookController {
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def showTemp(WorkBook workBook) {
-        println params
         if (workBook == null) {
             notFound()
             return
@@ -52,7 +51,7 @@ class WorkBookController {
 
     @Secured(['ROLE_ADMIN'])
     def edit(WorkBook workBook) {
-        respond workBook
+        render (template:'editTemp', model:[workBookInstance: workBook])
     }
 
 	@Secured(['ROLE_ADMIN'])
@@ -77,7 +76,8 @@ class WorkBookController {
 
 	@Secured(['ROLE_ADMIN'])
     def update(WorkBook workBook) {
-        workBook.lock()
+        println params
+        //workBook.lock()
         if (workBook == null) {
             notFound()
             return
@@ -89,7 +89,7 @@ class WorkBookController {
             workBook.errors.rejectValue('dateOfBirth', customErrorCode, errorMessage)
         }
         if (workBook.hasErrors()) {
-            respond(workBook.errors, view:'edit', Status: CONFLICT)
+            render (template: 'editTemp', model:[workBookInstance: workBook])
             workBook.workplaces*.discard()
             workBook.discard()
             return
@@ -99,7 +99,32 @@ class WorkBookController {
         flash.message = message(
                 code: 'default.updated.message',
                 args:  [WorkBook.class.simpleName, workBook.id])
-        respond(workBook, view:'show', status: OK)
+        render (template: 'showWorkBook', model:[workBookInstance: workBook])
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def remoteUpdate(WorkBook workBook) {
+        if (workBook == null) {
+            notFound()
+            return
+        }
+      //  additionalValidation(workBook)
+        if(workBookService.isInValidModifications(workBook)) {
+            def customErrorCode =  'workBook.age.conflict.workplaces'
+            def errorMessage = message(code: customErrorCode)
+            workBook.errors.rejectValue('dateOfBirth', customErrorCode, errorMessage)
+        }
+        if (workBook.hasErrors()) {
+            render (template: 'editTemp', model:[workBookInstance: workBook])
+            workBook.workplaces*.discard()
+            workBook.discard()
+            return
+        }
+        workBookService.save(workBook)
+        flash.message = message(
+                code: 'default.updated.message',
+                args:  [WorkBook.class.simpleName, workBook.id])
+        render(template: 'showWorkBook', model:[workBookInstance: workBook])
     }
 
 	@Secured(['ROLE_ADMIN'])
@@ -153,7 +178,13 @@ class WorkBookController {
                         id: xmlObject.@id?.text(),
                         workPlacesCount: workPlacesCount,
                 ])*/
-        respond(workBook, view:'create', status: OK)
+        workBook.validate()
+        if(workBookService.isInValidModifications(workBook)) {
+            def customErrorCode =  'workBook.age.conflict.workplaces'
+            def errorMessage = message(code: customErrorCode)
+            workBook.errors.rejectValue('dateOfBirth', customErrorCode, errorMessage)
+        }
+        render(model: [workBookInstance: workBook, workPlacesCount: workPlacesCount], view:'create', status: OK)
     }
 
     @Secured(['ROLE_ADMIN'])
@@ -169,44 +200,27 @@ class WorkBookController {
             notFound()
             return
         }
+        workBook.registeredAt = new Date()
+        workBook.lastUpdatedAt = new Date()
         additionalValidation(workBook)
         if (workBook.hasErrors()) {
             println workBook.errors
-            render (template:'xmlImportViews/createTemp', model:[workBookInstance: workBook])
+            //render (template:'xmlImportViews/createTemp', model:[workBookInstance: workBook])
+            render(view: 'create', model:[workBookInstance: workBook], status: OK)
             return
         }
         workBookService.save(workBook)
         flash.message = message(
                 code: 'default.created.message',
                 args:  [WorkBook.class.simpleName, workBook.id])
-        render(template: 'xmlImportViews/showTemp', model:[workBookDbInstance: workBook], status: OK)
-    }
-
-    @Secured(['ROLE_ADMIN'])
-    def remoteUpdate(WorkBook workBook) {
-        if (workBook == null) {
-            notFound()
-            return
-        }
-        additionalValidation(workBook)
-        if (workBook.hasErrors()) {
-            render (template: 'xmlImportViews/editTemp', model:[workBookInstance: workBook])
-            workBook.workplaces*.discard()
-            workBook.discard()
-            return
-        }
-        workBookService.save(workBook)
-        flash.message = message(
-                code: 'default.updated.message',
-                args:  [WorkBook.class.simpleName, workBook.id])
-        render(template: 'xmlImportViews/showTemp', model:[workBookDbInstance: workBook, flag: false])
+        render(template: 'showWorkBook', model:[workBookInstance: workBook], status: OK)
     }
 
     @Secured(['ROLE_ADMIN'])
 	def updateFromImport(){
 		def xmlObject = xmlProcessingServiceProxy.xmlObject
 		WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-        render (template: 'xmlImportViews/editTemp', model:[workBookInstance: workBook, flag: true])
+        render (template: 'editTemp', model:[workBookInstance: workBook, flag: true])
 	}
 
     void notFound() {

@@ -23,11 +23,10 @@ $().ready(function(){
 	})
 
 	$("body").mouseout(function(){
-       // alert($('.error').is(':visible'))
-		if($('.error').is(':visible')) {
-			$("#formSubmit").hide()
+		if($('.error').is(':visible') && !$('.errors').is(':visible')) {
+			$(".register").hide()
 		} else {
-			$("#formSubmit").show()
+			$(".register").show()
 		}
 
 	});

@@ -7,21 +7,21 @@ import grails.converters.XML
 class BootStrap {
 
     def init = { servletContext ->
+        XML.createNamedConfig("customRendererXML") {
+            XML.registerObjectMarshaller(WorkBook,{workBook, converter ->
+                converter.build {
+                    //id(workBook.id)
+                    firstName(workBook.firstName)
+                    lastName(workBook.lastName)
+                    email(workBook.email)
+                    passportNumber(workBook.passportNumber)
+                    age(workBook.age)
+                    dateOfBirth(workBook.dateOfBirth)
+                    workPlaces(workBook.workplaces)
+                }
+            })
+        }
 
-	    XML.createNamedConfig("shortDeep") {
-		    XML.registerObjectMarshaller(WorkBook,{workBook, converter ->
-			    converter.build {
-				    id(workBook.id)
-				    firstName(workBook.firstName)
-				    lastName(workBook.lastName)
-				    email(workBook.email)
-				    passportNumber(workBook.passportNumber)
-				    age(workBook.age)
-				    dateOfBirth(workBook.dateOfBirth)
-				    workPlaces(workBook.workplaces)
-			    }
-		    })
-	    }
       /*  def adminRole = SecRole.newInstance(authority: 'ROLE_ADMIN')
 	    adminRole.save(flush: true)
         def userRole = SecRole.newInstance(authority: 'ROLE_USER')

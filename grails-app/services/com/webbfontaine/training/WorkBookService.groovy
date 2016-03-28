@@ -11,7 +11,7 @@ class WorkBookService {
 
 	@Transactional
     void save(WorkBook workBook) {
-        workBook.save(flush: false)
+        workBook.save(flush: true)
     }
 
 	@Transactional
@@ -19,13 +19,15 @@ class WorkBookService {
 		workBook.delete(flush: true)
 	}
 
+    @Transactional(readOnly = true)
 	def isValidBirthDate(WorkBook workbook) {
         Date now = new Date()
         Date dateOfBirth = workbook.dateOfBirth
         int age = now.minus(dateOfBirth)/365.25
-        return age > 18
+        return age > 17
     }
 
+    @Transactional(readOnly = true)
     def isInValidModifications(WorkBook workBook) {
         Date dateOfBirth = workBook.dateOfBirth
         boolean flag
@@ -46,7 +48,6 @@ class WorkBookService {
         workBook.lastName = xmlObject.lastName.text() ?: "Unknown"
         workBook.email = xmlObject.email.text()
         workBook.passportNumber = xmlObject.passportNumber.text()
-        workBook.id =  xmlObject.@id?.text() ? xmlObject.@id.toLong() : 0
         workBook
     }
 

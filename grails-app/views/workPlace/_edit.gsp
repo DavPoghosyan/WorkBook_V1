@@ -5,7 +5,6 @@
 <g:set var="today" value="${new Date()}"/>
 <g:set var="minYear" value="${today[Calendar.YEAR]-100}"/>
 <g:set var="maxYear" value="${today[Calendar.YEAR]}"/>
-<g:set var="entityName" value="${message(code: 'workPlace.label')}" />
 <g:javascript src="libs/jquery.validate.js"/>
 <g:javascript src="workPlaceFormValidation.js"/>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -27,7 +26,7 @@
     }
 </g:javascript>
 <h1>
-	<g:message code="registration.form.label" args="[entityName]"/>
+	<g:message code="edit.label" args="[entityName]"/>
 </h1>
 <g:hasErrors bean="${workPlace}">
     <ul class="errors" role="alert">
@@ -40,19 +39,15 @@
         </g:eachError>
     </ul>
 </g:hasErrors>
-<g:formRemote id="workPlace" name="subForm" url="[resource:workPlace, controller:'workPlace', action:'save']" update="sub">
-            <fieldset class="form">
-            <div class="fieldcontain ${hasErrors(bean: workPlace, field: 'workbook', 'error')} required">
+<g:formRemote id="workPlace" name="update" url="[resource:workPlace, controller:'workPlace', action:'update']" update="sub">
+    <g:hiddenField name="version" value="${workPlace?.version}" />
+        <fieldset class="form">
+            <div class="fieldcontain ${hasErrors(bean: workPlace, field: 'workbook', 'error')} required" hidden>
                 <label for="workBook">
                     <g:message code="workBook.fullName.label"/>
                     <span class="required-indicator">*</span>
                 </label>
-                %{--<g:field id="workBook" name="workbook.id" type="number" value="${workPlace?.workbook?.id}"/>--}%
-                <g:select id="workbook" name="workbook.id"
-                          from="${WorkBook.list()}" optionKey="id"
-                          noSelection="['':'- Choose WorkBook Owner -']"
-                          value="${workPlace    ?.workbook?.id}" class="many-to-one required"
-                />
+                <g:field id="workBook" name="workbook.id" type="number" value="${workPlace?.workbook?.id}"/>
             </div>
             <div class="fieldcontain ${hasErrors(bean: workPlace, field: 'company', 'error')} required">
                 <label for="company">
@@ -102,12 +97,12 @@
 	</fieldset>
     <fieldset class="buttons register">
         <g:actionSubmitImage id="formSubmit" src="${resource(dir: 'images/icons', file: 'save-icon.png')}"
-                             action="save" name="register"
-                             value="${message(code: 'default.button.create.label')}"
+                             action="update" name="update"
+                             value="${message(code: 'default.button.update.label')}"
         />
 
-        <p class="registerTip">
-            <g:message code="register.label"/>
+        <p class="updateTip">
+            <g:message code="update.label"/>
         </p>
     </fieldset>
 </g:formRemote>

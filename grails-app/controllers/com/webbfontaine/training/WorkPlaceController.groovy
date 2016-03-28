@@ -11,7 +11,7 @@ class WorkPlaceController {
 	WorkPlaceService workPlaceService
     def xmlProcessingServiceProxy
 
-	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
+	static allowedMethods = [save: 'POST', update: 'POST', delete: 'DELETE']
 
 	@Secured(['ROLE_USER','ROLE_ADMIN'])
 	def index(Integer max) {
@@ -21,7 +21,7 @@ class WorkPlaceController {
 
 	@Secured(['ROLE_USER','ROLE_ADMIN'])
 	def show(WorkPlace workPlace) {
-		if (workPlace == null) {
+			if (workPlace == null) {
 			notFound()
 			return
 		}
@@ -36,7 +36,17 @@ class WorkPlaceController {
 	}
 
 	@Secured(['ROLE_ADMIN'])
+	def createFromImport(){
+		def xmlObject = xmlProcessingServiceProxy.xmlObject
+		int i = params.id.toInteger() - 1
+		WorkPlace workPlace = workPlaceService.xmlToDomain(xmlObject, i)
+		//render(template:'createTemp', model: [workPlaceInstance:  workPlace])
+		render(template:'create', model:[workPlace: workPlace], status: OK)
+	}
+
+	@Secured(['ROLE_ADMIN'])
 	def save(WorkPlace workPlace) {
+	        println params
         if (workPlace == null) {
             notFound()
             return
@@ -54,16 +64,17 @@ class WorkPlaceController {
         flash.message = message(
                 code: 'default.created.message',
                 args:  [WorkPlace.class.simpleName, workPlace.id])
-        render(template: 'showTemp', model:[workPlace: workPlace], status: OK)
+        render(template: 'showTemp', model:[workPlace: workPlace, workBookId: workPlace.workbook.id], status: OK)
 	}
 
 	@Secured(['ROLE_ADMIN'])
 	def edit(WorkPlace workPlace) {
-		render(template:'create', model:[workPlace: workPlace], status: OK)
+		render(template:'edit', model:[workPlace: workPlace])
 	}
 
 	@Secured(['ROLE_ADMIN'])
 	def update(WorkPlace workPlace) {
+        println params
 		if (workPlace == null) {
 			notFound()
 			return
@@ -77,9 +88,9 @@ class WorkPlaceController {
 			def invalidField = 'workbook'
 			workPlace.errors.rejectValue(invalidField, errorCode, errorMessage)
 		}
-		//additionalValidation(workPlace)
+		additionalValidation(workPlace)
 		if (workPlace.hasErrors()) {
-            respond(workPlace.errors, view: 'edit', status: CONFLICT)
+            render (template:'edit', model:[workPlace: workPlace])
             workPlace.discard()
             return
 		}
@@ -87,7 +98,7 @@ class WorkPlaceController {
 		flash.message = message(
 				code: 'default.updated.message',
 				args:  [WorkPlace.class.simpleName, workPlace.id])
-		respond(workPlace, view:'show', status: OK)
+        render(template: 'showTemp', model:[workPlace: workPlace], status: OK)
 	}
 
 	@Secured(['ROLE_ADMIN'])
@@ -96,20 +107,15 @@ class WorkPlaceController {
 			notFound()
 			return
 		}
+		long workBookId = workPlaceInstance.workbookId
 		workPlaceService.remove(workPlaceInstance)
 		flash.message = message(
 				code: 'default.deleted.message',
-				args:  [WorkBook.class.simpleName, workPlaceInstance.id])
-		render flash.message
+				args:  [WorkPlace.class.simpleName, workPlaceInstance.id])
+		render(template: 'showTemp',model: [workBookId: workBookId], status: OK)
 	}
 
-	@Secured(['ROLE_ADMIN'])
-    def createFromImport(){
-        def xmlObject = xmlProcessingServiceProxy.xmlObject
-        int i = params.id.toInteger() - 1
-        WorkPlace workPlace = workPlaceService.xmlToDomain(xmlObject, i)
-        render(template:'createTemp', model: [workPlaceInstance:  workPlace])
-    }
+
 
 	@Secured(['ROLE_ADMIN'])
     def remoteSave(WorkPlace workPlace) {

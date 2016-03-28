@@ -27,6 +27,20 @@
 				</li>
 			</ul>
 		</div>
+        <g:if test="${workBookInstance?.firstName}">
+            <div class="message" id="perm-message" role="status">
+                <g:message code="import.workbook.label" args="${workBookInstance}"/>
+
+                <g:if test="${workPlacesCount}">
+
+                    <g:message code="import.workplaces.label" args="${workPlacesCount}"/>
+                    <g:each in="${1..workPlacesCount}" var="i" >
+                        <g:remoteLink controller="workPlace" action="createFromImport" update="sub"  params="[id:i]">
+                            WorkPlace:${i}</g:remoteLink>
+                    </g:each>
+                </g:if>
+            </div>
+        </g:if>
 		<div id="create-workBook" class="content scaffold-create" role="main">
 			<h1>
                 <g:message code="registration.form.label" args="[entityName]"/>
@@ -52,7 +66,8 @@
                     </g:eachError>
                 </ul>
             </g:hasErrors>
-            <g:form id="workBook" url="[resource:workBookInstance, action:'save']" >
+            <g:formRemote id="workBook" name="subForm" url="[controller:'workBook', action:'remoteSave']"
+                          update="create-workBook">
                 <fieldset class="form">
                     <g:render template="form"/>
                 </fieldset>
@@ -64,7 +79,9 @@
                         <g:message code="register.label"/>
                     </p>
                 </fieldset>
-            </g:form>
+            </g:formRemote>
 		</div>
+    <div id="sub" class="content sub" role="sub">
+    </div>
 	</body>
 </html>

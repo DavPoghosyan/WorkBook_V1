@@ -2,7 +2,7 @@
 <h1>
     <g:message code="default.show.label" args="[entityName]" />
 </h1>
-<g:if test="${flash.message}">
+<g:if test="${flash.message?.contains(entityName)}">
     <div class="message" role="status">
         ${flash.message}
     </div>
@@ -81,7 +81,7 @@
                 %{--<g:link controller="workPlace" action="create" params="['workbook.id': workBookInstance?.id]">
                     ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
                 </g:link>--}%
-                <g:remoteLink controller="workPlace" action="create" update="sub" params="['workbook.id': workBookInstance?.id]">
+                <g:remoteLink id="addWorkPlace" controller="workPlace" action="create" update="sub" params="['workbook.id': workBookInstance?.id]">
                     ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
                 </g:remoteLink>
             </span>
@@ -134,11 +134,11 @@
                 <g:message code="default.button.delete.label"/>
             </p>
         </g:form>
-        <g:link class="edit" action="edit" resource="${workBookInstance}">
+        <g:remoteLink class="edit" action="edit" resource="${workBookInstance}" update="show-workBook">
             <g:img dir="images/icons" file="edit-icon.png"/>
             <p class="editTip">
                 <g:message code="default.button.edit.label"/>
             </p>
-        </g:link>
+        </g:remoteLink>
     </fieldset>
 </sec:ifAllGranted>

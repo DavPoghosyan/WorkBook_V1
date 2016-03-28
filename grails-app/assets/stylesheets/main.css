@@ -93,9 +93,10 @@ img {
 
 
 .content h1 {
-    margin-left: 10px;
+    margin-left: 25%;
 	padding: 0 0.25em;
 }
+
 
 .scaffold-list h1 {
 	border: none;
@@ -161,6 +162,9 @@ img {
 
 .create:hover .createTip  {
     visibility: visible;
+	position: relative;
+	top: -2px;
+	right: 10px;
 }
 
 .home:hover .homeTip  {
@@ -203,11 +207,11 @@ img {
 
 fieldset,
 .property-list {
-	margin-left: 5px;
+	border: ridge;
 	width: 45%;
+	left: 25%;
 	position: relative;
 	zoom: 1;
-	border: ridge;
     border-color: green;
 }
 
@@ -223,11 +227,9 @@ fieldset,
     /*margin-left: 10%;*/
 }
 
-#sub {
-	position: absolute;
-	width: 95%;
-	top: 22%;
-	left: 52%;
+.sub {
+	position: relative;
+	width: 100%;
 }
 
 
@@ -343,8 +345,12 @@ fieldset.embedded legend {
 .message {
 	font-size: 0.8em;
 	line-height: 2;
-	margin: 1em 2em;
+	margin: 1em 1em;
 	padding: 0.25em;
+}
+
+.errors {
+    width: 45%;
 }
 
 .message {
@@ -605,7 +611,7 @@ th:hover, tr:hover {
 
 .buttons {
     padding: 0.7em;
-    left: 40%;
+    left: 68%;
     border: none;
     background: white no-repeat center;
 }
@@ -622,7 +628,7 @@ th:hover, tr:hover {
     left: -50px;
 }
 
-.deleteTip, .registerTip {
+.deleteTip, .registerTip, .updateTip {
     position: absolute;
     top: 60px;
     left: 20px;
@@ -650,6 +656,10 @@ th:hover, tr:hover {
 }
 
 .register:hover .registerTip  {
+    visibility: visible;
+}
+
+.register:hover .updateTip  {
     visibility: visible;
 }
 
@@ -749,9 +759,7 @@ select.error, input.error{
     width: 45px;
     height: 45px;
 }
-.import {
-    margin-left: 25px;
-}
+
 
 a {
 	text-decoration: none;

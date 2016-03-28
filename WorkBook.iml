@@ -120,5 +120,6 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="WorkBook-grailsPlugins" />
+    <orderEntry type="library" name="grails-2.4.5 (2)" level="application" />
   </component>
 </module>

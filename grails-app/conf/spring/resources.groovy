@@ -11,8 +11,8 @@ beans = {
     }
 
     // Register XML renderer for WorkBook resource.
-    userDetailsRenderer(XmlRenderer, WorkBook) {
-        mimeTypes = [new MimeType('application/vnd.com.webbfontaine.training.shortDeep+xml', 'shortDeep')]
-        namedConfiguration = 'shortDeep'
+      userDetailsRenderer(XmlRenderer, WorkBook) {
+        mimeTypes = [new MimeType('application/vnd.com.webbfontaine.training.customRendererXML+xml', 'customRendererXML')]
+        namedConfiguration = 'customRendererXML'
     }
 }

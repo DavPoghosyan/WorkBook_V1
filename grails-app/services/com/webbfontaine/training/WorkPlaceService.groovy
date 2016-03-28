@@ -97,7 +97,7 @@ class WorkPlaceService {
         workPlace.current = xmlObject.workplaces.workPlace[i].current?.toBoolean()
         workPlace.company = Company.get(xmlObject.workplaces.workPlace[i].company.@id.toLong())
         workPlace.country = Country.get(xmlObject.workplaces.workPlace[i].country.@id.toLong())
-        workPlace.workbook = xmlObject.@id?.text() ? WorkBook.get(xmlObject.@id.toLong()) : null
+       // workPlace.workbook = xmlObject.@id?.text() ? WorkBook.get(xmlObject.@id.toLong()) : null
         workPlace
 	}
 
