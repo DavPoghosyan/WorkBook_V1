@@ -343,14 +343,18 @@ fieldset.embedded legend {
 
 .errors,
 .message {
+    width: 45%;
 	font-size: 0.8em;
 	line-height: 2;
+    top: 12%;
+    left: 25%;
 	margin: 1em 1em;
 	padding: 0.25em;
+    position: relative;
 }
 
-.errors {
-    width: 45%;
+.subm {
+    top: -20%;
 }
 
 .message {
@@ -616,6 +620,9 @@ th:hover, tr:hover {
     background: white no-repeat center;
 }
 
+.register {
+    left: 66%;
+}
 
 .buttons input {
     border: none;
@@ -625,7 +632,7 @@ th:hover, tr:hover {
 .buttons .edit {
     position: absolute;
     top: 15px;
-    left: -50px;
+    left: -45px;
 }
 
 .deleteTip, .registerTip, .updateTip {
@@ -643,9 +650,7 @@ th:hover, tr:hover {
     visibility: hidden;
     color: #48802c;
 }
-.delete {
-	width: 5px;
-}
+
 
 .delete:hover .deleteTip  {
     visibility: visible;
@@ -740,7 +745,7 @@ ul#locale-selector li.active a{
 }
 
 
-label.error {
+label.error, label.clientSideError {
 	color: red;
 	margin-left: 8px;
 	font-size: small;
@@ -748,7 +753,7 @@ label.error {
 	width: auto;
 }
 
-select.error, input.error{
+select.error, input.error, select.clientSideError, input.clientSideError{
     border: 2px solid red;
 }
 

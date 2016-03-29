@@ -47,7 +47,7 @@
                     <g:render template="xmlImportViews/showTemp"/>
                 </div>
 				<div>
-		            <g:render template="xmlImportViews/editTemp"/>
+		            <g:render  template="xmlImportViews/editTemp"/>
 	            </div>
             </g:if>
             <g:else>

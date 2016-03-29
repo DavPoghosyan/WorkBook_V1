@@ -19,12 +19,16 @@
     </ul>
 </g:hasErrors>
 <g:formRemote id="workBook" name="subForm" url="[controller:'workBook', action:'remoteSave']"
-              update="main-content">
+              update="create-workBook">
     <fieldset class="form">
         <g:render template="form"/>
     </fieldset>
-    <fieldset class="buttons">
-        <g:submitButton name="create" class="save"
-                        value="${message(code: 'default.button.create.label')}" />
+    <fieldset class="buttons register">
+        <g:actionSubmitImage src="${resource(dir: 'images/icons', file: 'save-icon.png')}"
+                             action="save" name="register"
+                             value="${message(code: 'default.button.create.label')}"/>
+        <p class="registerTip">
+            <g:message code="register.label"/>
+        </p>
     </fieldset>
 </g:formRemote>

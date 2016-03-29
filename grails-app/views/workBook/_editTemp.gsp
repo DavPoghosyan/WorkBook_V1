@@ -1,6 +1,7 @@
+<g:set var="entityName" value="${message(code: 'workBook.label')}"/>
 <div id="edit-workBook" class="content scaffold-edit" role="main">
     <h1>
-        <g:message code="update.from.xml"/>
+        <g:message code="edit.label" args="[entityName]"/>
     </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">
@@ -24,8 +25,14 @@
         <fieldset class="form">
             <g:render template="form"/>
         </fieldset>
-        <fieldset class="buttons">
-            <g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label')}" />
-        </fieldset>
+        <fieldset class="buttons register">
+        <g:actionSubmitImage id="formSubmit" src="${resource(dir: 'images/icons', file: 'save-icon.png')}"
+                             action="update" name="update"
+                             value="${message(code: 'default.button.update.label')}"
+        />
+        <p class="updateTip">
+            <g:message code="update.label"/>
+        </p>
+    </fieldset>
     </g:formRemote>
 </div>

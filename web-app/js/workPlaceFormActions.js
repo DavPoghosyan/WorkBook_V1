@@ -22,14 +22,14 @@ $().ready(function(){
 		$("checkBox").prop('checked', true)
 	})
 
-	$("body").mouseout(function(){
-		if($('.error').is(':visible') && !$('.errors').is(':visible')) {
-			$(".register").hide()
-		} else {
-			$(".register").show()
-		}
+    $("body").mouseout(function(){
+        if($('.clientSideError').is(':visible')) {
+            $(".register").hide()
+        } else {
+            $(".register").show()
+        }
 
-	});
+    });
 
    /* $('#formSubmit').on('show', function() {
         alert('#foo is now visible');

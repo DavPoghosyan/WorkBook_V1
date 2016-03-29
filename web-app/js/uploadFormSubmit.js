@@ -7,5 +7,12 @@ $().ready(function(){
 		$("#import").click()
 	})
 
+	$("body").mouseout(function(){
+		if($('.clientSideError').is(':visible')) {
+			$(".register").hide()
+		} else {
+			$(".register").show()
+		}
 
+	});
 })

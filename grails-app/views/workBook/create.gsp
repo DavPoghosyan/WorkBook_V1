@@ -27,20 +27,6 @@
 				</li>
 			</ul>
 		</div>
-        <g:if test="${workBookInstance?.firstName}">
-            <div class="message" id="perm-message" role="status">
-                <g:message code="import.workbook.label" args="${workBookInstance}"/>
-
-                <g:if test="${workPlacesCount}">
-
-                    <g:message code="import.workplaces.label" args="${workPlacesCount}"/>
-                    <g:each in="${1..workPlacesCount}" var="i" >
-                        <g:remoteLink controller="workPlace" action="createFromImport" update="sub"  params="[id:i]">
-                            WorkPlace:${i}</g:remoteLink>
-                    </g:each>
-                </g:if>
-            </div>
-        </g:if>
 		<div id="create-workBook" class="content scaffold-create" role="main">
 			<h1>
                 <g:message code="registration.form.label" args="[entityName]"/>
@@ -57,7 +43,7 @@
             </g:if>
 			<g:hasErrors bean="${workBookInstance}">
                 <ul class="errors" role="alert">
-                    <g:eachError bean="${workBookInstance}" var="error">
+                        <g:eachError bean="${workBookInstance}" var="error">
                         <li <g:if test="${error in org.springframework.validation.FieldError}">
                             data-field-id="${error.field}"
                         </g:if>>
@@ -81,6 +67,16 @@
                 </fieldset>
             </g:formRemote>
 		</div>
+        <g:if test="${workPlacesCount}">
+            <div class="message" id="perm-message" role="status">
+                <g:message code="import.workplaces.label" args="${workPlacesCount}"/>
+                <g:each in="${1..workPlacesCount}" var="i" >
+                    <g:remoteLink controller="workPlace" action="createFromImport" update="sub"  params="[id:i]">
+                        WorkPlace:${i}</g:remoteLink>
+                </g:each>
+            </div>
+        </g:if>
+
     <div id="sub" class="content sub" role="sub">
     </div>
 	</body>

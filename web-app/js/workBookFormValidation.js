@@ -4,6 +4,7 @@
 $().ready(function () {
     var now = new Date()
     $('#workBook').validate({
+        errorClass: 'clientSideError',
         rules: {
             firstName:{
                 minlength: 3

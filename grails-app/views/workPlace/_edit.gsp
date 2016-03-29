@@ -25,9 +25,6 @@
         }
     }
 </g:javascript>
-<h1>
-	<g:message code="edit.label" args="[entityName]"/>
-</h1>
 <g:hasErrors bean="${workPlace}">
     <ul class="errors" role="alert">
         <g:eachError bean="${workPlace}" var="error">
@@ -39,6 +36,9 @@
         </g:eachError>
     </ul>
 </g:hasErrors>
+<h1>
+    <g:message code="edit.label" args="[entityName]"/>
+</h1>
 <g:formRemote id="workPlace" name="update" url="[resource:workPlace, controller:'workPlace', action:'update']" update="sub">
     <g:hiddenField name="version" value="${workPlace?.version}" />
         <fieldset class="form">

@@ -8,6 +8,7 @@
 		<title>
 		    <g:message code="default.show.label" args="[entityName]"/>
         </title>
+        <g:javascript src="scroll.js"/>
 	</head>
 	<body>
 		<div class="nav" role="navigation">

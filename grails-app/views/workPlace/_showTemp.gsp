@@ -6,10 +6,10 @@
                           update='show-workBook' params="['id': workBookId ?: workPlace.workbookId]"/>
     }
 </g:javascript>
+<g:if test="${flash.message}">
+    <div class="message subm" role="status">${flash.message}</div>
+</g:if>
 <div id="show-workPlace" class="content" role="main">
-	<g:if test="${flash.message}">
-		<div class="message" role="status">${flash.message}</div>
-	</g:if>
 	<g:if test="${workPlace}">
 	    <h1>
 	        <g:message code="default.show.label" args="[entityName]" />

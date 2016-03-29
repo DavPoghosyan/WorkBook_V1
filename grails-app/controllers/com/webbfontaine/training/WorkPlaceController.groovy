@@ -32,6 +32,7 @@ class WorkPlaceController {
 	def create() {
 		println params
         WorkPlace workPlace = new WorkPlace(params)
+
         render(template:'create', model:[workPlace: workPlace], status: OK)
 	}
 
@@ -39,7 +40,12 @@ class WorkPlaceController {
 	def createFromImport(){
 		def xmlObject = xmlProcessingServiceProxy.xmlObject
 		int i = params.id.toInteger() - 1
+
 		WorkPlace workPlace = workPlaceService.xmlToDomain(xmlObject, i)
+        println session.workBookId
+        if(session.workBookId) {
+            workPlace.workbook = WorkBook.get(session.workBookId)
+        }
 		//render(template:'createTemp', model: [workPlaceInstance:  workPlace])
 		render(template:'create', model:[workPlace: workPlace], status: OK)
 	}

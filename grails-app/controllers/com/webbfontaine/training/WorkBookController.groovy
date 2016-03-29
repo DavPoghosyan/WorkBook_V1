@@ -152,7 +152,7 @@ class WorkBookController {
 
     @Secured(['ROLE_ADMIN'])
     def uploadXmlFile() {
-        def flyFile = request?.getFile('flyFile')
+            def flyFile = request?.getFile('flyFile')
         if(flyFile.empty){
 	        flash.error = 'file not chosen'
             respond(flash.error, view:'create', status: CONFLICT)
@@ -196,6 +196,7 @@ class WorkBookController {
 
     @Secured(['ROLE_ADMIN'])
     def remoteSave(WorkBook workBook) {
+        println workBook.errors
         if (workBook == null) {
             notFound()
             return
@@ -205,11 +206,12 @@ class WorkBookController {
         additionalValidation(workBook)
         if (workBook.hasErrors()) {
             println workBook.errors
-            //render (template:'xmlImportViews/createTemp', model:[workBookInstance: workBook])
-            render(view: 'create', model:[workBookInstance: workBook], status: OK)
+            render (template:'xmlImportViews/createTemp', model:[workBookInstance: workBook])
+           // render(view:'create', model: [workBookInstance:  workBook])
             return
         }
         workBookService.save(workBook)
+        session['workBookId'] = workBook.id
         flash.message = message(
                 code: 'default.created.message',
                 args:  [WorkBook.class.simpleName, workBook.id])
