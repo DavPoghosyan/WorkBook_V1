@@ -86,17 +86,19 @@ class WorkPlaceService {
 
 	def xmlToDomain(def xmlObject, def i) {
 		WorkPlace workPlace = new WorkPlace()
-		String startDate =  xmlObject?.workplaces.workPlace[i].startDate.text() - ~/\b\w{3}\b/
-		String endDate =  xmlObject?.workplaces.workPlace[i].endDate.text() - ~/\b\w{3}\b/
+		String startDate =  xmlObject?.workPlaces.workPlace[i].startDate.text() - ~/\b\w{3}\b/
+		String endDate =  xmlObject?.workPlaces.workPlace[i].endDate.text() - ~/\b\w{3}\b/
 		if(startDate){
             workPlace.startDate = Date.parse('yyyy-MM-dd',startDate.trim())
 		}
         if(endDate){
             workPlace.endDate = Date.parse('yyyy-MM-dd',endDate.trim())
         }
-        workPlace.current = xmlObject.workplaces.workPlace[i].current?.toBoolean()
-        workPlace.company = Company.get(xmlObject.workplaces.workPlace[i].company.@id.toLong())
-        workPlace.country = Country.get(xmlObject.workplaces.workPlace[i].country.@id.toLong())
+        workPlace.current = xmlObject.workPlaces.workPlace[i].current?.toBoolean()
+		Long companyId = xmlObject.workPlaces.workPlace[i].company.@id.toLong()
+		Long countryId = xmlObject.workPlaces.workPlace[i].country.@id.toLong()
+        workPlace.company = Company.get(companyId)
+        workPlace.country = Country.get(countryId)
        // workPlace.workbook = xmlObject.@id?.text() ? WorkBook.get(xmlObject.@id.toLong()) : null
         workPlace
 	}

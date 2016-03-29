@@ -16,8 +16,8 @@ class WorkPlaceControllerSpec extends Specification {
 
 	void "Test the index action returns the correct model"() {
 
-		when: "The index action is executed"
-		controller.index()
+		when: "The list action is executed"
+		controller.list()
 
 		then: "The model is correct"
 		!model.workPlaceInstanceList
@@ -97,7 +97,7 @@ class WorkPlaceControllerSpec extends Specification {
 		controller.update(null)
 
 		then: "A 404 error is returned"
-		response.redirectedUrl == '/workPlace/index'
+		response.redirectedUrl == '/workPlace/list'
 		flash.message != null
 
 
@@ -129,7 +129,7 @@ class WorkPlaceControllerSpec extends Specification {
 		controller.delete(null)
 
 		then: "A 404 is returned"
-		response.redirectedUrl == '/workPlace/index'
+		response.redirectedUrl == '/workPlace/list'
 		flash.message != null
 
 		when: "A domain instance is created"
@@ -145,7 +145,7 @@ class WorkPlaceControllerSpec extends Specification {
 
 		then: "The instance is deleted"
 		WorkPlace.count() == 0
-		response.redirectedUrl == '/workPlace/index'
+		response.redirectedUrl == '/workPlace/list'
 		flash.message != null
 	}
 }

@@ -33,7 +33,6 @@
                 </sec:ifAllGranted>
 			</ul>
 		</div>
-
         <div id="show-workBook" class="content" role="main">
             <g:render template="showWorkBook"/>
         </div>

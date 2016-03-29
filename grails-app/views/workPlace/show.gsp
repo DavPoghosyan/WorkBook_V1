@@ -15,7 +15,7 @@
                     </a>
                 </li>
 				<li>
-                    <g:link class="list" action="index">
+                    <g:link class="list" action="list">
                         <g:message code="default.list.label" args="[entityName]" />
                     </g:link>
                 </li>

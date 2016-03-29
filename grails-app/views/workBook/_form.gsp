@@ -1,10 +1,18 @@
 <%@ page import="org.springframework.web.servlet.support.RequestContextUtils; com.webbfontaine.training.WorkBook" %>
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery-ui.css')}" type="text/css">
 <g:javascript src="libs/jquery.validate.js"/>
 <g:javascript src="libs/jquery.localisation.js"/>
 <g:javascript src="localisation/messages-${RequestContextUtils.getLocale(request).getLanguage()}.js"/>
 <g:javascript src="workBookFormValidation.js"/>
 <g:javascript src="ageCalculate.js"/>
+<g:javascript src="libs/jquery-ui.js"/>
+
+<g:javascript>
+	$( "#datepicker" ).datepicker({
+		inline: true
+	});
+</g:javascript>
 <g:set var="today" value="${new Date()}"/>
 <g:set var="minYear" value="${today[Calendar.YEAR]-65}"/>
 <g:set var="maxYear" value="${today[Calendar.YEAR]-18}"/>
@@ -44,16 +52,5 @@
     <g:datePicker class="dateOfBirth" name="dateOfBirth" precision="day"
                   value="${workBookInstance?.dateOfBirth}" years="${maxYear..minYear}"
     />
+	%{--<g:textField id="datepicker" name="dateOfBirth" />--}%
 </div>
-
-%{--
-<div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'age', 'error')}">
-    <label for="age">
-        <g:message code="workBook.age.label"/>
-        <span class="common-indicator">:</span>
-    </label>
-    <g:field name="age" type="number" value="${workBookInstance?.age}"
-             min="18" max="65" readonly="true"/>
-</div>
---}%
-

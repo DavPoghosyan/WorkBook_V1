@@ -27,46 +27,9 @@
 				</li>
 			</ul>
 		</div>
-		<div id="create-workBook" class="content scaffold-create" role="main">
-			<h1>
-                <g:message code="registration.form.label" args="[entityName]"/>
-            </h1>
-			<g:if test="${flash.message}">
-			    <div class="message" role="status">
-                    ${flash.message}
-                </div>
-			</g:if>
-            <g:if test="${flash.error}">
-                <div class="errors" role="alert">
-	                <g:message error="${flash.error}"/>
-                </div>
-            </g:if>
-			<g:hasErrors bean="${workBookInstance}">
-                <ul class="errors" role="alert">
-                        <g:eachError bean="${workBookInstance}" var="error">
-                        <li <g:if test="${error in org.springframework.validation.FieldError}">
-                            data-field-id="${error.field}"
-                        </g:if>>
-                            <g:message error="${error}"/>
-                        </li>
-                    </g:eachError>
-                </ul>
-            </g:hasErrors>
-            <g:formRemote id="workBook" name="subForm" url="[controller:'workBook', action:'remoteSave']"
-                          update="create-workBook">
-                <fieldset class="form">
-                    <g:render template="form"/>
-                </fieldset>
-                <fieldset class="buttons register">
-                    <g:actionSubmitImage src="${resource(dir: 'images/icons', file: 'save-icon.png')}"
-                                         action="save" name="register"
-                                         value="${message(code: 'default.button.create.label')}"/>
-                    <p class="registerTip">
-                        <g:message code="register.label"/>
-                    </p>
-                </fieldset>
-            </g:formRemote>
-		</div>
+        <div id="create-workBook" class="content scaffold-create" role="main">
+            <g:render template="createTemp"/>
+        </div>
         <g:if test="${workPlacesCount}">
             <div class="message" id="perm-message" role="status">
                 <g:message code="import.workplaces.label" args="${workPlacesCount}"/>

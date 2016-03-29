@@ -156,7 +156,7 @@
 					<subreportParameterExpression><![CDATA[$P{id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["/home/davit/IdeaProjects/Training/WorkBook/web-app/reports/workPlaces.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["/home/davit/WBBF/WorkBook_V1/web-app/reports/workPlaces.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

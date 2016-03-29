@@ -12,7 +12,7 @@ class WorkBook {
 
     static transients = ['fullName','age']
 
-    static hasMany = [workplaces: WorkPlace]
+    static hasMany = [workPlaces: WorkPlace]
 
     static constraints = {
 	    firstName(size: 3..25)

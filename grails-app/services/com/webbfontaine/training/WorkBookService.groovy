@@ -4,10 +4,10 @@ import org.springframework.transaction.annotation.Transactional
 
 class WorkBookService {
 
-//    @Transactional(readOnly = true)
-//	def listWorkBooks(def params){
-//        WorkBook.list(params)
-//	}
+   @Transactional(readOnly = true)
+	def listWorkBooks(int max){
+        WorkBook.list(max : max)
+	}
 
 	@Transactional
     void save(WorkBook workBook) {
@@ -31,7 +31,7 @@ class WorkBookService {
     def isInValidModifications(WorkBook workBook) {
         Date dateOfBirth = workBook.dateOfBirth
         boolean flag
-        workBook.workplaces.any {
+        workBook.workPlaces.any {
             flag = it.startDate.minus(dateOfBirth)/365.25 < 18
         }
         return flag

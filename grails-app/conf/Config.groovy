@@ -120,15 +120,15 @@ log4j.main = {
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.active = true
 grails.plugin.springsecurity.logout.postOnly = false
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/WorkBook/index'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/WorkBook/list'
 grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.webbfontaine.training.SecUser'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.webbfontaine.training.SecUserSecRole'
 grails.plugin.springsecurity.authority.className = 'com.webbfontaine.training.SecRole'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                ['ROLE_USER','ROLE_ADMIN'],
-	'/index':           ['ROLE_USER','ROLE_ADMIN'],
-	'/index.gsp':       ['ROLE_USER','ROLE_ADMIN'],
+	'/list':           ['ROLE_USER','ROLE_ADMIN'],
+	//'/list.gsp:       ['ROLE_USER','ROLE_ADMIN'],
 	'/assets/**':       ['ROLE_USER','ROLE_ADMIN'],
 	'/**/js/**':        ['ROLE_USER','ROLE_ADMIN'],
 	'/**/css/**':       ['ROLE_USER','ROLE_ADMIN'],

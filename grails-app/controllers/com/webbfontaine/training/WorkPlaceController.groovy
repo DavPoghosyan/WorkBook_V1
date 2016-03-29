@@ -14,7 +14,7 @@ class WorkPlaceController {
 	static allowedMethods = [save: 'POST', update: 'POST', delete: 'DELETE']
 
 	@Secured(['ROLE_USER','ROLE_ADMIN'])
-	def index(Integer max) {
+	def list(Integer max) {
 		params.max = max ?: 10
 		respond WorkPlace.list(params), model: [workPlaceInstanceCount: WorkPlace.count()]
 	}
@@ -25,14 +25,12 @@ class WorkPlaceController {
 			notFound()
 			return
 		}
-		render(template: 'showTemp', model:[workPlace: workPlace], status: OK)
+		render(template: 'showWorkPlace', model:[workPlace: workPlace], status: OK)
 	}
 
 	@Secured(['ROLE_ADMIN'])
 	def create() {
-		println params
         WorkPlace workPlace = new WorkPlace(params)
-
         render(template:'create', model:[workPlace: workPlace], status: OK)
 	}
 
@@ -40,19 +38,16 @@ class WorkPlaceController {
 	def createFromImport(){
 		def xmlObject = xmlProcessingServiceProxy.xmlObject
 		int i = params.id.toInteger() - 1
-
 		WorkPlace workPlace = workPlaceService.xmlToDomain(xmlObject, i)
         println session.workBookId
         if(session.workBookId) {
             workPlace.workbook = WorkBook.get(session.workBookId)
         }
-		//render(template:'createTemp', model: [workPlaceInstance:  workPlace])
 		render(template:'create', model:[workPlace: workPlace], status: OK)
 	}
 
 	@Secured(['ROLE_ADMIN'])
 	def save(WorkPlace workPlace) {
-	        println params
         if (workPlace == null) {
             notFound()
             return
@@ -70,17 +65,16 @@ class WorkPlaceController {
         flash.message = message(
                 code: 'default.created.message',
                 args:  [WorkPlace.class.simpleName, workPlace.id])
-        render(template: 'showTemp', model:[workPlace: workPlace, workBookId: workPlace.workbook.id], status: OK)
+        render(template: 'showWorkPlace', model:[workPlace: workPlace, workBookId: workPlace.workbook.id], status: OK)
 	}
 
 	@Secured(['ROLE_ADMIN'])
 	def edit(WorkPlace workPlace) {
-		render(template:'edit', model:[workPlace: workPlace])
+				render(template:'edit', model:[workPlace: workPlace])
 	}
 
 	@Secured(['ROLE_ADMIN'])
 	def update(WorkPlace workPlace) {
-        println params
 		if (workPlace == null) {
 			notFound()
 			return
@@ -104,7 +98,7 @@ class WorkPlaceController {
 		flash.message = message(
 				code: 'default.updated.message',
 				args:  [WorkPlace.class.simpleName, workPlace.id])
-        render(template: 'showTemp', model:[workPlace: workPlace], status: OK)
+        render(template: 'showWorkPlace', model:[workPlace: workPlace], status: OK)
 	}
 
 	@Secured(['ROLE_ADMIN'])
@@ -118,28 +112,9 @@ class WorkPlaceController {
 		flash.message = message(
 				code: 'default.deleted.message',
 				args:  [WorkPlace.class.simpleName, workPlaceInstance.id])
-		render(template: 'showTemp',model: [workBookId: workBookId], status: OK)
+		render(template: 'showWorkPlace',model: [workBookId: workBookId], status: OK)
 	}
 
-
-
-	@Secured(['ROLE_ADMIN'])
-    def remoteSave(WorkPlace workPlace) {
-        if (workPlace == null) {
-            notFound()
-            return
-        }
-       // additionalValidation(workPlace)
-        if (workPlace.hasErrors()) {
-            render (template:'create', model:[workPlace: workPlace])
-            return
-        }
-        workPlaceService.save(workPlace)
-        flash.message = message(
-                code: 'default.created.message',
-                args:  [WorkPlace.class.simpleName, workPlace.id])
-        render(template: 'showTemp', model:[workPlaceInstance: workPlace], status: OK)
-    }
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def retrieveCompanyData(long id) {
@@ -149,7 +124,7 @@ class WorkPlaceController {
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def retrieveCountryData(long id) {
-        def country =  Country.get(id)
+	    def country =  Country.get(id)
         render(template:"countryDialog", model:[country: country])
     }
 
@@ -157,7 +132,7 @@ class WorkPlaceController {
 		flash.message = message(
 				code: 'default.not.found.message',
 				args:  [WorkPlace.class.simpleName, params.id])
-		redirect action:'index', method:'GET', status: NOT_FOUND
+		redirect action:'list', method:'GET', status: NOT_FOUND
 	}
 
 	void additionalValidation(WorkPlace workPlace) {

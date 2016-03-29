@@ -17,8 +17,8 @@ class WorkBookControllerSpec extends Specification {
 
     void "Test the index action returns the correct model"() {
 
-        when:"The index action is executed"
-            controller.index()
+        when:"The list action is executed"
+            controller.list()
 
         then:"The model is correct"
             !model.workBookInstanceList
@@ -98,7 +98,7 @@ class WorkBookControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/workBook/index'
+            response.redirectedUrl == '/workBook/list'
             flash.message != null
 
 
@@ -130,7 +130,7 @@ class WorkBookControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/workBook/index'
+            response.redirectedUrl == '/workBook/list'
             flash.message != null
 
         when:"A domain instance is created"
@@ -146,7 +146,7 @@ class WorkBookControllerSpec extends Specification {
 
         then:"The instance is deleted"
             WorkBook.count() == 0
-            response.redirectedUrl == '/workBook/index'
+            response.redirectedUrl == '/workBook/list'
             flash.message != null
     }
 }

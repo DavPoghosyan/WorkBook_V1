@@ -58,19 +58,16 @@
             </span>
         </li>
     </g:if>
-    <g:if test="${workBookInstance?.workplaces}">
+    <g:if test="${workBookInstance?.workPlaces}">
         <li class="fieldcontain">
             <span id="workplaces-label" class="property-label">
                 <g:message code="workBook.workplaces.label"/>
             </span>
-            <g:each in="${workBookInstance.workplaces}" var="workplace">
+            <g:each in="${workBookInstance.workPlaces}" var="workplace">
                 <span class="property-value" aria-labelledby="workplaces-label">
-                    %{--<g:link controller="workPlace" action="show" id="${workplace.id}">
-                        ${workplace}
-                    </g:link>--}%
                     <g:remoteLink controller="workPlace" action="show" update="sub" id="${workplace.id}">
                         ${workplace}
-                    </g:remoteLink>
+                               </g:remoteLink>
                 </span>
             </g:each>
         </li>
@@ -78,9 +75,6 @@
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <li class="fieldcontain">
             <span class="property-value">
-                %{--<g:link controller="workPlace" action="create" params="['workbook.id': workBookInstance?.id]">
-                    ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
-                </g:link>--}%
                 <g:remoteLink id="addWorkPlace" controller="workPlace" action="create" update="sub" params="['workbook.id': workBookInstance?.id]">
                     ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
                 </g:remoteLink>
@@ -144,3 +138,4 @@
         </g:remoteLink>
     </fieldset>
 </sec:ifAllGranted>
+

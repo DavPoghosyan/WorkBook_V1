@@ -18,7 +18,6 @@ class WorkPlace {
 	static constraints = {
         startDate (blank: true, nullable: true,
                 validator: { val, obj ->
-                    //val.after(obj.workbook.dateOfBirth.plus(18*365))
 					val.minus(obj.workbook.dateOfBirth)/365.25 > 18
                 }
         )

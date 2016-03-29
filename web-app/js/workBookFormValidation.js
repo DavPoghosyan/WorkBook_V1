@@ -2,6 +2,9 @@
  * Created by davit on 3/18/16.
  */
 $().ready(function () {
+    $( "#datepicker" ).datepicker({
+        inline: true
+    });
     var now = new Date()
     $('#workBook').validate({
         errorClass: 'clientSideError',
@@ -57,5 +60,4 @@ function dateValidation() {
         return false
     }
     return true
-
 }

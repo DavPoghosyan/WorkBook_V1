@@ -11,6 +11,8 @@
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <g:javascript src="workPlaceFormActions.js"/>
 <g:javascript>
+    <g:remoteFunction controller='workPlace' action='retrieveCompanyData'
+                      update='company-info' params="'id='+2"/>
 	function retrieveCompanyData(id) {
 		if(id){
 		    createDialogCompany()
