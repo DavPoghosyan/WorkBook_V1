@@ -3,26 +3,63 @@
 	<meta name='layout' content='main'/>
 	<title><g:message code="springSecurity.login.title"/></title>
 	<style type='text/css' media='screen'>
-	#login {
-		margin: 15px 0px;
-		padding: 0px;
-		text-align: center;
-	}
+    .form {
+        position: relative;
+        z-index: 1;
+        background: #FFFFFF;
+        max-width: 360px;
+        margin: 0 auto 100px;
+        padding: 45px;
+        text-align: center;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
 
-	#login .inner {
-		width: 340px;
-		padding-bottom: 6px;
-		margin: 60px auto;
-		text-align: left;
-		border: 1px solid #aab;
-		background-color: #f0f0fa;
-		-moz-box-shadow: 2px 2px 2px #eee;
-		-webkit-box-shadow: 2px 2px 2px #eee;
-		-khtml-box-shadow: 2px 2px 2px #eee;
-		box-shadow: 2px 2px 2px #eee;
-	}
+    .form input {
+        font-family: "Roboto", sans-serif;
+        outline: 0;
+        background: #f2f2f2;
+        width: 100%;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+    .form button {
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background: #4CAF50;
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: #FFFFFF;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+    }
+    .form button:hover,.form button:active,.form button:focus {
+        background: #43A047;
+    }
 
-	#login .inner .fheader {
+    body {
+        background: #76b852; /!* fallback for old browsers *!/
+        background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+        background: -moz-linear-gradient(right, #76b852, #8DC26F);
+        background: -o-linear-gradient(right, #76b852, #8DC26F);
+        background: linear-gradient(to left, #76b852, #8DC26F);
+        font-family: "Roboto", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    #login .form .login_message {
+        padding: 6px 25px 20px 25px;
+        color: #c33;
+    }
+
+	/*#login .inner .fheader {
 		padding: 18px 26px 14px 26px;
 		background-color: #f7f7ff;
 		margin: 0px 0 14px 0;
@@ -80,21 +117,21 @@
 
 	#login .inner .chk {
 		height: 12px;
-	}
+	}*/
 	</style>
 </head>
 
 <body>
 <div id='login'>
-	<div class='inner'>
-		<div class='fheader'><g:message code="springSecurity.login.header"/></div>
+	<div class='form'>
+
 
 		<g:if test='${flash.message}'>
 			<div class='login_message'>${flash.message}</div>
 		</g:if>
 
 		<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
-			<p>
+			%{--<p>
 				<label for='username'><g:message code="springSecurity.login.username.label"/>:</label>
 				<input type='text' class='text_' name='j_username' id='username'/>
 			</p>
@@ -110,7 +147,14 @@
 			</p>
 			<p>
 				<input type='submit' id="submit" value='${message(code: "springSecurity.login.button")}'/>
-			</p>
+			</p>--}%
+            <form class="login-form">
+                <input type="text" placeholder="${message(code: "springSecurity.login.username.label")}" name='j_username'/>
+                <input type="password" placeholder="${message(code: "springSecurity.login.password.label")}" name='j_password' />
+            <button>
+                    <g:message code="springSecurity.login.button"/>
+                </button>
+            </form>
 		</form>
 	</div>
 </div>

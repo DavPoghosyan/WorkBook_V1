@@ -73,7 +73,7 @@ h1 {
 	color: #48802c;
 	font-weight: normal;
 	font-size: 1.25em;
-	margin: 0.8em 0 0.3em 0;
+    /*margin: 0.8em 0 0.3em 0;*/
 }
 
 ul {
@@ -94,7 +94,6 @@ img {
 
 .content h1 {
     margin-left: 25%;
-	padding: 0 0.25em;
 }
 
 
@@ -162,20 +161,20 @@ img {
 
 .create:hover .createTip  {
     visibility: visible;
-	position: relative;
-	top: -2px;
-	right: 10px;
+    bottom: 5px;
+    right: 6px;
 }
 
 .home:hover .homeTip  {
     visibility: visible;
+    bottom: 5px;
 }
 
 .import:hover .importTip {
     visibility: visible;
-    position: relative;
-    top: -2px;
-    left: -15px;
+    width: 75%;
+    bottom: 5px;
+    right: 8px;
 }
 /*
 .nav a:active, .nav a:visited {
@@ -614,7 +613,6 @@ th:hover, tr:hover {
 }*/
 
 .buttons {
-    padding: 0.7em;
     left: 68%;
     border: none;
     background: white no-repeat center;
@@ -635,10 +633,10 @@ th:hover, tr:hover {
     left: -45px;
 }
 
-.deleteTip, .registerTip, .updateTip {
-    position: absolute;
-    top: 60px;
-    left: 20px;
+.deleteTip, .registerTip, .updateTip{
+    position: relative;
+    bottom: 6px;
+    left: 5px;
     visibility: hidden;
     color: #48802c;
 }
@@ -667,6 +665,21 @@ th:hover, tr:hover {
 .register:hover .updateTip  {
     visibility: visible;
 }
+
+.closeSub:hover .closeTip {
+    visibility:visible;
+}
+
+
+.closeTip {
+    position: relative;
+    bottom: 6px;
+    right: 3px;
+    visibility: hidden;
+    font-size: small;
+    color: #48802c;
+}
+
 
 a.skip {
 	position: absolute;
@@ -721,6 +734,7 @@ ul#locale-selector li a:hover {
 }
 
 ul#locale-selector li.active a{
+    pointer-events: none;
     background-color: green;
 }
 
@@ -782,3 +796,10 @@ a {
 .refToDetails:hover .title {
     visibility:visible;
 }
+
+.closeSub {
+    position: relative;
+    left: 72%;
+    top: 10px;
+}
+

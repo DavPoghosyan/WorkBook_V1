@@ -19,7 +19,6 @@
 	    <g:javascript src="main.js"/>
         <g:javascript library="jquery"/>
         <g:javascript library="jquery-ui"/>
-        <g:javascript library="jquery-ui"/>
 		<g:layoutHead/>
 	</head>
 	<body>

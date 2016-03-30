@@ -1,8 +1,6 @@
+<g:javascript src="scroll.js"/>
 <g:set var="entityName" value="${message(code: 'workBook.label')}"/>
 <div id="edit-workBook" class="content scaffold-edit" role="main">
-    <h1>
-        <g:message code="edit.label" args="[entityName]"/>
-    </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">
             ${flash.message}
@@ -20,6 +18,9 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
+    <h1>
+        <g:message code="edit.label" args="[entityName]"/>
+    </h1>
     <g:formRemote name="subForm" url="[resource:workBookInstance,controller:'workBook', action:'update']"
                   update="show-workBook">
         <fieldset class="form">

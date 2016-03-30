@@ -27,20 +27,25 @@
 				</li>
 			</ul>
 		</div>
-        <div id="create-workBook" class="content scaffold-create" role="main">
+        <div id="show-workBook" class="content scaffold-create" role="main">
             <g:render template="createTemp"/>
         </div>
         <g:if test="${workPlacesCount}">
             <div class="message" id="perm-message" role="status">
                 <g:message code="import.workplaces.label" args="${workPlacesCount}"/>
                 <g:each in="${1..workPlacesCount}" var="i" >
-                    <g:remoteLink controller="workPlace" action="createFromImport" update="sub"  params="[id:i]">
+                    <g:remoteLink class="showSub" controller="workPlace" action="createFromImport" update="sub"  params="[id:i]">
                         WorkPlace:${i}</g:remoteLink>
                 </g:each>
             </div>
         </g:if>
-
-    <div id="sub" class="content sub" role="sub">
-    </div>
+        <div class="closeSub" hidden>
+            <g:img dir="images/icons" file="close-cross-icon.png" />
+            <p class="closeTip">
+                <g:message code="close.label"/>
+            </p>
+        </div>
+        <div id="sub" class="content sub" role="sub">
+        </div>
 	</body>
 </html>

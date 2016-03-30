@@ -2,12 +2,16 @@
  * Created by davit on 3/29/16.
  */
 $().ready(function() {
-    function scrollToAnchor(aid) {
-        var aTag = $("#sub")
-        $('html,body').animate({scrollTop: aTag.offset().top}, 'slow');
-    }
 
-    $("#addWorkPlace").click(function () {
-        scrollToAnchor('sub');
-    });
+    $('.closeSub').click(function () {
+        $(this).hide()
+        $('#sub').hide()
+    })
+
+    $('.showSub').click(function () {
+        $('.closeSub').show()
+        var aTag = $('#sub')
+        aTag.show()
+        $('html,body').animate({scrollTop: aTag.offset().top}, 'slow');
+    })
 });

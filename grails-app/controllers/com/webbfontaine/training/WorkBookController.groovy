@@ -93,7 +93,7 @@ class WorkBookController {
 
 	@Secured(['ROLE_ADMIN'])
 	def edit(WorkBook workBook) {
-		render (template:'editTemp', model:[workBookInstance: workBook])
+        render (template:'editTemp', model:[workBookInstance: workBook])
 	}
 
 	/*@Secured(['ROLE_ADMIN'])
@@ -202,7 +202,7 @@ class WorkBookController {
                 ])*/
         workBook.validate()
         if(workBookService.isInValidModifications(workBook)) {
-            def customErrorCode =  'workBook.age.conflict.workplaces'
+            def customErrorCode =  'workBook.age.conflict.workPlaces'
             def errorMessage = message(code: customErrorCode)
             workBook.errors.rejectValue('dateOfBirth', customErrorCode, errorMessage)
         }

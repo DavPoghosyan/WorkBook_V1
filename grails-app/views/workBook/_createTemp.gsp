@@ -1,6 +1,5 @@
-<h1>
-    <g:message code="registration.form.label" args="[entityName]"/>
-</h1>
+<g:javascript src="scroll.js"/>
+<g:set var="entityName" value="${message(code: 'workBook.label')}"/>
 <g:if test="${flash.message}">
     <div class="message" role="status">
         ${flash.message}
@@ -22,8 +21,11 @@
         </g:eachError>
     </ul>
 </g:hasErrors>
+<h1>
+    <g:message code="registration.form.label" args="[entityName]"/>
+</h1>
 <g:formRemote id="workBook" name="subForm" url="[controller:'workBook', action:'remoteSave']"
-          update="create-workBook">
+          update="show-workBook">
 	<fieldset class="form">
 	    <g:render template="form"/>
 	</fieldset>

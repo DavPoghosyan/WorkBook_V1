@@ -1,3 +1,4 @@
+<g:javascript src="scroll.js"/>
 <g:set var="entityName" value="${message(code: 'workBook.label')}"/>
 <g:if test="${flash.message?.contains(entityName)}">
     <div class="message" role="status">
@@ -61,13 +62,13 @@
     <g:if test="${workBookInstance?.workPlaces}">
         <li class="fieldcontain">
             <span id="workplaces-label" class="property-label">
-                <g:message code="workBook.workplaces.label"/>
+                <g:message code="workBook.workPlaces.label"/>
             </span>
             <g:each in="${workBookInstance.workPlaces}" var="workplace">
                 <span class="property-value" aria-labelledby="workplaces-label">
-                    <g:remoteLink controller="workPlace" action="show" update="sub" id="${workplace.id}">
+                    <g:remoteLink class="showSub" controller="workPlace" action="show" update="sub" id="${workplace.id}">
                         ${workplace}
-                               </g:remoteLink>
+                    </g:remoteLink>
                 </span>
             </g:each>
         </li>
@@ -75,7 +76,7 @@
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <li class="fieldcontain">
             <span class="property-value">
-                <g:remoteLink id="addWorkPlace" controller="workPlace" action="create" update="sub" params="['workbook.id': workBookInstance?.id]">
+                <g:remoteLink class="showSub" controller="workPlace" action="create" update="sub" params="['workbook.id': workBookInstance?.id]">
                     ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
                 </g:remoteLink>
             </span>

@@ -17,7 +17,7 @@ class BootStrap {
                     passportNumber(workBook.passportNumber)
                     age(workBook.age)
                     dateOfBirth(workBook.dateOfBirth)
-                    workPlaces(workBook.workplaces)
+                    workPlaces(workBook.workPlaces)
                 }
             })
         }

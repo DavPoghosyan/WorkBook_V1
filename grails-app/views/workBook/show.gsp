@@ -8,7 +8,6 @@
 		<title>
 		    <g:message code="default.show.label" args="[entityName]"/>
         </title>
-        <g:javascript src="scroll.js"/>
 	</head>
 	<body>
 		<div class="nav" role="navigation">
@@ -35,6 +34,12 @@
 		</div>
         <div id="show-workBook" class="content" role="main">
             <g:render template="showWorkBook"/>
+        </div>
+        <div class="closeSub" hidden>
+            <g:img dir="images/icons" file="close-cross-icon.png" />
+            <p class="closeTip">
+                <g:message code="close.label"/>
+            </p>
         </div>
 		<div id="sub" class="content sub" role="sub">
 		</div>

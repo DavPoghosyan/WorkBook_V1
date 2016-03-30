@@ -6,13 +6,12 @@
 <g:javascript src="localisation/messages-${RequestContextUtils.getLocale(request).getLanguage()}.js"/>
 <g:javascript src="workBookFormValidation.js"/>
 <g:javascript src="ageCalculate.js"/>
-<g:javascript src="libs/jquery-ui.js"/>
-
+%{--<g:javascript src="libs/jquery-ui.js"/>
 <g:javascript>
 	$( "#datepicker" ).datepicker({
 		inline: true
 	});
-</g:javascript>
+</g:javascript>--}%
 <g:set var="today" value="${new Date()}"/>
 <g:set var="minYear" value="${today[Calendar.YEAR]-65}"/>
 <g:set var="maxYear" value="${today[Calendar.YEAR]-18}"/>
@@ -54,3 +53,15 @@
     />
 	%{--<g:textField id="datepicker" name="dateOfBirth" />--}%
 </div>
+<g:if test="${workBookInstance?.workPlaces}">
+    <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'workPlaces', 'error')}">
+        <label id="workplaces-label">
+            <g:message code="workBook.workPlaces.label"/>
+        </label>
+        <g:each in="${workBookInstance.workPlaces}" var="workplace">
+            <g:remoteLink class="showSub" controller="workPlace" action="edit" update="sub" id="${workplace.id}">
+                ${workplace}
+            </g:remoteLink>
+        </g:each>
+    </div>
+</g:if>
