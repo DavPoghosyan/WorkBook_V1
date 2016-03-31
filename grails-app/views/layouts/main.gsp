@@ -22,10 +22,10 @@
 		<g:layoutHead/>
 	</head>
 	<body>
-		<g:link class="logo" href="${createLink(uri: 'workbook/list')}">
+	<a class="logo" href="${createLink(uri: '/')}">
 			<asset:image src="logo.png" alt="WorkBook"/>
-			<h1 class="about"><g:message code="main.about"/></h1>
-		</g:link>
+		</a>
+		<h1 class="about"><g:message code="main.about"/></h1>
         <locale:selector/>
         <g:link class="log-out" controller="logout" action="">
 			<asset:image src="skin/log-out-icon.png" alt="WorkBook"/>

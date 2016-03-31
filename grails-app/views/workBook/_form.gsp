@@ -13,7 +13,7 @@
 	});
 </g:javascript>--}%
 <g:set var="today" value="${new Date()}"/>
-<g:set var="minYear" value="${today[Calendar.YEAR]-65}"/>
+<g:set var="minYear" value="${today[Calendar.YEAR]-99}"/>
 <g:set var="maxYear" value="${today[Calendar.YEAR]-18}"/>
 <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'firstName', 'error')} required">
 	<label for="firstName">

@@ -57,7 +57,7 @@
                                 <g:link action="show" id="${workBookInstance.id}">
                                     ${fieldValue(bean: workBookInstance, field: "fullName")}
 									<p class="title">
-                                        <g:img dir="images/icons" file="details-icon.png"/>
+                                        <g:img dir="images/icons" file="details_icon.png"/>
 									</p>
                                 </g:link>
                             </td>

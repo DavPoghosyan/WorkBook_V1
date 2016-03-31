@@ -1,4 +1,4 @@
-<%@ page import="rimm.Country; rimm.Company; com.webbfontaine.training.*" %>
+<%@ page import="am.webbfontaine.training.rimm.Country; am.webbfontaine.training.rimm.Company; com.webbfontaine.training.*" %>
 %{--<g:javascript src="workPlaceValidation.js"/>--}%
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
 <g:set var="entityName" value="${message(code: 'workPlace.label')}"/>
@@ -10,8 +10,8 @@
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <g:javascript src="workPlaceFormActions.js"/>
 <g:javascript>
-    <g:remoteFunction controller='workPlace' action='retrieveCompanyData'
-                      update='company-info' params="'id='+2"/>
+    %{--<g:remoteFunction controller='workPlace' action='retrieveCompanyData'
+                      update='company-info' params="'code='+2"/>--}%
 	function retrieveCompanyData(id) {
 		if(id){
 		    createDialogCompany()
@@ -20,7 +20,6 @@
 	    }
     }
     function retrieveCountryData(id) {
-    alert(id)
         if(id){
             createDialogCountry()
             <g:remoteFunction controller='workPlace' action='retrieveCountryData'

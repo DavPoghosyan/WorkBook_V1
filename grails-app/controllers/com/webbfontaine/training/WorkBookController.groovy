@@ -77,7 +77,7 @@ class WorkBookController {
 		}
 		workBook.registeredAt = new Date()
 		workBook.lastUpdatedAt = new Date()
-		additionalValidation(workBook)
+		//additionalValidation(workBook)
 		if (workBook.hasErrors()) {
 			println workBook.errors
 			render (template:'createTemp', model:[workBookInstance: workBook])

@@ -1,19 +1,19 @@
-<%@ page import="rimm.Country; rimm.Company; com.webbfontaine.training.WorkBook" %>
-<g:javascript>
+<%@ page import="am.webbfontaine.training.rimm.Company; am.webbfontaine.training.rimm.Country; am.webbfontaine.training.rimm.Company; com.webbfontaine.training.WorkBook" %>
+%{--<g:javascript>
     $(".find").change(function(){
     alert($(this).val())
         var numbers = [1, 2, 3, 4, 5];
         var option = '';
         var a=$(this).val()
         for (var i=0; i<5   ; i++){
-            option += '<option value="'+ numbers[i] + '">' +   "${rimm.Country.where {code =~ '$a%'}.projections { distinct 'code' }.list()[0]}" + '</option>';
+            //option += '<option value="'+ numbers[i] + '">' +   "${rimm.Country.where {code =~ '$a%'}.projections { distinct 'code' }.list()[0]}" + '</option>';
         }
-        alert( "${rimm.Country.where {code =~ '" + $(this).val()+ "%'}.projections { distinct 'code' }.list()[0]}")
+        //alert( "${rimm.Country.where {code =~ '" + $(this).val()+ "%'}.projections { distinct 'code' }.list()[0]}")
 
         $('#company').append(option)
     })
 
-</g:javascript>
+</g:javascript>--}%
 <g:formRemote id="workPlace" name="subForm" url="[resource:workPlace, controller:'workPlace', action:'save']" update="sub">
     <fieldset class="form">
         <div class="fieldcontain ${hasErrors(bean: workPlace, field: 'workbook', 'error')} required">
@@ -23,7 +23,7 @@
             </label>
             %{--<g:field id="workBook" name="workbook.id" type="number" value="${workPlace?.workbook?.id}"/>--}%
             <g:select id="workbook" name="workbook.id"
-                      from="${com.webbfontaine.training.WorkBook.list()}" optionKey="id"
+                      from="${WorkBook.list()}" optionKey="id"
                       noSelection="['':'- Choose WorkBook Owner -']"
                       value="${workPlace?.workbook?.id}" class="many-to-one required"
             />
@@ -33,9 +33,9 @@
                 <g:message code="workPlace.company.code"/>
                 <span class="required-indicator">*</span>
             </label>
-            <input class="find"/>
+           %{-- <input class="find"/>--}%
             <g:select id="company" name="company.id"
-                      from="${rimm.Company.findAll{code =~ 'D%'}}"
+                      from="${Company.listOrderByCode()}"
                       optionKey="id" optionValue="code"
                       value="${workPlace?.company?.id}" class="many-to-one required"
                       noSelection="['':'- Choose Company Code -']"
@@ -48,7 +48,8 @@
                 <span class="required-indicator">*</span>
             </label>
             <g:select id="country"  name="country.id"
-                      from="${rimm.Country.where {code =~ 'P%'}.projections { distinct 'code' }.list()}"
+                      from="${Country.listOrderByCode()}"
+                      optionKey="id" optionValue="code"
                       class="many-to-one required"
                       value="${workPlace?.country?.id}"
                       noSelection="['':'- Choose Country Code -']"
@@ -64,7 +65,7 @@
                           value="${workPlace?.startDate}" years="${maxYear..minYear}"/>
         </div>
         <div class="addElement">
-            <a id="current" class="addEndDate" href="#">
+            <a id="current" class="addEndDate">
                 <g:message code="workPlace.add.endDate.label"/>
             </a>
         </div>

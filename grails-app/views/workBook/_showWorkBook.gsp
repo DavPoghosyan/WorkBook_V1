@@ -6,7 +6,7 @@
     </div>
 </g:if>
 <h1>
-    <g:message code="default.show.label" args="[entityName]" />
+    <g:message code="default.show.label" args="[entityName]"/>
 </h1>
 <ol class="property-list workBook">
     <li class="fieldcontain">
@@ -75,11 +75,9 @@
     </g:if>
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <li class="fieldcontain">
-            <span class="property-value">
-                <g:remoteLink class="showSub" controller="workPlace" action="create" update="sub" params="['workbook.id': workBookInstance?.id]">
+                <g:remoteLink class="showSub addWorkPlace" controller="workPlace" action="create" update="sub" params="['workbook.id': workBookInstance?.id]">
                     ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
                 </g:remoteLink>
-            </span>
         </li>
     </sec:ifAllGranted>
     <g:if test="${workBookInstance?.registeredAt}">
@@ -111,7 +109,7 @@
         <span class="property-value">
                 <g:jasperReport delimiter=" "
                             jasper="workBook" format="PDF" name="">
-                <input type="hidden" name="id" value="${id}"/>
+                <input type="hidden" name="id" value="${workBookInstance?.id}"/>
                 <input type="hidden" name="age" value="${workBookInstance?.age}"/>
                 <input type="hidden" name="logo" value="./grails-app/assets/images/logo.png"/>
                 <g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">

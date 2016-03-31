@@ -96,7 +96,6 @@ img {
     margin-left: 25%;
 }
 
-
 .scaffold-list h1 {
 	border: none;
 }
@@ -131,7 +130,8 @@ img {
 
 .nav {
     border: none;
-    margin-left: 10%;
+    margin-top: 5%;
+    margin-left: 5%;
     background: white no-repeat center;
 }
 
@@ -162,11 +162,12 @@ img {
 .create:hover .createTip  {
     visibility: visible;
     bottom: 5px;
-    right: 6px;
+    right: 5px;
 }
 
 .home:hover .homeTip  {
     visibility: visible;
+    right: 5px;
     bottom: 5px;
 }
 
@@ -238,11 +239,17 @@ fieldset,
 }
 
 
+.addWorkPlace {
+    margin-left: 20%;
+}
+
+
+
 .fieldcontain label,
 .fieldcontain .property-label {
 	color: #666666;
 	/*text-align: right;*/
-	width: 28%;
+	width: 35%;
 }
 
 .fieldcontain .property-label {
@@ -251,8 +258,18 @@ fieldset,
 }
 
 .fieldcontain .property-value {
-	display: block;
-	margin-left: 35%;
+    display: block;
+    margin-left: 35%;
+}
+
+.fieldcontain .modal-property-label {
+    margin-left: 10%;
+    float: left;
+}
+
+.fieldcontain .modal-property-value {
+    display: block;
+    margin-left: 45%;
 }
 
 label {
@@ -716,8 +733,8 @@ a.skip {
 #locale-selector {
 	position: absolute;
 	display: inline-block;
-	left: 90%;
-	top: 8%;
+	left: 10%;
+	top: 10px;
 }
 
 ul#locale-selector {
@@ -768,10 +785,10 @@ ul#locale-selector li.active a{
 }
 
 .about {
-	position:absolute;
-	top:20px;
+    position: absolute;
+	top:40px;
 	left:125px;
-	font-size: x-large;
+    font-size: 3vw;
 }
 
 label.error, label.clientSideError {

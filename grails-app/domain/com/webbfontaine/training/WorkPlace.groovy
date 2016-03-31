@@ -18,13 +18,15 @@ class WorkPlace {
 	static constraints = {
         startDate (blank: true, nullable: true,
                 validator: { val, obj ->
-					val.minus(obj.workbook.dateOfBirth)/365.25 > 18
+					val.minus(obj.workbook.dateOfBirth)/365.25 > 18 &&
+                            val.minus(obj.workbook.dateOfBirth)/365.25 < 66
                 }
         )
 		endDate (blank: true, nullable: true,
 				validator: { val, obj ->
 					if(val){
-						(val.after(obj.startDate)) && val.before(obj.workbook.dateOfBirth.plus(65*365))
+						val.after(obj.startDate) &&
+								val.minus(obj.workbook.dateOfBirth)/365.25 < 66
 					}
 				}
         )

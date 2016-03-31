@@ -2,9 +2,9 @@
  * Created by davit on 3/18/16.
  */
 $().ready(function () {
-    $( "#datepicker" ).datepicker({
+    /*$( "#datepicker" ).datepicker({
         inline: true
-    });
+    });*/
     var now = new Date()
     $('#workBook').validate({
         errorClass: 'clientSideError',
@@ -21,19 +21,13 @@ $().ready(function () {
             passportNumber: {
                 passportNumberRegExp: true
             },
-            dateOfBirth_day: {
-                    ageValidation : true
-            },
-            dateOfBirth_month: {
-                ageValidation : true
-            },
             dateOfBirth_year: {
                 ageValidation : true
             }
         },
     });
 
-    $.validator.addMethod("ageValidation", function (  ) {
+    $.validator.addMethod("ageValidation", function () {
         return  dateValidation();
     },invalidAge);
 
@@ -41,6 +35,14 @@ $().ready(function () {
         return  /^[A-Z]{2}[0-9]{7}/.test(value);
     },passportNumberInvalidMessage);
 
+    $('#dateOfBirth_month').change(function() {
+        $('#workBook').valid();
+    });
+
+    /*$('#endDate_year, #endDate_month, #endDate_day').change(function() {
+        dateValidation($("#endDate"));
+    });
+*/
 
 });
 

@@ -21,7 +21,7 @@
     <h1>
         <g:message code="edit.label" args="[entityName]"/>
     </h1>
-    <g:formRemote name="subForm" url="[resource:workBookInstance,controller:'workBook', action:'update']"
+    <g:formRemote id="workBook" name="subForm" url="[resource:workBookInstance,controller:'workBook', action:'update']"
                   update="show-workBook">
         <fieldset class="form">
             <g:render template="form"/>
