@@ -61,7 +61,7 @@
 	        <g:if test="${workPlace?.registeredAt}">
 	            <li class="fieldcontain">
 	                <span id="registeredAt-label" class="property-label">
-	                    <g:message code="instance.registered.label"/>
+	                    <g:message code="instance.registeredAt.label"/>
 	                </span>
 	                <span class="property-value" aria-labelledby="registeredAt-label">
 	                    <g:formatDate format="yyyy-MM-dd hh:mm:ss" date="${workPlace?.registeredAt}"/>

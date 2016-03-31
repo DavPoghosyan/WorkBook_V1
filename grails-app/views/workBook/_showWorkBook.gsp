@@ -85,7 +85,7 @@
     <g:if test="${workBookInstance?.registeredAt}">
         <li class="fieldcontain">
             <span id="registeredAt-label" class="property-label">
-                <g:message code="instance.registered.label"/>
+                <g:message code="instance.registeredAt.label"/>
                 <img src="${resource(dir:'images/icons', file:'clock-icon.png')}"/>
             </span>
             <span class="property-value" aria-labelledby="registeredAt-label">
@@ -109,13 +109,13 @@
             <g:message code="show.export.label"/>
         </span>
         <span class="property-value">
-            <g:jasperReport delimiter=" "
+                <g:jasperReport delimiter=" "
                             jasper="workBook" format="PDF" name="">
                 <input type="hidden" name="id" value="${id}"/>
                 <input type="hidden" name="age" value="${workBookInstance?.age}"/>
                 <input type="hidden" name="logo" value="./grails-app/assets/images/logo.png"/>
                 <g:link controller="xmlProcessing" action="exportAsXML" resource="${workBookInstance}">
-                    <img src="${resource(dir:'images/icons', file:'xml-icon.gif')}" title="XML" />
+                    <g:img dir="images/icons" file="xml-icon.png" title="XML" />
                 </g:link>
             </g:jasperReport>
         </span>

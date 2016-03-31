@@ -44,17 +44,20 @@
                                           title="${message(code: 'workBook.age.label')}"/>
 						<g:sortableColumn property="dateOfBirth"
                                           title="${message(code: 'workBook.dateOfBirth.label')}"/>
+                        <g:sortableColumn property="registeredAt"
+                                          title="${message(code: 'instance.registeredAt.label')}"/>
+                        <g:sortableColumn property="lastUpdatedAt"
+                                          title="${message(code: 'instance.lastUpdatedAt.label')}"/>
 					</tr>
                 </thead>
 				<tbody>
 				    <g:each in="${workBookInstanceList}" status="i" var="workBookInstance">
 					    <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						    <td>
-                                <g:link action="show" id="${workBookInstance.id}" class="refToDetails">
+						    <td class="refToDetails">
+                                <g:link action="show" id="${workBookInstance.id}">
                                     ${fieldValue(bean: workBookInstance, field: "fullName")}
 									<p class="title">
                                         <g:img dir="images/icons" file="details-icon.png"/>
-										<g:message code="show.details.label"/>
 									</p>
                                 </g:link>
                             </td>
@@ -62,6 +65,9 @@
                             <td>${fieldValue(bean: workBookInstance, field: "email")}</td>
                             <td>${fieldValue(bean: workBookInstance, field: "age")}</td>
                             <td><g:formatDate format="yyyy-MM-dd" date="${workBookInstance.dateOfBirth}" /></td>
+                            <td><g:formatDate format="yyyy-MM-dd hh:mm" date="${workBookInstance.registeredAt}" /></td>
+                            <td><g:formatDate format="yyyy-MM-dd hh:mm" date="${workBookInstance.lastUpdatedAt}" /></td>
+
 					    </tr>
 				    </g:each>
 				</tbody>

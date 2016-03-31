@@ -22,7 +22,10 @@
 		<g:layoutHead/>
 	</head>
 	<body>
-        <asset:image src="grails_logo.png" alt="WorkBook"/>
+		<g:link class="logo" href="${createLink(uri: 'workbook/list')}">
+			<asset:image src="logo.png" alt="WorkBook"/>
+			<h1 class="about"><g:message code="main.about"/></h1>
+		</g:link>
         <locale:selector/>
         <g:link class="log-out" controller="logout" action="">
 			<asset:image src="skin/log-out-icon.png" alt="WorkBook"/>

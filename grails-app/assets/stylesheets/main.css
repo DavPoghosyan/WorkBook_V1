@@ -73,7 +73,7 @@ h1 {
 	color: #48802c;
 	font-weight: normal;
 	font-size: 1.25em;
-    /*margin: 0.8em 0 0.3em 0;*/
+	margin-bottom: 5px;
 }
 
 ul {
@@ -131,7 +131,7 @@ img {
 
 .nav {
     border: none;
-    margin-left: 15%;
+    margin-left: 10%;
     background: white no-repeat center;
 }
 
@@ -169,6 +169,12 @@ img {
     visibility: visible;
     bottom: 5px;
 }
+
+.logo:hover .aboutTip  {
+	visibility: visible;
+	bottom: 5px;
+}
+
 
 .import:hover .importTip {
     visibility: visible;
@@ -670,7 +676,6 @@ th:hover, tr:hover {
     visibility:visible;
 }
 
-
 .closeTip {
     position: relative;
     bottom: 6px;
@@ -709,8 +714,10 @@ a.skip {
 }
 
 #locale-selector {
+	position: absolute;
 	display: inline-block;
-	margin-left: 75%;
+	left: 90%;
+	top: 8%;
 }
 
 ul#locale-selector {
@@ -749,6 +756,7 @@ ul#locale-selector li.active a{
 
 .log-out .text {
 	position:absolute;
+	font-size: large;
 	top:2px;
     right:25px;
 	visibility:hidden;
@@ -756,8 +764,15 @@ ul#locale-selector li.active a{
 
 .log-out:hover .text {
     visibility:visible;
+
 }
 
+.about {
+	position:absolute;
+	top:20px;
+	left:125px;
+	font-size: x-large;
+}
 
 label.error, label.clientSideError {
 	color: red;
@@ -784,13 +799,14 @@ a {
 	text-decoration: none;
 }
 
-.refToDetails .title {
+.title  {
     position:relative;
-    height: 2px;
     width: 20px;
-    margin-left: 40%;
-    border: groove;
+	height: 2px;
+	margin-left: 40%;
+	bottom: 8px;
     visibility:hidden;
+
 }
 
 .refToDetails:hover .title {

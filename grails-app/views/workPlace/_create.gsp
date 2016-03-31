@@ -1,4 +1,4 @@
-<%@ page import="am.webbfontaine.training.rimm.Country; am.webbfontaine.training.rimm.Company; com.webbfontaine.training.*" %>
+<%@ page import="rimm.Country; rimm.Company; com.webbfontaine.training.*" %>
 %{--<g:javascript src="workPlaceValidation.js"/>--}%
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
 <g:set var="entityName" value="${message(code: 'workPlace.label')}"/>
@@ -20,6 +20,7 @@
 	    }
     }
     function retrieveCountryData(id) {
+    alert(id)
         if(id){
             createDialogCountry()
             <g:remoteFunction controller='workPlace' action='retrieveCountryData'
