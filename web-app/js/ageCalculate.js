@@ -1,6 +1,7 @@
 /**
  * Created by davit on 3/18/16.
  */
+/*
 $().ready(function () {
     $('#age').val(18);
     $('#dateOfBirth_year, #dateOfBirth_month, #dateOfBirth_day').change(function() {
@@ -21,4 +22,4 @@ function ageCalculation() {
         age += 1
     }
     $('#age').val(age);
-}
+}*/

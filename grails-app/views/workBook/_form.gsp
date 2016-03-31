@@ -4,14 +4,8 @@
 <g:javascript src="libs/jquery.validate.js"/>
 <g:javascript src="libs/jquery.localisation.js"/>
 <g:javascript src="localisation/messages-${RequestContextUtils.getLocale(request).getLanguage()}.js"/>
+<g:javascript src="datePickersNormalizations.js"/>
 <g:javascript src="workBookFormValidation.js"/>
-<g:javascript src="ageCalculate.js"/>
-%{--<g:javascript src="libs/jquery-ui.js"/>
-<g:javascript>
-	$( "#datepicker" ).datepicker({
-		inline: true
-	});
-</g:javascript>--}%
 <g:set var="today" value="${new Date()}"/>
 <g:set var="minYear" value="${today[Calendar.YEAR]-99}"/>
 <g:set var="maxYear" value="${today[Calendar.YEAR]-18}"/>
@@ -49,6 +43,7 @@
 		<span class="required-indicator">*</span>
 	</label>
     <g:datePicker class="dateOfBirth" name="dateOfBirth" precision="day"
+                  default="none" noSelection="['': '']"
                   value="${workBookInstance?.dateOfBirth}" years="${maxYear..minYear}"
     />
 	%{--<g:textField id="datepicker" name="dateOfBirth" />--}%

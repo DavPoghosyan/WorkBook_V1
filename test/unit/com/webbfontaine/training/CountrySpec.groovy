@@ -1,5 +1,6 @@
 package com.webbfontaine.training
 
+import am.webbfontaine.training.rimm.Country
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

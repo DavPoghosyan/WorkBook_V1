@@ -1,4 +1,4 @@
-<%@ page import="am.webbfontaine.training.rimm.Country; am.webbfontaine.training.rimm.Company; com.webbfontaine.training.*" %>
+<%@ page import="org.springframework.web.servlet.support.RequestContextUtils; am.webbfontaine.training.rimm.Country; am.webbfontaine.training.rimm.Company; com.webbfontaine.training.*" %>
 %{--<g:javascript src="workPlaceValidation.js"/>--}%
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
 <g:set var="entityName" value="${message(code: 'workPlace.label')}"/>
@@ -6,26 +6,27 @@
 <g:set var="minYear" value="${today[Calendar.YEAR]-100}"/>
 <g:set var="maxYear" value="${today[Calendar.YEAR]}"/>
 <g:javascript src="libs/jquery.validate.js"/>
+<g:javascript src="libs/jquery.localisation.js"/>
+<g:javascript src="localisation/messages-${RequestContextUtils.getLocale(request).getLanguage()}.js"/>
+<g:javascript src="datePickersNormalizations.js"/>
 <g:javascript src="workPlaceFormValidation.js"/>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <g:javascript src="workPlaceFormActions.js"/>
 <g:javascript>
-    %{--<g:remoteFunction controller='workPlace' action='retrieveCompanyData'
-                      update='company-info' params="'code='+2"/>--}%
 	function retrieveCompanyData(id) {
 		if(id){
 		    createDialogCompany()
             <g:remoteFunction controller='workPlace' action='retrieveCompanyData'
-                                      update='company-info' params="'id='+id"/>
-	    }
-    }
-    function retrieveCountryData(id) {
-        if(id){
-            createDialogCountry()
-            <g:remoteFunction controller='workPlace' action='retrieveCountryData'
-                              update='country-info' params="'id='+id"/>
-        }
-    }
+                              update='company-info' params="'id='+id"/>
+	}
+}
+function retrieveCountryData(id) {
+	if(id){
+		createDialogCountry()
+	<g:remoteFunction controller='workPlace' action='retrieveCountryData'
+	                  update='country-info' params="'id='+id"/>
+	}
+}
 </g:javascript>
 <g:hasErrors bean="${workPlace}">
     <ul class="errors" role="alert">

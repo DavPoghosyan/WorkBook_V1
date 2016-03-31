@@ -1,5 +1,6 @@
 package workbook
 
+import com.webbfontaine.training.WorkPlace
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

@@ -1,19 +1,4 @@
 <%@ page import="am.webbfontaine.training.rimm.Company; am.webbfontaine.training.rimm.Country; am.webbfontaine.training.rimm.Company; com.webbfontaine.training.WorkBook" %>
-%{--<g:javascript>
-    $(".find").change(function(){
-    alert($(this).val())
-        var numbers = [1, 2, 3, 4, 5];
-        var option = '';
-        var a=$(this).val()
-        for (var i=0; i<5   ; i++){
-            //option += '<option value="'+ numbers[i] + '">' +   "${rimm.Country.where {code =~ '$a%'}.projections { distinct 'code' }.list()[0]}" + '</option>';
-        }
-        //alert( "${rimm.Country.where {code =~ '" + $(this).val()+ "%'}.projections { distinct 'code' }.list()[0]}")
-
-        $('#company').append(option)
-    })
-
-</g:javascript>--}%
 <g:formRemote id="workPlace" name="subForm" url="[resource:workPlace, controller:'workPlace', action:'save']" update="sub">
     <fieldset class="form">
         <div class="fieldcontain ${hasErrors(bean: workPlace, field: 'workbook', 'error')} required">
@@ -21,7 +6,6 @@
                 <g:message code="workBook.fullName.label"/>
                 <span class="required-indicator">*</span>
             </label>
-            %{--<g:field id="workBook" name="workbook.id" type="number" value="${workPlace?.workbook?.id}"/>--}%
             <g:select id="workbook" name="workbook.id"
                       from="${WorkBook.list()}" optionKey="id"
                       noSelection="['':'- Choose WorkBook Owner -']"
@@ -33,7 +17,6 @@
                 <g:message code="workPlace.company.code"/>
                 <span class="required-indicator">*</span>
             </label>
-           %{-- <input class="find"/>--}%
             <g:select id="company" name="company.id"
                       from="${Company.listOrderByCode()}"
                       optionKey="id" optionValue="code"
@@ -62,7 +45,7 @@
                 <span class="required-indicator">*</span>
             </label>
             <g:datePicker name="startDate" precision="day" class="startDate"
-                          value="${workPlace?.startDate}" years="${maxYear..minYear}"/>
+                          default="none" noSelection="['': '']"  value="${workPlace?.startDate}" years="${maxYear..minYear}"/>
         </div>
         <div class="addElement">
             <a id="current" class="addEndDate">

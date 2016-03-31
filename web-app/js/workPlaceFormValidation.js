@@ -3,15 +3,28 @@
  */
 $().ready(function () {
 
-    var now = new Date()
-    var options =$('#startDate_month option')
-    var optionsDays =$('#startDate_day option')
+	var now = new Date()
+    var sdMonthOptions =$('#startDate_month option')
+    var sdDayOptions =$('#startDate_day option')
 
-    var select = $('#startDate_month');
-    var currentMonth = now.getMonth();
-    $('option:gt('+ currentMonth + ')',select).remove();
+	var sdYearSelector = $('#startDate_year')
+	var sdMonthSelector = $("#startDate_month")
+	var sdDaySelector = $('#startDate_day')
+	var curMonth =  now.getMonth()+1
+	var curDay = now.getDate()
+	$('option:gt('+ curMonth + ')',sdMonthSelector).remove();
+	$('option:gt('+ curDay + ')',sdDaySelector).remove();
 
+	var edMonthOptions =$('#endDate_month option')
+	var edDayOptions =$('#endDate_day option')
 
+	var edYearSelector = $('#endDate_year')
+	var edMonthSelector = $("#endDate_month")
+	var edDaySelector = $('#endDate_day')
+	$('option:gt('+ curMonth + ')',edMonthSelector).remove();
+
+	var sdSkip =false
+	var enSkip =false
 
     $('#workPlace').validate({
         rules: {
@@ -22,77 +35,33 @@ $().ready(function () {
                 required: true
             },
             country: {
-                required: true
+                required: true,
             },
-            startDate_month: {
-                max : now.getMonth()+1
-            },
-            startDate_day: {
-                max : now.getDate()
-            },
-            endDate_month: {
-                max : now.getMonth()+1
-            },
-            endDate_day: {
-                max : now.getDate()
-            }
+	        startDate_year: {
+		        required: true
+	        }
         }
     });
 
-
-    $('#startDate_year, #startDate_month').change(function() {
-
-        isLeap = new Date($('#startDate_year').val(), 1, 29).getMonth() == 1
-        if($("#startDate_month").val() == 2) {
-            $('option:gt(27)',$('#startDate_day')).remove();
-
-            if(isLeap == true) {
-                $('#startDate_day').append(optionsDays.get(28));
-               // $('option:gt(28)',$('#startDate_day')).remove();
-            }
-        } else {
-            /*alert(new Date($('#startDate_year').val(), $('#startDate_month').val(), 31).getMonth())
-            alert($('#startDate_month').val())*/
-            var month = parseInt($('#startDate_month').val())
-            alert(month)
-
-          // var isLongMonth = new Date($('#startDate_year').val(), $('#startDate_month').val(), 31).getMonth()-1 == month
-           $('#startDate_day').append(optionsDays);
-            alert(month%2 == 0)
-            if(month < 8 && month%2 == 0 ) {
-                $('option:gt(29)',$('#startDate_day')).remove();
-            }
-            if(month > 8 && month%2 != 0) {
-                $('option:gt(29)', $('#startDate_day')).remove();
-            }
-           } /*else if(month%2 != 0) {
-               $('option:gt(29)',$('#startDate_day')).remove();
-           }*/
-
-
-        if($("#startDate_year").val() < now.getFullYear()) {
-            $('#startDate_month').append(options);
-        } else {
-            $('option:gt('+ currentMonth + ')',select).remove();
-        }
-        if($("#startDate_year").val() < now.getFullYear() || $("#startDate_month").val() < now.getMonth()+1) {
-            $( "#startDate_month" ).rules( "remove");
-            $( "#startDate_day" ).rules( "remove");
-        } else {
-            $("#startDate_month").rules("add", {max: now.getMonth() + 1});
-            $("#startDate_day").rules("add", {max: now.getDate()});
-        }
+    $('#startDate_year').change(function() {
+	    $.monthsPickerNormalization(sdYearSelector,sdMonthSelector,sdMonthOptions,sdSkip)
+	    $.daysPickerNormalization(sdYearSelector,sdMonthSelector,sdDaySelector,sdDayOptions)
     });
-    $('#endDate_year, #endDate_month, #endDate_day').change(function() {
-        if($("#endDate_year").val() < now.getFullYear() || $("#endDate_month").val() < now.getMonth()+1) {
-            $( "#endDate_month" ).rules( "remove");
-            $( "#wndDate_day" ).rules( "remove");
-        } else {
-            $("#endDate_month").rules("add", {max: now.getMonth()+1});
-            $( "#endDate_day" ).rules( "add", {max: now.getDate()});
-        }
-    });
+	$('#startDate_month').change(function() {
+	$.daysPickerNormalization(sdYearSelector,sdMonthSelector,sdDaySelector,sdDayOptions)
+	})
+	$('#endDate_year').change(function() {
+		$.monthsPickerNormalization(edYearSelector,edMonthSelector,edMonthOptions,enSkip)
+		$.daysPickerNormalization(edYearSelector,edMonthSelector,edDaySelector,edDayOptions)
+
+	});
+	$('#endDate_month').change(function() {
+		$.daysPickerNormalization(edYearSelector,edMonthSelector,edDaySelector,edDayOptions)
+
+	})
 
 
 });
+
+
 

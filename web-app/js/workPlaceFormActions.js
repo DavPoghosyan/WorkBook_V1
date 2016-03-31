@@ -1,4 +1,4 @@
-	/*
+/*
 ** Created by davit on 2/25/16.
 */
 $().ready(function(){

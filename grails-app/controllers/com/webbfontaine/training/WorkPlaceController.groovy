@@ -1,6 +1,5 @@
 package com.webbfontaine.training
 
-import am.webbfontaine.training.rimm.Company
 import am.webbfontaine.training.rimm.Country
 import org.springframework.security.access.annotation.Secured
 
@@ -48,7 +47,7 @@ class WorkPlaceController {
 
 	@Secured(['ROLE_ADMIN'])
 	def save(WorkPlace workPlace) {
-        if (workPlace == null) {
+		if (workPlace == null) {
             notFound()
             return
         }

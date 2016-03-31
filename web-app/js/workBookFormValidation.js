@@ -5,7 +5,7 @@ $().ready(function () {
     /*$( "#datepicker" ).datepicker({
         inline: true
     });*/
-    var now = new Date()
+
     $('#workBook').validate({
         errorClass: 'clientSideError',
         rules: {
@@ -21,45 +21,42 @@ $().ready(function () {
             passportNumber: {
                 passportNumberRegExp: true
             },
+	        dateOfBirth_month: {
+		        required : true
+	        },
+	        dateOfBirth_day: {
+		        required : true
+	        },
             dateOfBirth_year: {
-                ageValidation : true
+                required : true
             }
         },
     });
 
-    $.validator.addMethod("ageValidation", function () {
-        return  dateValidation();
-    },invalidAge);
+	var now = new Date()
+	var bdMonthOptions =$('#dateOfBirth_month option')
+	var bdDayOptions =$('#dateOfBirth_day option')
+
+	var bdYearSelector = $('#dateOfBirth_year')
+	var bdMonthSelector = $("#dateOfBirth_month")
+	var bdDaySelector = $('#dateOfBirth_day')
+	var curMonth =  now.getMonth()+1
+	var curDay = now.getDate()
+	$('option:gt('+ curMonth + ')',bdMonthSelector).remove();
+	/*$('option:gt('+ curDay + ')',bdDaySelector).remove();*/
+
+	var bdSkip = false
 
     $.validator.addMethod("passportNumberRegExp", function (value) {
         return  /^[A-Z]{2}[0-9]{7}/.test(value);
     },passportNumberInvalidMessage);
 
-    $('#dateOfBirth_month').change(function() {
-        $('#workBook').valid();
-    });
-
-    /*$('#endDate_year, #endDate_month, #endDate_day').change(function() {
-        dateValidation($("#endDate"));
-    });
-*/
+	$('#dateOfBirth_year').change(function() {
+		$.monthsPickerNormalization(bdYearSelector,bdMonthSelector,bdMonthOptions,bdSkip)
+		$.daysPickerNormalization(bdYearSelector,bdMonthSelector,bdDaySelector,bdDayOptions)
+	});
+	$('#dateOfBirth_month').change(function() {
+		$.daysPickerNormalization(bdYearSelector,bdMonthSelector,bdDaySelector,bdDayOptions)
+	})
 
 });
-
-function dateValidation() {
-    var now = new Date();
-    var birthDay = $('#dateOfBirth_day').val();
-    var birthMonth = $('#dateOfBirth_month').val();
-    var birthYear = $('#dateOfBirth_year').val();
-    var dateOfBirth = new Date(birthYear, birthMonth, birthDay)
-    var age = Math.floor((now - dateOfBirth) / (365.25 * 24 * 60 * 60 * 1000));
-    var today = now.getDate()
-    var currentMonth = now.getMonth()+1
-    if (birthMonth <= currentMonth && birthDay <= today) {
-        age += 1
-    }
-    if(age < 18) {
-        return false
-    }
-    return true
-}
