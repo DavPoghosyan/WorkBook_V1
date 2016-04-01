@@ -16,16 +16,16 @@ $().ready(function () {
             },
 	        startDate_year: {
 		        required: true,
-                fullStDate: true
+                fullDate: true
 	        }
         }
     });
 
- $.validator.addMethod("fullStDate", function () {
-        return sdDaySelector.val() != '' && sdMonthSelector.val() != ''
-    },inCompleteDate);
+    $.validator.addMethod("fullDate", function () {
+        return sdMonthSelector.val() != '' && sdDaySelector.val() != ''
+    },"inCompleteDate");
 
-   /* $(".form").mouseout(function(){
+    $("#workPlace").mouseout(function(){
         if($('.clientSideError').is(':visible')) {
             $(".register").hide()
         } else {
@@ -33,7 +33,6 @@ $().ready(function () {
         }
 
     });
-    */
     $('.register').mouseover(function(){
         $('#workPlace').valid()
     })
@@ -48,7 +47,7 @@ $().ready(function () {
 	var curMonth =  now.getMonth()+1
 	var curDay = now.getDate()
 	$('option:gt('+ curMonth + ')',sdMonthSelector).remove();
-	$('option:gt('+ curDay + ')',sdDaySelector).remove();
+	//$('option:gt('+ curDay + ')',sdDaySelector).remove();
 
 	var edMonthOptions =$('#endDate_month option')
 	var edDayOptions =$('#endDate_day option')

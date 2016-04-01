@@ -17,7 +17,7 @@ class WorkPlace {
 	static belongsTo = [workbook: WorkBook]
 	
 	static constraints = {
-        startDate (blank: true, nullable: true,
+        startDate (blank: false, nullable: false,
                 validator: { val, obj ->
 					val.minus(obj.workbook.dateOfBirth)/365.25 > 18 &&
                             val.minus(obj.workbook.dateOfBirth)/365.25 < 66

@@ -62,6 +62,7 @@
 	            <li class="fieldcontain">
 	                <span id="registeredAt-label" class="property-label">
 	                    <g:message code="instance.registeredAt.label"/>
+						<img src="${resource(dir:'images/icons', file:'clock-icon.png')}"/>
 	                </span>
 	                <span class="property-value" aria-labelledby="registeredAt-label">
 	                    <g:formatDate format="yyyy-MM-dd hh:mm:ss" date="${workPlace?.registeredAt}"/>
@@ -72,6 +73,7 @@
 	            <li class="fieldcontain">
 	                <span id="lastUpdatedAt-label" class="property-label">
 	                    <g:message code="instance.lastUpdatedAt.label"/>
+						<img src="${resource(dir:'images/icons', file:'clock-icon.png')}"/>
 	                </span>
 	                <span class="property-value" aria-labelledby="lastUpdatedAt-label">
 	                    <g:formatDate format="yyyy-MM-dd hh:mm:ss" date="${workPlace?.lastUpdatedAt}"/>
