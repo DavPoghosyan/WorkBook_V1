@@ -46,9 +46,11 @@
             <g:message code="workBook.workPlaces.label"/>
         </label>
         <g:each in="${workBookInstance.workPlaces}" var="workplace">
-            <g:remoteLink class="showSub" controller="workPlace" action="edit" update="sub" id="${workplace.id}">
-                ${workplace}
-            </g:remoteLink>
+            <li>
+                <g:remoteLink class="showSub" controller="workPlace" action="edit" update="sub" id="${workplace.id}">
+                    ${workplace}
+                </g:remoteLink>
+            </li>
         </g:each>
     </div>
 </g:if>
