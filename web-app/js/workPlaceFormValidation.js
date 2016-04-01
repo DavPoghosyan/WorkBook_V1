@@ -63,10 +63,15 @@ $().ready(function () {
     $('#startDate_year').change(function() {
 	    $.monthsPickerNormalization(sdYearSelector,sdMonthSelector,sdMonthOptions,sdSkip)
 	    $.daysPickerNormalization(sdYearSelector,sdMonthSelector,sdDaySelector,sdDayOptions)
+
     });
 	$('#startDate_month').change(function() {
 	$.daysPickerNormalization(sdYearSelector,sdMonthSelector,sdDaySelector,sdDayOptions)
+        $('#workPlace').valid()
 	})
+    sdDaySelector.change(function() {
+        $('#workPlace').valid()
+    })
 	$('#endDate_year').change(function() {
 		$.monthsPickerNormalization(edYearSelector,edMonthSelector,edMonthOptions,enSkip)
 		$.daysPickerNormalization(edYearSelector,edMonthSelector,edDaySelector,edDayOptions)
