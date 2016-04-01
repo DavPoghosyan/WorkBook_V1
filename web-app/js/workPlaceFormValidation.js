@@ -2,10 +2,45 @@
  * Created by davit on 3/18/16.
  */
 $().ready(function () {
+    $('#workPlace').validate({
+		errorClass: 'clientSideError',
+        rules: {
+            workbook:{
+                required: true,
+            },
+            company:{
+                required: true
+            },
+            country: {
+                required: true,
+            },
+	        startDate_year: {
+		        required: true,
+                fullStDate: true
+	        }
+        }
+    });
+
+ $.validator.addMethod("fullStDate", function () {
+        return sdDaySelector.val() != '' && sdMonthSelector.val() != ''
+    },inCompleteDate);
+
+   /* $(".form").mouseout(function(){
+        if($('.clientSideError').is(':visible')) {
+            $(".register").hide()
+        } else {
+            $(".register").show()
+        }
+
+    });
+    */
+    $('.register').mouseover(function(){
+        $('#workPlace').valid()
+    })
 
 	var now = new Date()
-    var sdMonthOptions =$('#startDate_month option')
-    var sdDayOptions =$('#startDate_day option')
+	var sdMonthOptions =$('#startDate_month option')
+	var sdDayOptions =$('#startDate_day option')
 
 	var sdYearSelector = $('#startDate_year')
 	var sdMonthSelector = $("#startDate_month")
@@ -25,23 +60,6 @@ $().ready(function () {
 
 	var sdSkip =false
 	var enSkip =false
-
-    $('#workPlace').validate({
-        rules: {
-            workbook:{
-                required: true,
-            },
-            company:{
-                required: true
-            },
-            country: {
-                required: true,
-            },
-	        startDate_year: {
-		        required: true
-	        }
-        }
-    });
 
     $('#startDate_year').change(function() {
 	    $.monthsPickerNormalization(sdYearSelector,sdMonthSelector,sdMonthOptions,sdSkip)

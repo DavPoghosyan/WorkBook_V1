@@ -6,13 +6,4 @@ $().ready(function(){
 	$(".upload_btn").change(function() {
 		$("#import").click()
 	})
-
-	$("body").mouseout(function(){
-		if($('.clientSideError').is(':visible')) {
-			$(".register").hide()
-		} else {
-			$(".register").show()
-		}
-
-	});
 })

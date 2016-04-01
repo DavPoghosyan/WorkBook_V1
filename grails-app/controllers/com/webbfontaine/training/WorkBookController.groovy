@@ -49,26 +49,6 @@ class WorkBookController {
         respond new WorkBook(params)
     }
 
-	/*@Secured(['ROLE_ADMIN'])
-    def save(WorkBook workBook) {
-        if (workBook == null) {
-            notFound()
-            return
-        }
-	   // additionalValidation(workBook)
-        workBook.registeredAt = new Date()
-        workBook.lastUpdatedAt = new Date()
-        if (workBook.hasErrors()) {
-            respond(workBook.errors, view:'create', status: CONFLICT)
-            return
-        }
-        workBookService.save(workBook)
-        flash.message = message(
-                code: 'default.created.message',
-                args:  [WorkBook.class.simpleName, workBook.id])
-        respond(workBook, view:'show', status: OK)
-    }*/
-
 	@Secured(['ROLE_ADMIN'])
 	def remoteSave(WorkBook workBook) {
 		if (workBook == null) {
@@ -96,41 +76,12 @@ class WorkBookController {
         render (template:'editTemp', model:[workBookInstance: workBook])
 	}
 
-	/*@Secured(['ROLE_ADMIN'])
-    def update(WorkBook workBook) {
-        println params
-        //workBook.lock()
-        if (workBook == null) {
-            notFound()
-            return
-        }
-	   // additionalValidation(workBook)
-        if(workBookService.isInValidModifications(workBook)) {
-            def customErrorCode =  'workBook.age.conflict.workplaces'
-            def errorMessage = message(code: customErrorCode)
-            workBook.errors.rejectValue('dateOfBirth', customErrorCode, errorMessage)
-        }
-        if (workBook.hasErrors()) {
-            render (template: 'editTemp', model:[workBookInstance: workBook])
-            workBook.workplaces*.discard()
-            workBook.discard()
-            return
-        }
-        workBook.lastUpdatedAt(new Date())
-        workBookService.save(workBook)
-        flash.message = message(
-                code: 'default.updated.message',
-                args:  [WorkBook.class.simpleName, workBook.id])
-        render (template: 'showWorkBook', model:[workBookInstance: workBook])
-    }*/
-
     @Secured(['ROLE_ADMIN'])
     def update(WorkBook workBook) {
         if (workBook == null) {
             notFound()
             return
         }
-      //  additionalValidation(workBook)
         if(workBookService.isInValidModifications(workBook)) {
             def customErrorCode =  'workBook.age.conflict.workplaces'
             def errorMessage = message(code: customErrorCode)
@@ -176,30 +127,24 @@ class WorkBookController {
     def uploadXmlFile() {
 	    def flyFile = request?.getFile('flyFile')
         if(flyFile.empty){
-	        flash.error = 'file not chosen'
+	        flash.error = message(code: 'file.not.chosen')
             respond(flash.error, view:'create', status: CONFLICT)
             return
         }
 	    def fileExtension = flyFile.originalFilename.substring(flyFile.originalFilename.lastIndexOf('.')+1)
 	    if(fileExtension != 'xml') {
-		    flash.error = 'fileupload.upload.unauthorizedExtension'
+		    flash.error = message(code: 'file.upload.unauthorizedExtension')
 		    respond(flash.error, view:'create', status: CONFLICT)
 		    return
 	    }
         def xmlObject = xmlProcessingServiceProxy.importFromXML(flyFile)//*** alternative way using HTTPSession session object ... session['xmlObject'] = xmlObject ***//
         if(String.isCase(xmlObject)){
-            flash.error = xmlObject
+            flash.error = message(code: 'xml.invalid')
             respond(flash.error, view:'create', status: CONFLICT)
             return
         }
         int workPlacesCount = xmlObject?.workPlaces.children().size()
         WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-        /*render (view: 'show',
-                model:[
-                        workBookInstance: workBook,
-                        id: xmlObject.@id?.text(),
-                        workPlacesCount: workPlacesCount,
-                ])*/
         workBook.validate()
         if(workBookService.isInValidModifications(workBook)) {
             def customErrorCode =  'workBook.age.conflict.workPlaces'
@@ -208,20 +153,6 @@ class WorkBookController {
         }
         render(model: [workBookInstance: workBook, workPlacesCount: workPlacesCount], view:'create', status: OK)
     }
-
-    /*@Secured(['ROLE_ADMIN'])
-    def createFromImport(){
-        def xmlObject = xmlProcessingServiceProxy.xmlObject
-        WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-        render(template:'xmlImportViews/createTemp', model: [workBookInstance:  workBook])
-    }
-
-    @Secured(['ROLE_ADMIN'])
-	def updateFromImport(){
-		def xmlObject = xmlProcessingServiceProxy.xmlObject
-		WorkBook workBook = workBookService.xmlToDomain(xmlObject)
-        render (template: 'editTemp', model:[workBookInstance: workBook, flag: true])
-	}*/
 
     void notFound() {
         flash.message = message(

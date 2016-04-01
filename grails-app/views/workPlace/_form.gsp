@@ -1,6 +1,6 @@
 <%@ page import="am.webbfontaine.training.rimm.Company; am.webbfontaine.training.rimm.Country; am.webbfontaine.training.rimm.Company; com.webbfontaine.training.WorkBook" %>
 <g:formRemote id="workPlace" name="subForm" url="[resource:workPlace, controller:'workPlace', action:'save']" update="sub">
-    <fieldset class="form">
+    <fieldset class="form" id="wp">
         <div class="fieldcontain ${hasErrors(bean: workPlace, field: 'workbook', 'error')} required">
             <label for="workBook">
                 <g:message code="workBook.fullName.label"/>
@@ -48,9 +48,7 @@
                           default="none" noSelection="['': '']"  value="${workPlace?.startDate}" years="${maxYear..minYear}"/>
         </div>
         <div class="addElement">
-            <a id="current" class="addEndDate">
-                <g:message code="workPlace.add.endDate.label"/>
-            </a>
+            <a id="current" class="addEndDate"><g:message code="workPlace.add.endDate.label"/></a>
         </div>
         <div id="endDate" class="fieldcontain ${hasErrors(bean: workPlace, field: 'endDate', 'error')}">
             <label for="endDate">
@@ -61,7 +59,7 @@
         </div>
         <img src="${resource(dir:'images/icons', file:'ok-icon.png')}"/>
     </fieldset>
-    <fieldset class="buttons register">
+    <fieldset class="buttons register" id="wpr">
         <g:actionSubmitImage id="formSubmit" src="${resource(dir: 'images/icons', file: 'save-icon.png')}"
                              action="save" name="register"
                              value="${message(code: 'default.button.create.label')}"

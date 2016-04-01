@@ -13,7 +13,7 @@ class XmlProcessingService {
 
 	def exportToXML(domainInstance) {
 		def stringWriter = new StringWriter()
-		XML.use("customRendererXML")
+		XML.use("custom")
         def xmlConverter = domainInstance as XML
 		xmlConverter.render(stringWriter)
         return stringWriter
@@ -28,7 +28,7 @@ class XmlProcessingService {
             xmlObject = new XmlSlurper().parse(xmlOnServer)
             xmlObject
         }catch (any){
-            'xml is not valid'
+            'xml is invalid'
         }
 	}
 

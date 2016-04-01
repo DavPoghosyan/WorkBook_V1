@@ -1,4 +1,12 @@
+<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
 <g:javascript src="scroll.js"/>
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery-ui.css')}" type="text/css">
+<g:javascript src="libs/jquery.validate.js"/>
+<g:javascript src="libs/jquery.localisation.js"/>
+<g:javascript src="localisation/messages-${RequestContextUtils.getLocale(request).getLanguage()}.js"/>
+<g:javascript src="datePickersNormalizations.js"/>
+<g:javascript src="workBookFormValidation.js"/>
 <g:set var="entityName" value="${message(code: 'workBook.label')}"/>
 <g:if test="${flash.message}">
     <div class="message" role="status">

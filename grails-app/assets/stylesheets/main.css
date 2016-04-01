@@ -183,30 +183,6 @@ img {
     bottom: 5px;
     right: 8px;
 }
-/*
-.nav a:active, .nav a:visited {
-	color: #666666;
-}
-
-.nav a:focus, .nav a:hover {
-	background-color: #999999;
-	color: #ffffff;
-	outline: none;
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-}
-
-.no-borderradius .nav a:focus, .no-borderradius .nav a:hover {
-	background-color: transparent;
-	color: #444444;
-	text-decoration: underline;
-}
-
-.nav a.home, .nav a.list, .nav a.create {
-	background-position: 0.7em center;
-	background-repeat: no-repeat;
-	text-indent: 25px;
-}*/
-
 
 
 /* CREATE/EDIT FORMS AND SHOW PAGES */
@@ -564,77 +540,6 @@ th:hover, tr:hover {
 	text-decoration: underline;
 }
 
-/*/!* ACTION BUTTONS *!/
-
-.buttons {
-	background-color: #efefef;
-	overflow: hidden;
-	padding: 1em;
-	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
-	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-	        box-shadow: 0 0 3px 1px #aaaaaa;
-	margin: 0.1em 0 0 0;
-	border: none;
-}
-
-.buttons input,
-.buttons a {
-	background-color: transparent;
-	border: 0;
-	color: #666666;
-	cursor: pointer;
-	display: inline-block;
-	margin: 0 0.25em 0;
-	overflow: visible;
-	padding: 1em;
-	text-decoration: none;
-
-	   -moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-	        border-radius: 0.3em;
-}
-
-.buttons input:hover, .buttons input:focus,
-.buttons a:hover, .buttons a:focus {
-	background-color: #999999;
-	color: #ffffff;
-	outline: none;
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-	   -moz-box-shadow: none;
-	-webkit-box-shadow: none;
-	        box-shadow: none;
-}
-
-.no-borderradius .buttons input:hover, .no-borderradius .buttons input:focus,
-.no-borderradius .buttons a:hover, .no-borderradius .buttons a:focus {
-	background-color: transparent;
-	color: #444444;
-	text-decoration: underline;
-}
-
-.buttons .delete, .buttons .edit, .buttons .save {
-	background-position: center;
-	background-repeat: no-repeat;
-	text-indent: 25px;
-}
-
-.ie6 .buttons input.delete, .ie6 .buttons input.edit, .ie6 .buttons input.save,
-.ie7 .buttons input.delete, .ie7 .buttons input.edit, .ie7 .buttons input.save {
-	padding-left: 36px;
-}
-
-.buttons .delete {
-	background-image: url(../images/skin/delete-icon.png);
-}
-
-.buttons .edit {
-	background-image: url(../images/skin/database_edit.png);
-}
-
-.buttons .save {
-	background-image: url(../images/skin/database_save.png);
-}*/
-
 .buttons {
     left: 68%;
     border: none;
@@ -788,7 +693,7 @@ ul#locale-selector li.active a{
     position: absolute;
 	top:40px;
 	left:125px;
-    font-size: 3vw;
+    font-size: 2.5vw;
 }
 
 label.error, label.clientSideError {
@@ -796,7 +701,7 @@ label.error, label.clientSideError {
 	margin-left: 8px;
 	font-size: small;
 	text-align: left;
-	width: auto;
+	width: 250px;
 }
 
 select.error, input.error, select.clientSideError, input.clientSideError{

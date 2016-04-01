@@ -1,4 +1,3 @@
-
 <%@ page import="com.webbfontaine.training.WorkBook" %>
 <!DOCTYPE html>
 <html>

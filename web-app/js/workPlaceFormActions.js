@@ -2,8 +2,8 @@
 ** Created by davit on 2/25/16.
 */
 $().ready(function(){
-	var removeEndDateTxt = ' - Remove End Date'
-	var addEndDateTxt = ' + Add End Date'
+	/*var removeEndDateTxt = '- Remove End Date'
+	var addEndDateTxt = '+ Add End Date'*/
 	if($("#endDate_day").val() == ''){
 		$("#endDate").hide()
 	} else {
@@ -22,23 +22,13 @@ $().ready(function(){
 		$("checkBox").prop('checked', true)
 	})
 
-    $("body").mouseout(function(){
+    /*$("body").mouseout(function(){
         if($('.clientSideError').is(':visible')) {
             $(".register").hide()
         } else {
             $(".register").show()
         }
 
-    });
-
-   /* $('#formSubmit').on('show', function() {
-        alert('#foo is now visible');
-        $("#formSubmit").hide()
-    });
-
-    $('.error').on('hide', function() {
-        alert('#foo is hidden');
-        $("#formSubmit").show()
     });*/
 
 })
@@ -82,15 +72,5 @@ function createDialogCountry() {
         ]
     })
 }
-
-(function ($) {
-    $.each(['show', 'hide'], function (i, ev) {
-        var el = $.fn[ev];
-        $.fn[ev] = function () {
-            this.trigger(ev);
-            return el.apply(this, arguments);
-        };
-    });
-})(jQuery);
 
 

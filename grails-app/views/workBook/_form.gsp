@@ -1,11 +1,4 @@
 <%@ page import="org.springframework.web.servlet.support.RequestContextUtils; com.webbfontaine.training.WorkBook" %>
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery-ui.css')}" type="text/css">
-<g:javascript src="libs/jquery.validate.js"/>
-<g:javascript src="libs/jquery.localisation.js"/>
-<g:javascript src="localisation/messages-${RequestContextUtils.getLocale(request).getLanguage()}.js"/>
-<g:javascript src="datePickersNormalizations.js"/>
-<g:javascript src="workBookFormValidation.js"/>
 <g:set var="today" value="${new Date()}"/>
 <g:set var="minYear" value="${today[Calendar.YEAR]-99}"/>
 <g:set var="maxYear" value="${today[Calendar.YEAR]-18}"/>
@@ -46,7 +39,6 @@
                   default="none" noSelection="['': '']"
                   value="${workBookInstance?.dateOfBirth}" years="${maxYear..minYear}"
     />
-	%{--<g:textField id="datepicker" name="dateOfBirth" />--}%
 </div>
 <g:if test="${workBookInstance?.workPlaces}">
     <div class="fieldcontain ${hasErrors(bean: workBookInstance, field: 'workPlaces', 'error')}">

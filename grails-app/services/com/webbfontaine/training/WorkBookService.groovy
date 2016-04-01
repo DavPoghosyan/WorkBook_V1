@@ -19,14 +19,6 @@ class WorkBookService {
 		workBook.delete(flush: true)
 	}
 
-  /*  @Transactional(readOnly = true)
-	def isValidBirthDate(WorkBook workbook) {
-        Date now = new Date()
-        Date dateOfBirth = workbook.dateOfBirth
-        int age = now.minus(dateOfBirth)/365.25
-        return age > 17
-    }*/
-
     @Transactional(readOnly = true)
     def isInValidModifications(WorkBook workBook) {
         Date dateOfBirth = workBook.dateOfBirth
