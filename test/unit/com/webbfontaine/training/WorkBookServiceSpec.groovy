@@ -1,4 +1,4 @@
-package workbook
+package com.webbfontaine.training
 
 import com.webbfontaine.training.WorkBookService
 import grails.test.mixin.TestFor

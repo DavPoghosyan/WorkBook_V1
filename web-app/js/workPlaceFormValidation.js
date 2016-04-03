@@ -23,7 +23,7 @@ $().ready(function () {
 
     $.validator.addMethod("fullDate", function () {
         return sdMonthSelector.val() != '' && sdDaySelector.val() != ''
-    },"inCompleteDate");
+    },inCompleteDate);
 
     $("#workPlace").mouseout(function(){
         if($('.clientSideError').is(':visible')) {
@@ -39,7 +39,7 @@ $().ready(function () {
 
 	var now = new Date()
 	var sdMonthOptions =$('#startDate_month option')
-	var sdDayOptions =$('#startDate_day option')
+	var sdDayOptions = $('#startDate_day option')
 
 	var sdYearSelector = $('#startDate_year')
 	var sdMonthSelector = $("#startDate_month")

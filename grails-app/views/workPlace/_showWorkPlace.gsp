@@ -98,9 +98,6 @@
 					    <g:message code="default.button.edit.label"/>
 				    </p>
 			    </g:remoteLink>
-                %{--<g:remoteLink id="c" controller="workBook" action="showTemp" update="show-workBook" params="['id': workPlace?.workbook?.id]">
-                    ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
-                </g:remoteLink>--}%
 		    </fieldset>
 	    </sec:ifAllGranted>
 	</g:if>

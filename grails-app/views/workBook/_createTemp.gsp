@@ -32,7 +32,7 @@
 <h1>
     <g:message code="registration.form.label" args="[entityName]"/>
 </h1>
-<g:formRemote id="workBook" name="subForm" url="[controller:'workBook', action:'remoteSave']"
+<g:formRemote id="workBook" name="subForm" url="[controller:'workBook', action:'save']"
           update="show-workBook">
 	<fieldset class="form">
 	    <g:render template="form"/>

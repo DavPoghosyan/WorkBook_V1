@@ -57,7 +57,6 @@
             <g:datePicker name="endDate" precision="day"  value="${workPlace?.endDate}"
                           default="none" noSelection="['': '']" years="${maxYear..minYear}"/>
         </div>
-        <img src="${resource(dir:'images/icons', file:'ok-icon.png')}"/>
     </fieldset>
     <fieldset class="buttons register" id="wpr">
         <g:actionSubmitImage id="formSubmit" src="${resource(dir: 'images/icons', file: 'save-icon.png')}"

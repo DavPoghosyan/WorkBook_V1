@@ -1,7 +1,7 @@
-package workbook
+package com.webbfontaine.training
 
-import org.springframework.web.servlet.support.RequestContextUtils;
-import groovy.xml.MarkupBuilder;
+import groovy.xml.MarkupBuilder
+import org.springframework.web.servlet.support.RequestContextUtils
 
 class LocaleTagLib {
     static namespace = 'locale'

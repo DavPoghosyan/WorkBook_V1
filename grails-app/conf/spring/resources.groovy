@@ -11,8 +11,8 @@ beans = {
     }
 
     // Register XML renderer for WorkBook resource.
-    workBookCustomRenderer(XmlRenderer, WorkBook) {
-        mimeTypes = [new MimeType('application/vnd.com.webbfontaine.training.custom+xml', 'custom')]
-        namedConfiguration = 'custom'
+    workBookcustomXmlParserRenderer(XmlRenderer, WorkBook) {
+        mimeTypes = [new MimeType('application/vnd.com.webbfontaine.training.customXmlParser+xml', 'customXmlParser')]
+        namedConfiguration = 'customXmlParser'
     }
 }

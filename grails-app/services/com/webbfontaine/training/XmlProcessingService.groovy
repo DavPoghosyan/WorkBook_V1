@@ -13,7 +13,7 @@ class XmlProcessingService {
 
 	def exportToXML(domainInstance) {
 		def stringWriter = new StringWriter()
-		XML.use("custom")
+		XML.use("customXmlParser")
         def xmlConverter = domainInstance as XML
 		xmlConverter.render(stringWriter)
         return stringWriter

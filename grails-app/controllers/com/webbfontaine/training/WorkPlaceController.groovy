@@ -39,7 +39,6 @@ class WorkPlaceController {
 		def xmlObject = xmlProcessingServiceProxy.xmlObject
 		int i = params.id.toInteger() - 1
 		WorkPlace workPlace = workPlaceService.xmlToDomain(xmlObject, i)
-        println session.workBookId
         if(session.workBookId) {
             workPlace.workbook = WorkBook.get(session.workBookId)
         }
@@ -70,7 +69,7 @@ class WorkPlaceController {
 
 	@Secured(['ROLE_ADMIN'])
 	def edit(WorkPlace workPlace) {
-				render(template:'edit', model:[workPlace: workPlace])
+		render(template:'edit', model:[workPlace: workPlace])
 	}
 
 	@Secured(['ROLE_ADMIN'])

@@ -9,14 +9,8 @@ import am.webbfontaine.training.rimm.Country
 class BootStrap {
 
     def init = { servletContext ->
-        XML.createNamedConfig("custom") {
+        XML.createNamedConfig("customXmlParser") {
                 it.registerObjectMarshaller(WorkBook){WorkBook workBook, xml ->
-                    /*final workBookMap = [
-                            id      : workBook.id,
-                            username: workBook.firstName
-                    ]
-                    workBookMap*/
-
                     xml.build {
                         firstName(workBook.firstName)
                         lastName(workBook.lastName)
@@ -29,19 +23,19 @@ class BootStrap {
             }
         }
 
-          /*  def adminRole = SecRole.newInstance(authority: 'ROLE_ADMIN')
-            adminRole.save(flush: true)
-            def userRole = SecRole.newInstance(authority: 'ROLE_USER')
-            userRole.save(flush: true)
+        def adminRole = SecRole.newInstance(authority: 'ROLE_ADMIN')
+        adminRole.save(flush: true)
+        def userRole = SecRole.newInstance(authority: 'ROLE_USER')
+        userRole.save(flush: true)
 
-            def admin = SecUser.newInstance(username: 'admin', enabled: true, password: 'admin')
-            admin.save(flush: true)
-            def user = SecUser.newInstance(username: 'user', enabled: true, password: 'user' )
-            user.save(flush: true)
+        def admin = SecUser.newInstance(username: 'admin', enabled: true, password: 'admin')
+        admin.save(flush: true)
+        def user = SecUser.newInstance(username: 'user', enabled: true, password: 'user' )
+        user.save(flush: true)
 
-            SecUserSecRole.create(admin, adminRole)
-            SecUserSecRole.create(user, userRole)
-    */
+        SecUserSecRole.create(admin, adminRole)
+        SecUserSecRole.create(user, userRole)
+
         Country country = Country.newInstance(name: 'Armenia', code: 'AM', description: 'Republic')
         country.save(flush: true)
 	    Country country1 = Country.newInstance(name: 'Poland', code: 'PL', description: 'Republic')

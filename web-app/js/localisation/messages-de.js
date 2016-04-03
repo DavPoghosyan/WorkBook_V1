@@ -17,7 +17,7 @@ $.extend($.validator.messages, {
     max: $.validator.format("Geben Sie bitte einen Wert kleiner oder gleich {0} ein."),
     minlength: $.validator.format("Bitte geben Sie mindestens {0} Zeichen.")
 });
-passportNumberInvalidMessage="Bitte geben Sie eine gültige Passnummer"
+passportNumberInvalidMessage="Bitte geben Sie eine gültige Passnummer [A-Z]{2}[0-9]{7}"
 inCompleteDate="Füllen Sie bitte Datum als dieses Format dd/mm/yyy"
 removeEndDateTxt = "- Entfernen End Date"
 addEndDateTxt = "+ Fügen Sie Enddatum"

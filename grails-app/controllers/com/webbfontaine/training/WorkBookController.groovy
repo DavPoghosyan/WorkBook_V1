@@ -9,7 +9,7 @@ class WorkBookController {
     WorkBookService workBookService
     def xmlProcessingServiceProxy
 
-  //  static allowedMethods = [remoteSave: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def list(Integer max) {
@@ -17,10 +17,6 @@ class WorkBookController {
         respond WorkBook.list(params), model: [workBookInstanceCount: WorkBook.count()]
     }
 
-    /*@Secured(['ROLE_USER','ROLE_ADMIN'])
-    def list(int max) {
-        respond workBookService.listWorkBooks(max ?: 10), model: [workBookInstanceCount: WorkBook.count()]
-    }*/
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def show(WorkBook workBook) {
@@ -50,14 +46,13 @@ class WorkBookController {
     }
 
 	@Secured(['ROLE_ADMIN'])
-	def remoteSave(WorkBook workBook) {
+	def save(WorkBook workBook) {
 		if (workBook == null) {
 			notFound()
 			return
 		}
 		workBook.registeredAt = new Date()
 		workBook.lastUpdatedAt = new Date()
-		//additionalValidation(workBook)
 		if (workBook.hasErrors()) {
 			println workBook.errors
 			render (template:'createTemp', model:[workBookInstance: workBook])
@@ -83,7 +78,7 @@ class WorkBookController {
             return
         }
         if(workBookService.isInValidModifications(workBook)) {
-            def customErrorCode =  'workBook.age.conflict.workplaces'
+            def customErrorCode =  'workBook.age.conflict.workPlaces'
             def errorMessage = message(code: customErrorCode)
             workBook.errors.rejectValue('dateOfBirth', customErrorCode, errorMessage)
         }
@@ -159,15 +154,6 @@ class WorkBookController {
                 code: 'default.not.found.message',
                 args:  [WorkBook.class.simpleName, params.id])
         redirect action:"list", method:"GET", status: NOT_FOUND
-    }
-
-    void additionalValidation(WorkBook workBook) {
-        def customErrorField
-        if (!workBookService.isValidBirthDate(workBook)) {
-            def customErrorCode =  'workBook.age.min.invalid'
-            def errorMessage = message(code: customErrorCode, args: customErrorField)
-            workBook.errors.rejectValue(customErrorField, customErrorCode, errorMessage)
-        }
     }
 
 }
