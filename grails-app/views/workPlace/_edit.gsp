@@ -5,8 +5,9 @@
 <g:set var="today" value="${new Date()}"/>
 <g:set var="minYear" value="${today[Calendar.YEAR]-100}"/>
 <g:set var="maxYear" value="${today[Calendar.YEAR]}"/>
-<g:javascript src="localisation/messages-${RequestContextUtils.getLocale(request).getLanguage()}.js"/>
 <g:javascript src="libs/jquery.validate.js"/>
+<g:javascript src="libs/jquery.localisation.js"/>
+<g:javascript src="localisation/messages-${RequestContextUtils.getLocale(request).getLanguage()}.js"/>
 <g:javascript src="workPlaceFormValidation.js"/>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <g:javascript src="workPlaceFormActions.js"/>
