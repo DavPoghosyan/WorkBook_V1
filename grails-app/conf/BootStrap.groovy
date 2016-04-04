@@ -23,6 +23,7 @@ class BootStrap {
             }
         }
 
+
         def adminRole = SecRole.newInstance(authority: 'ROLE_ADMIN')
         adminRole.save(flush: true)
         def userRole = SecRole.newInstance(authority: 'ROLE_USER')
