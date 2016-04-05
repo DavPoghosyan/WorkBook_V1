@@ -19,6 +19,7 @@ $().ready( function(){
 		if(monthSelector.val() == curMonth && year == curYear) {
 			$('option:gt('+ curDay + ')',daySelector).remove();
 		} else {
+			daySelector.append(dayOptions);
 			if(monthSelector.val() == 2) {
 				$('option:gt(28)',daySelector).remove();
 				if(isLeap == true) {
@@ -26,7 +27,6 @@ $().ready( function(){
 				}
 			} else {
 				monthSelector = parseInt(monthSelector.val())
-				daySelector.append(dayOptions);
 				if(monthSelector < 8 && monthSelector%2 == 0 ) {
 					$('option:gt(30)',daySelector).remove();
 				}else  if(monthSelector > 8 && monthSelector%2 != 0) {

@@ -13,20 +13,24 @@
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <g:javascript src="workPlaceFormActions.js"/>
 <g:javascript>
+    <g:remoteFunction controller='workPlace' action='retrieveCompanyData'
+                      update='company-info' params="'id='+1"/>
+    <g:remoteFunction controller='workPlace' action='retrieveCountryData'
+                      update='country-info' params="'id='+1"/>
 	function retrieveCompanyData(id) {
 		if(id){
 		    createDialogCompany()
             <g:remoteFunction controller='workPlace' action='retrieveCompanyData'
                               update='company-info' params="'id='+id"/>
-	}
-}
-function retrieveCountryData(id) {
-	if(id){
-		createDialogCountry()
-	<g:remoteFunction controller='workPlace' action='retrieveCountryData'
-	                  update='country-info' params="'id='+id"/>
-	}
-}
+	    }
+    }
+    function retrieveCountryData(id) {
+        if(id){
+            createDialogCountry()
+        <g:remoteFunction controller='workPlace' action='retrieveCountryData'
+                          update='country-info' params="'id='+id"/>
+        }
+    }
 </g:javascript>
 <g:hasErrors bean="${workPlace}">
     <ul class="errors" role="alert">
