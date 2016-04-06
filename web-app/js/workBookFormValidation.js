@@ -59,7 +59,7 @@ $().ready(function () {
 	var bdDaySelector = $('#dateOfBirth_day')
 	var curMonth =  now.getMonth()+1
 	var curDay = now.getDate()
-	$('option:gt('+ curMonth + ')',bdMonthSelector).remove();
+	/*$('option:gt('+ curMonth + ')',bdMonthSelector).remove();*!/*/
 	/*$('option:gt('+ curDay + ')',bdDaySelector).remove();*/
 
 	var bdSkip = false

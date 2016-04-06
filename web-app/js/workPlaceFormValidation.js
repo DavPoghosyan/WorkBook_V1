@@ -46,7 +46,7 @@ $().ready(function () {
 	var sdDaySelector = $('#startDate_day')
 	var curMonth =  now.getMonth()+1
 	var curDay = now.getDate()
-	$('option:gt('+ curMonth + ')',sdMonthSelector).remove();
+	/*$('option:gt('+ curMonth + ')',sdMonthSelector).remove();*/
 	//$('option:gt('+ curDay + ')',sdDaySelector).remove();
 
 	var edMonthOptions =$('#endDate_month option')
@@ -81,7 +81,6 @@ $().ready(function () {
 		$.daysPickerNormalization(edYearSelector,edMonthSelector,edDaySelector,edDayOptions)
 
 	})
-
 
 });
 
