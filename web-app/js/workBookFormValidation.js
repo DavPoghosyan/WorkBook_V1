@@ -74,8 +74,7 @@ $().ready(function () {
 	})
 
     bdDaySelector.change(function() {
-        $.daysPickerNormalization(bdYearSelector,bdMonthSelector,bdDaySelector,bdDayOptions)
+        //$.daysPickerNormalization(bdYearSelector,bdMonthSelector,bdDaySelector,bdDayOptions)
         $('#workBook').valid()
     })
-
 });
