@@ -30,6 +30,11 @@ class WorkPlaceController {
 
 	@Secured(['ROLE_ADMIN'])
 	def create() {
+		respond new WorkPlace(params)
+	}
+
+	@Secured(['ROLE_ADMIN'])
+	def add() {
         WorkPlace workPlace = new WorkPlace(params)
         render(template:'create', model:[workPlace: workPlace], status: OK)
 	}
@@ -65,6 +70,17 @@ class WorkPlaceController {
                 code: 'default.created.message',
                 args:  [WorkPlace.class.simpleName, workPlace.id])
         render(template: 'showWorkPlace', model:[workPlace: workPlace, workBookId: workPlace.workbook.id], status: OK)
+	}
+
+	@Secured(['ROLE_ADMIN'])
+	def saveAllFromImport() {
+        def xmlObject = xmlProcessingServiceProxy.xmlObject
+        int i = params.id.toInteger() - 1
+        WorkPlace workPlace = workPlaceService.xmlToDomain(xmlObject, i)
+        if(session.workBookId) {
+            workPlace.workbook = WorkBook.get(session.workBookId)
+            workPlaceService.save(workPlace)
+        }
 	}
 
 	@Secured(['ROLE_ADMIN'])

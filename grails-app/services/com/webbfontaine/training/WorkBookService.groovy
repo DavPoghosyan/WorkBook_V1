@@ -4,6 +4,8 @@ import org.springframework.transaction.annotation.Transactional
 
 class WorkBookService {
 
+    def workPlaceService
+
    @Transactional(readOnly = true)
 	def listWorkBooks(int max){
         WorkBook.list(max : max)
@@ -40,6 +42,10 @@ class WorkBookService {
         workBook.lastName = xmlObject.lastName.text() ?: "Unknown"
         workBook.email = xmlObject.email.text()
         workBook.passportNumber = xmlObject.passportNumber.text()
+
+       int i = 0
+        WorkPlace workPlace = workPlaceService.xmlToDomain(xmlObject, i)
+       workBook.addToWorkPlaces(workPlace)
         workBook
     }
 

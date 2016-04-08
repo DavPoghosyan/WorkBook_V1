@@ -64,18 +64,53 @@
             <span id="workplaces-label" class="property-label">
                 <g:message code="workBook.workPlaces.label"/>
             </span>
-            <g:each in="${workBookInstance.workPlaces}" var="workplace">
-                <span class="property-value" aria-labelledby="workplaces-label">
-                    <g:remoteLink class="showSub" controller="workPlace" action="show" update="sub" id="${workplace.id}">
-                        ${workplace}
-                    </g:remoteLink>
-                </span>
-            </g:each>
+            <table class="workplaces-table">
+                <thead>
+                <tr>
+                    <g:sortableColumn property="company"
+                                      title="${message(code: 'workPlace.company.label',)}"/>
+                    <g:sortableColumn property="country"
+                                      title="${message(code: 'workPlace.country.label',)}"/>
+                    <g:sortableColumn property="startDate"
+                                      title="${message(code: 'workPlace.startDate.label')}"/>
+                    <g:sortableColumn property="endDate"
+                                      title="${message(code: 'workPlace.endDate.label')}"/>
+                </tr>
+                </thead>
+                <tbody>
+                <g:each in="${workBookInstance.workPlaces}" status="i" var="workPlaceInstance">
+                    <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                        <td>
+                            <g:remoteLink class="showSub" controller="workPlace" action="show" update="sub" id="${workPlaceInstance.id}">
+                                ${fieldValue(bean: workPlaceInstance, field: "company")}
+                            </g:remoteLink>
+                        </td>
+                        <td>
+                            ${fieldValue(bean: workPlaceInstance, field: "country")}
+                        </td>
+                        <td>
+                            <g:formatDate format="yyyy-MM-dd" date="${workPlaceInstance.startDate}" />
+                        </td>
+                        <td>
+                            <g:if test="${workPlaceInstance?.endDate}">
+                                <g:formatDate format="yyyy-MM-dd" date="${workPlaceInstance.endDate}" />
+                            </g:if>
+                            <g:else>
+                                <g:message code="workPlace.current.true.label"/>
+                            </g:else>
+                        </td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+            %{--<div class="pagination">
+                <g:paginate total="${2 ?: 0}" />
+            </div>--}%
         </li>
     </g:if>
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <li class="fieldcontain">
-                <g:remoteLink class="showSub addWorkPlace" controller="workPlace" action="create" update="sub" params="['workbook.id': workBookInstance?.id]">
+                <g:remoteLink class="showSub addWorkPlace" controller="workPlace" action="add" update="sub" params="['workbook.id': workBookInstance?.id]">
                     ${message(code: 'default.add.label', args: [message(code: 'workPlace.label')])}
                 </g:remoteLink>
         </li>

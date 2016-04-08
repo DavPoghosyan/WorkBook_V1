@@ -24,7 +24,7 @@
                     </g:link>
                 </li>
 				<li>
-                    <g:link class="create" action="create">
+                    <g:link class="create" action="add">
                         <g:message code="default.new.label" args="[entityName]" />
                     </g:link>
                 </li>

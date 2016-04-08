@@ -76,6 +76,14 @@ h1 {
 	margin-bottom: 5px;
 }
 
+h2 {
+	color: #48802c;
+	font-weight: normal;
+	font-size: 1.15em;
+	margin-bottom: 5px;
+}
+
+
 ul {
 	padding: 0;
 }
@@ -94,6 +102,10 @@ img {
 
 .content h1 {
     margin-left: 25%;
+}
+
+h2 {
+	margin-left: 1%;
 }
 
 .scaffold-list h1 {
@@ -130,22 +142,19 @@ img {
 
 .nav {
     border: none;
-    margin-top: 5%;
+    margin-top: 2%;
     margin-left: 5%;
     background: white no-repeat center;
 }
 
 .nav ul {
 	overflow: hidden;
-	zoom: 1;
 }
 
 .nav li {
 	display: block;
 	float: left;
 	list-style-type: none;
-	margin-right: 0.5em;
-	padding: 0;
 }
 
 .nav a {
@@ -154,34 +163,35 @@ img {
 
 .nav p {
     position: relative;
-    margin-left: 10px;
     visibility: hidden;
     color: #48802c;
 }
 
 .create:hover .createTip  {
     visibility: visible;
-    bottom: 5px;
-    right: 5px;
+	left: 5px;
+
+}
+
+.list:hover .listTip  {
+	visibility: visible;
+
+
 }
 
 .home:hover .homeTip  {
     visibility: visible;
-    right: 5px;
-    bottom: 5px;
+
 }
 
 .logo:hover .aboutTip  {
 	visibility: visible;
-	bottom: 5px;
 }
 
 
 .import:hover .importTip {
     visibility: visible;
-    width: 75%;
-    bottom: 5px;
-    right: 8px;
+
 }
 
 
@@ -426,9 +436,11 @@ table {
 	margin-bottom: 1em;
 }
 
-tr {
-	border: 0;
+.workplaces-table {
+	margin-left: 5%;
+	width: 65%;
 }
+
 
 tr>td:first-child, tr>th:first-child {
 	padding-left: 1.25em;
@@ -446,12 +458,12 @@ td, th {
 }
 
 th {
-	background-color: #efefef;
-	background-image: -moz-linear-gradient(top, #ffffff, #eaeaea);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #eaeaea));
+	background-color: #7aef5a;
+	background-image: -moz-linear-gradient(top, #c1ffba, #ddeab6);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aeffbc), color-stop(1, #c2ea8e));
 	    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#ffffff', EndColorStr = '#eaeaea');
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea')";
-	color: #666666;
+	color: #abffa8;
 	font-weight: bold;
 	line-height: 1.7em;
 	padding: 0.2em 0.6em;

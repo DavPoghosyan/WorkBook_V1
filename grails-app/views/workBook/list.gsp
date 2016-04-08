@@ -12,6 +12,14 @@
 	<body>
 	<div class="nav" role="navigation">
 		<ul>
+            <li>
+                <g:link class="list" controller="workPlace" action="list">
+                    <g:img dir="images/icons" file="workplaces-list-icon.png"/>
+                    <p class="listTip">
+                        <g:message code="workPlaces.list"/>
+                    </p>
+                </g:link>
+            </li>
 			<sec:ifAllGranted roles="ROLE_ADMIN">
 				<li>
 					<g:link class="create" action="create">
@@ -25,6 +33,9 @@
 		</ul>
 	</div>
 		<div id="list-workBook" class="content scaffold-list" role="main">
+            <h2>
+				<g:message code="default.list.label" args="[entityName]" />
+			</h2>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">
                     ${flash.message}

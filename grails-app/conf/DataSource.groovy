@@ -25,19 +25,19 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "update" // one of 'add', 'add-drop', 'update', 'validate', ''
             url = "jdbc:mysql://localhost/training?useOldAliasMetadataBehavior=true"
         }
     }
     test {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "add-drop" // one of 'add', 'add-drop', 'update', 'validate', ''
             url = "jdbc:mysql://localhost/trainingTest?useOldAliasMetadataBehavior=true"
         }
     }
     production {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "add-drop" // one of 'add', 'add-drop', 'update', 'validate', ''
             url = "jdbc:mysql://localhost/trainingProd?useOldAliasMetadataBehavior=true"
         }
     }

@@ -23,7 +23,7 @@ class BootStrap {
             }
         }
 
-        def adminRole = SecRole.newInstance(authority: 'ROLE_ADMIN')
+       /* def adminRole = SecRole.newInstance(authority: 'ROLE_ADMIN')
         adminRole.save(flush: true)
         def userRole = SecRole.newInstance(authority: 'ROLE_USER')
         userRole.save(flush: true)
@@ -33,8 +33,8 @@ class BootStrap {
         def user = SecUser.newInstance(username: 'user', enabled: true, password: 'user' )
         user.save(flush: true)
 
-        SecUserSecRole.create(admin, adminRole)
-        SecUserSecRole.create(user, userRole)
+        SecUserSecRole.add(admin, adminRole)
+        SecUserSecRole.add(user, userRole)*/
 
         Country country = Country.newInstance(name: 'Armenia', code: 'AM', description: 'Republic')
         country.save(flush: true)

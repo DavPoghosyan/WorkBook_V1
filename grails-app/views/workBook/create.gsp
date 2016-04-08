@@ -16,9 +16,17 @@
                     <a class="home" href="${createLink(uri: '/')}">
                         <g:img dir="images/icons" file="home-icon.png"/>
                         <p class="homeTip">
-                            <g:message code="default.home.label"/>
+                            <g:message code="workBooks.list"/>
                         </p>
                     </a>
+                </li>
+                <li>
+                    <g:link class="list" controller="workPlace" action="list">
+                        <g:img dir="images/icons" file="workplaces-list-icon.png"/>
+                        <p class="listTip">
+                            <g:message code="workPlaces.list"/>
+                        </p>
+                    </g:link>
                 </li>
 				<li>
                     <div class="import">

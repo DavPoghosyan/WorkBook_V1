@@ -22,7 +22,7 @@ class XmlProcessingService {
 	def importFromXML(flyFile){
         def dirForUploads = new File('uploads')
         dirForUploads.mkdir()
-        File xmlOnServer = new File(dirForUploads,"template_${new Date().timeString}.xml")
+        File xmlOnServer = new File(dirForUploads,"template_${new Date().time}.xml")
         flyFile.transferTo(xmlOnServer)
         try {
             xmlObject = new XmlSlurper().parse(xmlOnServer)

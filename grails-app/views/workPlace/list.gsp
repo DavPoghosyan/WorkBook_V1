@@ -9,23 +9,31 @@
 	</head>
 	<body>
 		<div class="nav" role="navigation">
-			<ul>
-				<li>
-                    <a class="home" href="${createLink(uri: '/')}">
-                        <g:message code="default.home.label"/>
-                    </a>
-                </li>
-				<li>
-                    <g:link class="create" action="create">
-                        <g:message code="default.new.label" args="[entityName]" />
+            <ul>
+                <li>
+                    <g:link class="list" controller="workBook" action="list">
+                        <g:img dir="images/icons" file="home-icon.png"/>
+                        <p class="listTip">
+                            <g:message code="workBooks.list"/>
+                        </p>
                     </g:link>
                 </li>
-			</ul>
+                <sec:ifAllGranted roles="ROLE_ADMIN">
+                    <li>
+                        <g:link class="create" action="create">
+                            <g:img dir="images/icons" file="add-icon.png"/>
+                            <p class="createTip">
+                                <g:message code="add.new.label"/>
+                            </p>
+                        </g:link>
+                    </li>
+                </sec:ifAllGranted>
+            </ul>
 		</div>
 		<div id="list-workPlace" class="content scaffold-list" role="main">
-			<h1>
+			<h2>
                 <g:message code="default.list.label" args="[entityName]" />
-            </h1>
+            </h2>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">
                     ${flash.message}
@@ -34,19 +42,16 @@
 			<table>
 			    <thead>
 					<tr>
-                        <th>
-                            <g:message code="workBook.fullName.label"/>
-                        </th>
-                        <th>
-                            <g:message code="workPlace.company.label" default="Company"/>
-                        </th>
-                        <th>
-                            <g:message code="workPlace.country.label" default="Country"/>
-                        </th>
+                        <g:sortableColumn property="workbook"
+                                          title="${message(code: 'workBook.fullName.label',)}"/>
+                        <g:sortableColumn property="company"
+                                          title="${message(code: 'workPlace.company.label',)}"/>
+                        <g:sortableColumn property="country"
+                                          title="${message(code: 'workPlace.country.label',)}"/>
                         <g:sortableColumn property="startDate"
-                                          title="${message(code: 'workPlace.startDate.label', default: 'Start Date')}"/>
+                                          title="${message(code: 'workPlace.startDate.label')}"/>
                         <g:sortableColumn property="endDate"
-                                          title="${message(code: 'workPlace.endDate.label', default: 'End Date')}"/>
+                                          title="${message(code: 'workPlace.endDate.label')}"/>
 					</tr>
                 </thead>
 				<tbody>
